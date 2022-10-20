@@ -8,7 +8,8 @@
 <table>
   <tbody>
     <tr>
-      <td align="center"><a href="https://github.com/haileyport"><img src="https://avatars.githubusercontent.com/u/50188104?v=4" width="100px;" alt=""/><br /><sub><b>Eunhye Jeon(헬리)</b></sub></a><br /><a href="https://github.com/Quick-Project/BMTI-DLink/commits?author=haileyport" title="Documentation">📖</a> <a href="https://github.com/Quick-Project/BMTI-DLink/pulls?q=is%3Apr+author%3Ahaileyport" title="Pull Requests">🥂</a></td>
+      <td align="center"><a href="https://github.com/choizia0724"><img src="https://avatars.githubusercontent.com/u/107836206?v=4" width="100px;" alt=""/><br /><sub><b>
+Choizia</b></sub></a><br /><a href="https://github.com/codestates-seb/seb40_pre_010/commits?author=choizia0724" title="Documentation">📖</a> <a href="https://github.com/Quick-Project/BMTI-DLink/pulls?q=is%3Apr+author%3Ahaileyport" title="Pull Requests">🥂</a></td>
       <td align="center"><a href="https://github.com/nada1221"><img src="https://avatars.githubusercontent.com/u/104189107?v=4" width="100px;" alt=""/><br /><sub><b>Dongwook Goh(앤디)</b></sub></a><br /><a href="https://github.com/Quick-Project/BMTI-DLink/commits?author=nada1221" title="Documentation">📖</a> <a href="https://github.com/Quick-Project/BMTI-DLink/pulls?q=is%3Apr+author%3Anada1221" title="Pull Requests">🥂</a></td>
       <td align="center"><a href="https://github.com/jaehongg"><img src="https://avatars.githubusercontent.com/u/107832252?v=4" width="100px;" alt=""/><br /><sub><b>
 Jaehong Seo(피터)</b></sub></a><br /><a href="https://github.com/Quick-Project/BMTI-DLink/commits?author=jaehongg" title="Documentation">📖</a> <a href="https://github.com/Quick-Project/BMTI-DLink/pulls?q=is%3Apr+author%3Ajaehongg" title="Pull Requests">🥂</a></td>
