@@ -1,7 +1,9 @@
 # seb40_pre_010
 
 안녕하세요!
+<br/>
 FE - 박여울, 김지연, 서재홍
+<br/>
 BE - 김민준, 이혜민, 
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
