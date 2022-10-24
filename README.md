@@ -2,9 +2,9 @@
 
 안녕하세요!
 <br/>
-FE - 박여울, 김지연, 서재홍
+FE - , 박여울, 서재홍
 <br/>
-BE - 김민준, 이혜민, 박성희
+BE - 김민준, 박성희, 이혜민
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
