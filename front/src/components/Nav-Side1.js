@@ -26,7 +26,7 @@ const List = styled.li`
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
   line-height: 26px;
-  display: ${(props) => props.display};
+  display: ${(props) => props.Display};
   justify-content: space-between;
   align-items: center;
   font-size: 11px;
@@ -104,7 +104,7 @@ function SideNav1() {
               </List>
             </LGroup>
           </List>
-          <List margin="16px 4px 0px 8px" display="flex">
+          <List margin="16px 4px 0px 8px" Display="flex">
             COLLECTIVES
             <MySvg
               fill="#525960"
