@@ -7,14 +7,16 @@ import com.backendPreProject.backend_Preproject.question.server.QuestionService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/v1/test1")
+@Validated
 public class QuestionController {
 
     private QuestionService questionService;
@@ -37,7 +39,8 @@ public class QuestionController {
 
 
     @GetMapping("/{question-id}")
-    public ResponseEntity getQuestion(@Positive int question_id) {
+    public ResponseEntity getQuestion(
+            @PathVariable("question-id") @Positive int question_id) {
         Question question= questionService.findQuestion(question_id);
         return new ResponseEntity<>(questionMapper.questionToQuestionResponseDto(question), HttpStatus.OK);
     }

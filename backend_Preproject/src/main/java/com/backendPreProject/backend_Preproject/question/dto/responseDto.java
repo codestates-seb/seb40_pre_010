@@ -4,10 +4,7 @@ package com.backendPreProject.backend_Preproject.question.dto;
 import lombok.*;
 
 @AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Getter
-@Setter
 public class responseDto {
 
     private int question_id;    // 질문 번호, 아이디는 jpa가 자동으로 카운트
