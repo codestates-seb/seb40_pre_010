@@ -1,11 +1,19 @@
 import styled from 'styled-components';
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+const BREAK_POINT_TABLET = 768;
+const BREAK_POINT_PC = 1200;
+
 const LeftArea = styled.div`
   font-size: 13px;
   position: relative;
   width: 164px;
   color: #525960;
+  // 태블릿 : 1200px ~ 768px :: 768px 이상 적용되는 css
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+    display: none;
+  }
 `;
 const Wrapper = styled.div`
   border-right: 1px solid #d6d9dc;

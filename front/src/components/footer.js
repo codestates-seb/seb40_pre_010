@@ -7,7 +7,7 @@ const BREAK_POINT_PC = 1200;
 const Wrapper = styled.div`
   background: #202224;
   width: 100%;
-  height: 300px;
+  min-height: 300px;
   margin: auto;
   text-align: center;
   color: #868e96;
@@ -78,6 +78,10 @@ const StyledDivTwo = styled.div`
 const StyledDivThree = styled.div`
   display: flex;
   width: 100%;
+  // 태블릿 : 1200px ~ 768px :: 768px 이상 적용되는 css
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledImg = styled.img`
