@@ -1,8 +1,14 @@
 import styled from 'styled-components';
 import React from 'react';
 
+const BREAK_POINT_TABLET = 768;
+const BREAK_POINT_PC = 1200;
 const Wrapper = styled.div`
   width: 300px;
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+    width: 100%;
+    padding: 0 0.5em;
+  }
 `;
 const Sidebar = styled.div`
   margin-bottom: 16px;
