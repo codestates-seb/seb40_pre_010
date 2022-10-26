@@ -24,12 +24,13 @@ const StyledLink = styled.a`
   text-decoration: none;
   color: #818a91;
   margin: 0 20px;
-  font-size: 11px;
+  font-size: 13px;
   text-align: left;
 `;
 
 const StyledLinkTwo = styled.a`
   display: flex;
+  text-decoration: none;
   flex-direction: column;
   color: #acb2b7;
   margin: 0 20px;
@@ -84,12 +85,10 @@ const StyledDivThree = styled.div`
   }
 `;
 
-const StyledImg = styled.img`
-  display: flex;
-  justify-items: top;
-`;
-
 const StyledLinkThree = styled.a`
+  text-decoration: none;
+  font-size: 11px;
+  color: #acb2b7;
   display: flex;
   align-self: start;
   margin: 5px;
@@ -97,6 +96,7 @@ const StyledLinkThree = styled.a`
 
 const StyledDivDown = styled.div`
   align-self: end;
+  font-size: 11px;
 `;
 
 const Footer = () => {
@@ -120,67 +120,101 @@ const Footer = () => {
             </svg>
           </StyledDiv>
           <StyledDiv>
-            <StyledLinkTwo>STACK OVERFLOW</StyledLinkTwo>
-            <StyledLink
-              className="footer_sub"
-              href="https://ads.google.com/intl/ko_kr/home/?subid=ww-ww-et-g-awa-a-g_hpafoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpafooter&fg=1"
-            >
-              Questions
-            </StyledLink>
-            <StyledLink
-              className="footer_sub"
-              href="https://www.google.com/services/?subid=ww-ww-et-g-awa-a-g_hpbfoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpbfooter&fg=1"
-            >
-              Help
-            </StyledLink>
+            <StyledLinkTwo href="http://localhost:3000/">
+              STACK OVERFLOW
+            </StyledLinkTwo>
+            <StyledLink href="http://localhost:3000/">Questions</StyledLink>
+            <StyledLink href="https://stackoverflow.com/help">Help</StyledLink>
           </StyledDiv>
           <StyledDiv>
-            <StyledLinkTwo>PRODUCTS</StyledLinkTwo>
-            <StyledLink
-              className="footer_sub"
-              href="https://policies.google.com/privacy?hl=ko&fg=1"
-            >
+            <StyledLinkTwo href="https://stackoverflow.co/">
+              PRODUCTS
+            </StyledLinkTwo>
+            <StyledLink href="https://policies.google.com/privacy?hl=ko&fg=1">
               Teams
             </StyledLink>
-            <StyledLink
-              className="footer_sub"
-              href="https://policies.google.com/terms?hl=ko&fg=1"
-            >
+            <StyledLink href="https://policies.google.com/terms?hl=ko&fg=1">
               Advertising
             </StyledLink>
-            <StyledLink>Collectives</StyledLink>
-            <StyledLink>Talent</StyledLink>
+            <StyledLink href="https://stackoverflow.co/collectives/">
+              Collectives
+            </StyledLink>
+            <StyledLink href="https://stackoverflow.co/talent/">
+              Talent
+            </StyledLink>
           </StyledDiv>
           <StyledDiv>
-            <StyledLinkTwo>COMPANY</StyledLinkTwo>
-            <StyledLink>About</StyledLink>
-            <StyledLink>Press</StyledLink>
-            <StyledLink>Work Here</StyledLink>
-            <StyledLink>Legal</StyledLink>
-            <StyledLink>Privacy Policy</StyledLink>
-            <StyledLink>Terms of Service</StyledLink>
-            <StyledLink>Contact Us</StyledLink>
-            <StyledLink>Cookie Settings</StyledLink>
-            <StyledLink>Cookie Policy</StyledLink>
+            <StyledLinkTwo href="https://stackoverflow.co/">
+              COMPANY
+            </StyledLinkTwo>
+            <StyledLink href="https://stackoverflow.co/">About</StyledLink>
+            <StyledLink href="https://stackoverflow.co/company/press">
+              Press
+            </StyledLink>
+            <StyledLink href="https://stackoverflow.co/company/work-here">
+              Work Here
+            </StyledLink>
+            <StyledLink href="https://stackoverflow.com/legal/terms-of-service">
+              Legal
+            </StyledLink>
+            <StyledLink href="https://stackoverflow.com/legal/privacy-policy">
+              Privacy Policy
+            </StyledLink>
+            <StyledLink href="https://stackoverflow.com/legal/terms-of-service">
+              Terms of Service
+            </StyledLink>
+            <StyledLink href="https://stackoverflow.co/company/contact">
+              Contact Us
+            </StyledLink>
+            <StyledLink href="http://localhost:3000/">
+              Cookie Settings
+            </StyledLink>
+            <StyledLink href="https://stackoverflow.com/legal/cookie-policy">
+              Cookie Policy
+            </StyledLink>
           </StyledDiv>
           <StyledDiv>
-            <StyledLinkTwo>STACK EXCHANGE NETWORK</StyledLinkTwo>
-            <StyledLink>Technology</StyledLink>
-            <StyledLink>Culture & recreation</StyledLink>
-            <StyledLink>Life & arts</StyledLink>
-            <StyledLink>Science</StyledLink>
-            <StyledLink>Professional</StyledLink>
-            <StyledLink>Business</StyledLink>
-            <StyledLink>API</StyledLink>
-            <StyledLink>Data</StyledLink>
+            <StyledLinkTwo href="https://stackexchange.com/">
+              STACK EXCHANGE NETWORK
+            </StyledLinkTwo>
+            <StyledLink href="https://stackexchange.com/sites#technology">
+              Technology
+            </StyledLink>
+            <StyledLink href="https://stackexchange.com/sites#culturerecreation">
+              Culture & recreation
+            </StyledLink>
+            <StyledLink href="https://stackexchange.com/sites#lifearts">
+              Life & arts
+            </StyledLink>
+            <StyledLink href="https://stackexchange.com/sites#science">
+              Science
+            </StyledLink>
+            <StyledLink href="https://stackexchange.com/sites#professional">
+              Professional
+            </StyledLink>
+            <StyledLink href="https://stackexchange.com/sites#business">
+              Business
+            </StyledLink>
+            <StyledLink href="https://api.stackexchange.com/">API</StyledLink>
+            <StyledLink href="https://data.stackexchange.com/">Data</StyledLink>
           </StyledDiv>
           <StyledDivTwo>
             <div>
-              <StyledLinkThree>Blog</StyledLinkThree>
-              <StyledLinkThree>Facebook</StyledLinkThree>
-              <StyledLinkThree>Twitter</StyledLinkThree>
-              <StyledLinkThree>Linkedln</StyledLinkThree>
-              <StyledLinkThree>Instagram</StyledLinkThree>
+              <StyledLinkThree href="https://stackoverflow.blog/?blb=1&_ga=2.31851262.1960660203.1666600034-1945471025.1666227659">
+                Blog
+              </StyledLinkThree>
+              <StyledLinkThree href="https://www.facebook.com/officialstackoverflow/">
+                Facebook
+              </StyledLinkThree>
+              <StyledLinkThree href="https://twitter.com/stackoverflow">
+                Twitter
+              </StyledLinkThree>
+              <StyledLinkThree href="https://www.linkedin.com/company/stack-overflow">
+                LinkedIn
+              </StyledLinkThree>
+              <StyledLinkThree href="https://www.instagram.com/thestackoverflow/">
+                Instagram
+              </StyledLinkThree>
             </div>
             <StyledDivDown>
               Site design / logo © 2022 Stack Exchange Inc; user contributions
