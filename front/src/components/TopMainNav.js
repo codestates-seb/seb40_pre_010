@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Logo from '../img/logo.svg';
+import MenuIcon from '../img/MenuIcon.svg';
+import Xicon from '../img/Xicon.svg';
 
 const MainNavBox = styled.div`
   position: fixed;
@@ -29,26 +31,22 @@ const MainNavBox = styled.div`
     display: inline-block;
     width: 187px;
     height: 50px;
-    /* margin-top: 5px;
-    margin-bottom: 5px; */
     display: flex;
     align-items: center;
     transition-duration: 0.3s;
+    margin-left: 15px;
   }
-  /* .logo:hover {
-    background-color: rgb(186, 191, 196);
-    transition-duration: 0.3s;
-  } */
 
-  /* .input-box {
-    display: flex;
-    justify-content: center;
-    height: 32px;
-  } */
+  @media screen and (max-width: 550px) {
+    .logo {
+      width: 35px;
+    }
+  }
 
   .search-bar {
     width: 100%;
     max-width: 600px;
+    min-width: 100px;
     height: 27px;
     border-radius: 5px;
     border: solid 1px rgba(0, 0, 0, 0.3);
@@ -58,6 +56,7 @@ const MainNavBox = styled.div`
     z-index: 1;
     opacity: 1;
     text-align: left;
+    margin-left: 15px;
   }
 
   .search-bar__input {
@@ -97,15 +96,46 @@ const Menu = styled.div`
 
   .menu-btn {
     margin: 0.5em;
-    padding: 0.2em 0.5em 0.3em 0.5em;
+    padding: 0.3em 0.5em 0.3em 0.5em;
     border-radius: 40px;
     font-size: 1em;
     color: rgb(59, 64, 69);
     transition-duration: 0.3s;
+    cursor: pointer;
   }
   .menu-btn:hover {
     background-color: rgb(186, 191, 196);
     transition-duration: 0.3s;
+  }
+
+  .menu-icon {
+    display: none;
+  }
+
+  @media screen and (max-width: 700px) {
+    .menu-btn {
+      display: none;
+    }
+    .menu-icon {
+      display: block;
+      background-color: red;
+      margin-top: 10px;
+      width: 45px;
+      height: 50px;
+      background-image: url(${MenuIcon});
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .btn2 {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 1237px) {
+    .btn1 {
+      display: none;
+    }
   }
 `;
 
@@ -128,9 +158,11 @@ const Buttons = styled.div`
     border-color: rgb(122, 167, 199);
     box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 70%);
     border-radius: 3px;
+    transition-duration: 0.3s;
   }
   .btn-login:hover {
     background-color: rgb(240, 248, 255);
+    transition-duration: 0.3s;
   }
 
   .btn-logout {
@@ -148,9 +180,11 @@ const Buttons = styled.div`
     /* border-color: rgb(122, 167, 199); */
     box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 70%);
     border-radius: 3px;
+    transition-duration: 0.3s;
   }
   .btn-logout:hover {
     background-color: rgb(0, 100, 194);
+    transition-duration: 0.3s;
   }
 `;
 
@@ -159,18 +193,19 @@ function TopMainNav() {
     <MainNavBox>
       <div className="main-box">
         <Menu>
+          <div className="menu-icon"></div>
           <ul>
             <a className="logo-box" href="/">
               <li>
                 <div className="logo"></div>
               </li>
             </a>
+
+            <li className="menu-btn">About</li>
+
+            <li className="menu-btn btn2">Products</li>
             <a href="/">
-              <li className="menu-btn">About</li>
-            </a>
-            <li className="menu-btn">Products</li>
-            <a href="/">
-              <li className="menu-btn">For Teams</li>
+              <li className="menu-btn btn1">For Teams</li>
             </a>
           </ul>
         </Menu>
