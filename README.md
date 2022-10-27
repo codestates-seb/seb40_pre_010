@@ -60,7 +60,8 @@ Jaehong Seo</b></sub></a><br /><a href="https://github.com/codestates-seb/seb40_
   <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
   <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
   <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
-  ![axios](https://img.shields.io/badge/Axios-181717?style=for-the-badge&logo=Axios&logoColor=white) 
+    <img src="https://img.shields.io/badge/Axios-181717?style=for-the-badge&logo=Axios&logoColor=white">
+
    ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
   
 
