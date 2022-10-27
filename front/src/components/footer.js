@@ -57,6 +57,8 @@ const StyledDiv = styled.div`
 const StyledDivTwo = styled.div`
   display: flex;
   width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
   justify-content: space-between;
   flex-wrap: wrap;
   flex: 1 1 150px;

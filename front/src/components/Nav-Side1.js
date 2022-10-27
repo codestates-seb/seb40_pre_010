@@ -19,8 +19,9 @@ const Wrapper = styled.div`
   border-right: 1px solid #d6d9dc;
   padding: 24px 0 0 0;
   position: sticky;
-  top: 0;
-  height: 100vh;
+  top: 50px;
+  z-index: -1;
+  height: calc(100vh - 50px);
 `;
 const LGroup = styled.ul`
   flex-direction: column;
