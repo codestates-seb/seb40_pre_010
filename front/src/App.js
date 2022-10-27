@@ -24,7 +24,7 @@ function App() {
     <>
       <BrowserRouter>
         <TopMainNav />
-        <MainWrapper className="d-flex">
+        <MainWrapper className="d-flex sm:fd-column">
           <NavSide1 />
           <Routes className="main">
             <Route path="/" element={<QuestionList />} />
