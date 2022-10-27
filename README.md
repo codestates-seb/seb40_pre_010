@@ -1,7 +1,15 @@
-# seb40_pre_010
+# team.binary(10);(seb40_pre_010)
 
 안녕하세요!
+코드스테이츠 40기를 통해 백엔드, 프론트엔드 통합으로 구성 된 team.binary(10); 입니다.
+메인 프로젝트에 들어가기 앞서 6월부터 지금까지 열심히 배운 내용들을
+실전에서 연습하여 나의 것으로 만들기 위해 
+Stack Overflow를 클론코딩 하는 프로젝트입니다.
+
+
 <br/>
+
+## 🙌 Team members
 FE - 김지연, 박여울, 서재홍
 <br/>
 BE - 김민준, 박성희, 이혜민
@@ -32,6 +40,45 @@ Jaehong Seo</b></sub></a><br /><a href="https://github.com/codestates-seb/seb40_
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 <br/>
+
+## 🪄 Description
+구현하고자 하는 페이지
+- questions 목록
+- questions 내용
+- questions 등록
+- log in
+- sign up
+
+## :date: Project period
+- 기간 : 2022.10.24 ~ 2022.11.07(2주)
+
+</br>
+
+## 🛠 Tech Stacks
+### Frontend
+  <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
+  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+  ![axios](https://img.shields.io/badge/Axios-181717?style=for-the-badge&logo=Axios&logoColor=white) 
+   ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+  
+
+### Backend
+  <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> 
+    <img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white"> 
+    <img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white">
+    
+    
+### Collaboration Tools
+  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+
+
+</br>
+
+
+</br>
 
 ## 커밋 규칙
 
