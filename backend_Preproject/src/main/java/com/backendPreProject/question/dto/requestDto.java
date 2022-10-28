@@ -1,4 +1,4 @@
-package com.backendPreProject.backend_Preproject.question.dto;
+package com.backendPreProject.question.dto;
 
 import lombok.Getter;
 
@@ -13,6 +13,6 @@ public class requestDto {
 
 
 
-    private int question_id;    // 테스트용
+    private int questionId;    // 테스트용
 
 }
