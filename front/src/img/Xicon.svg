@@ -5,9 +5,8 @@ viewBox="0 0 384 512"
 style="
 pointer-events: none; 
 display: block;
-width: 24px;
-height: 24px; 
-fill={fill};
+
+fill:gray;
 transition: 0.2s;
 "
 
