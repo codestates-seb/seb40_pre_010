@@ -29,7 +29,6 @@ Jaehong Seo</b></sub></a><br /><a href="https://github.com/codestates-seb/seb40_
     </tr>
     <tr>
       <td align="center"><a href="https://github.com/MinJounKim"><img src="https://avatars.githubusercontent.com/u/48819024?v=4" width="100px;" alt=""/><br /><sub><b>MinJounKim</b></sub></a><br /><a href="https://github.com/codestates-seb/seb40_pre_010/commits?author=MinJounKim" title="Documentation">📖</a> <a href="https://github.com/codestates-seb/seb40_pre_010/pulls?q=is%3Apr+author%3AMinJounKim" title="Pull Requests">📌</a></td>
-     
       <td align="center"><a href="https://github.com/happiness-ham"><img src="https://avatars.githubusercontent.com/u/107877903?v=4" width="100px;" alt=""/><br /><sub><b>happiness-ham</b></sub></a><br /><a href="https://github.com/codestates-seb/seb40_pre_010/commits?author=happiness-ham" title="Documentation">📖</a> <a href="https://github.com/codestates-seb/seb40_pre_010/pulls?q=is%3Apr+author%3Ahappiness-ham" title="Pull Requests">📌</a></td>
     </tr>
   </tbody>
