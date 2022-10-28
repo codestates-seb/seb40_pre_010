@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchInput from './SearchInput';
+import LogoutModal from './LogoutModal';
 
 import Logo from '../img/logo.svg';
 import MenuIcon from '../img/MenuIcon.svg';
@@ -300,6 +301,7 @@ const Buttons = styled.div`
 function TopMainNav() {
   return (
     <MainNavBox>
+      <LogoutModal></LogoutModal>
       <div className="main-box">
         <Menu>
           <ul>
