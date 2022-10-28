@@ -2,9 +2,10 @@ import React from 'react';
 import './App.css';
 import Footer from './components/footer';
 import NavSide1 from './components/Nav-Side1';
-import NavSide2 from './components/Nav-Side2';
+
 import TopMainNav from './components/TopMainNav';
 import QuestionList from './pages/QuestionList';
+import QuestionPost from './pages/QuestionPost';
 
 import styled from 'styled-components';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -25,11 +26,10 @@ function App() {
       <BrowserRouter>
         <TopMainNav />
         <MainWrapper className="d-flex sm:fd-column">
-          <NavSide1 />
           <Routes className="main">
             <Route path="/" element={<QuestionList />} />
+            <Route path="/post/:id" element={<QuestionPost />} />
           </Routes>
-          <NavSide2 className="side2" />
         </MainWrapper>
         <Footer />
       </BrowserRouter>

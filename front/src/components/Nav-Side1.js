@@ -20,7 +20,6 @@ const Wrapper = styled.div`
   padding: 24px 0 0 0;
   position: sticky;
   top: 50px;
-  z-index: -1;
   height: calc(100vh - 50px);
 `;
 const LGroup = styled.ul`
@@ -105,7 +104,7 @@ const Star = () => {
       fill="#f48225"
       margin_right="4px"
       aria-hidden="true"
-      className="mt-auto fc-orange-400 svg-icon iconStarVerified"
+      className="fc-orange-400 svg-icon iconStarVerified"
       width="18"
       height="18"
       viewBox="0 0 18 18"
@@ -122,7 +121,11 @@ const IconText = (icon, text) => {
   );
 };
 const Linked = (text, link) => {
-  return <MyLink to={link}>{text}</MyLink>;
+  return (
+    <MyLink className="d-flex ai-center" to={link}>
+      {text}
+    </MyLink>
+  );
 };
 function SideNav1() {
   return (
