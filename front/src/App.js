@@ -8,6 +8,7 @@ import QuestionList from './pages/QuestionList';
 
 import styled from 'styled-components';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AskQuestion from './pages/AskQuestion';
 
 const MainWrapper = styled.div`
   max-width: 1240px;
@@ -28,6 +29,7 @@ function App() {
           <NavSide1 />
           <Routes className="main">
             <Route path="/" element={<QuestionList />} />
+            <Route path="/askquestion" element={<AskQuestion />} />
           </Routes>
           <NavSide2 className="side2" />
         </MainWrapper>
