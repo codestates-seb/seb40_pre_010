@@ -1,10 +1,9 @@
 # team.binary(10);(seb40_pre_010)
 
 안녕하세요!
+<br/>
 코드스테이츠 40기를 통해 백엔드, 프론트엔드 통합으로 구성 된 team.binary(10); 입니다.
-메인 프로젝트에 들어가기 앞서 6월부터 지금까지 열심히 배운 내용들을
-실전에서 연습하여 나의 것으로 만들기 위해 
-Stack Overflow를 클론코딩 하는 프로젝트입니다.
+
 
 
 <br/>
@@ -42,6 +41,10 @@ Jaehong Seo</b></sub></a><br /><a href="https://github.com/codestates-seb/seb40_
 <br/>
 
 ## 🪄 Description
+메인 프로젝트에 들어가기 앞서 6월부터 지금까지 열심히 배운 내용들을
+실전에서 연습하여 나의 것으로 만들기 위해 
+Stack Overflow를 클론코딩 하는 프로젝트입니다.
+<br/>
 구현하고자 하는 페이지
 - questions 목록
 - questions 내용
