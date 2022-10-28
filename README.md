@@ -44,7 +44,9 @@ Jaehong Seo</b></sub></a><br /><a href="https://github.com/codestates-seb/seb40_
 메인 프로젝트에 들어가기 앞서 6월부터 지금까지 열심히 배운 내용들을
 실전에서 연습하여 나의 것으로 만들기 위해 
 Stack Overflow를 클론코딩 하는 프로젝트입니다.
+
 <br/>
+
 구현하고자 하는 페이지
 - questions 목록
 - questions 내용
@@ -74,9 +76,7 @@ Stack Overflow를 클론코딩 하는 프로젝트입니다.
 </br>
 
 
-</br>
-
-## 커밋 규칙
+## ✏️Commit Convention
 
 - ⛲ feat : 새로운 기능 추가, 기존의 기능을 요구 사항에 맞추어 수정
 - 🚨 fix : 기능에 대한 버그 수정
@@ -87,3 +87,6 @@ Stack Overflow를 클론코딩 하는 프로젝트입니다.
 - 🔨 refactor : 기능의 변화가 아닌 코드 리팩터링 ex) 변수 이름 변경
 - 🌏  release : 버전 릴리즈
 - ✅ merge : 병합
+
+
+
