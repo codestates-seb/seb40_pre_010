@@ -9,9 +9,11 @@
 <br/>
 
 ## 🙌 Team members
-FE - 김지연, 박여울, 서재홍
+### Frontend
+김지연, 박여울, 서재홍
 <br/>
-BE - 김민준, 박성희, 이혜민
+### Backend
+김민준, 이혜민
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
