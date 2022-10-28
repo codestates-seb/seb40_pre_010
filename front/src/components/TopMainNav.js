@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import SearchInput from './SearchInput';
 
 import Logo from '../img/logo.svg';
 import MenuIcon from '../img/MenuIcon.svg';
@@ -7,6 +8,8 @@ import Xicon from '../img/Xicon.svg';
 import BoxIcon from '../img/inbox-solid.svg';
 import Trophy from '../img/trophy-solid.svg';
 import Question from '../img/circle-question-solid.svg';
+import Profile from '../img/user-solid.svg';
+import Search from '../img/magnifying-glass-solid.svg';
 
 const MainNavBox = styled.div`
   position: fixed;
@@ -85,6 +88,11 @@ const MainNavBox = styled.div`
   .fa-search {
     font-size: 15px;
   }
+  @media screen and (max-width: 375px) {
+    .search-bar {
+      display: none;
+    }
+  }
 `;
 
 const Menu = styled.div`
@@ -105,6 +113,9 @@ const Menu = styled.div`
     color: rgb(59, 64, 69);
     transition-duration: 0.3s;
     cursor: pointer;
+  }
+  .btn3 {
+    min-width: 90px;
   }
   .menu-btn:hover {
     background-color: rgb(186, 191, 196);
@@ -229,7 +240,7 @@ const Buttons = styled.div`
   }
 
   .login-icon {
-    min-width: 30px;
+    min-width: 29px;
     height: 29px;
     display: flex;
     justify-content: center;
@@ -258,6 +269,32 @@ const Buttons = styled.div`
   .login-icon4 {
     background-image: url(${MenuIcon});
   }
+  .profile {
+    width: 18.5px;
+    background-image: url(${Profile});
+  }
+  .search-login-icon {
+    display: none;
+  }
+
+  @media screen and (max-width: 375px) {
+    .search-login-icon {
+      min-width: 29px;
+      height: 29px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 5px;
+      padding: 4px;
+      margin-left: 5px;
+      margin-right: 5px;
+      transition-duration: 0.3s;
+      cursor: pointer;
+    }
+    .search {
+      background-image: url(${Search});
+    }
+  }
 `;
 
 function TopMainNav() {
@@ -279,10 +316,11 @@ function TopMainNav() {
 
             <li className="menu-btn btn2">Products</li>
             <a href="/">
-              <li className="menu-btn btn1">For Teams</li>
+              <li className="menu-btn btn3">For Teams</li>
             </a>
           </ul>
         </Menu>
+        {/* <SearchInput></SearchInput> */}
         <div className="search-bar">
           <i className="fas fa-search"></i>
           <input className="search-bar__input" placeholder="Search"></input>
@@ -294,24 +332,27 @@ function TopMainNav() {
           </div> */}
 
           <div className="login-state">
-            <div className="profile">
-              <div className="profile-icon"></div>
-            </div>
+            <ul className="login-icons">
+              <li className="search-login-icon">
+                <div className="login-icon_ search"></div>
+              </li>
+              <li className="login-icon">
+                <div className="login-icon_ profile"></div>
+              </li>
+              <li className="login-icon">
+                <div className="login-icon_ login-icon1 "></div>
+              </li>
+              <li className="login-icon">
+                <div className="login-icon_ login-icon2"></div>
+              </li>
+              <li className="login-icon">
+                <div className="login-icon_  login-icon3"></div>
+              </li>
+              <li className="login-icon ">
+                <div className="login-icon_ login-icon4"></div>
+              </li>
+            </ul>
           </div>
-          <ul className="login-icons">
-            <li className="login-icon">
-              <div className="login-icon_ login-icon1 "></div>
-            </li>
-            <li className="login-icon">
-              <div className="login-icon_ login-icon2"></div>
-            </li>
-            <li className="login-icon">
-              <div className="login-icon_  login-icon3"></div>
-            </li>
-            <li className="login-icon ">
-              <div className="login-icon_ login-icon4"></div>
-            </li>
-          </ul>
         </Buttons>
       </div>
     </MainNavBox>
