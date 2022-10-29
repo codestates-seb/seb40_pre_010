@@ -6,7 +6,7 @@ const Tag = (props) => {
     <>
       <div className="p12 ba bc-black-075 bar-sm">
         <div className="ta-left">
-          <Link to={'/question/' + props.name} className="s-tag" href="#">
+          <Link to={'/tags/' + props.name} className="s-tag" href="#">
             {props.name}
           </Link>
         </div>

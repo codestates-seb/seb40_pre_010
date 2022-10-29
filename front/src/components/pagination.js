@@ -12,7 +12,11 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage }) => {
     <div className="s-pagination p12">
       {pageNumber.map((pageNum) => {
         return pageNum === currentPage ? (
-          <span className="s-pagination--item is-selected" aria-current="page">
+          <span
+            className="s-pagination--item is-selected"
+            aria-current="page"
+            key={pageNum}
+          >
             {pageNum}
           </span>
         ) : (
