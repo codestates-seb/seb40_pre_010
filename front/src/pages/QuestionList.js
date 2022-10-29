@@ -39,7 +39,9 @@ const QuestionList = () => {
       <div className="pt96">
         <div className=" ta-left px16 d-flex jc-space-between pb8">
           <span className="fs-headline1">All Questions</span>
-          <button className="s-btn s-btn__primary">Ask Question</button>
+          <Link to="/" className="s-btn s-btn__primary">
+            Ask Question
+          </Link>
         </div>
         <div className="d-flex">
           <PostWrapper>
@@ -57,7 +59,11 @@ const QuestionList = () => {
                     <TagWrap className="mb12">
                       {x.question_tags.split(',').map((z, j) => {
                         return (
-                          <a key={j} href="/" className="s-tag mr4">
+                          <a
+                            key={j}
+                            href={'/question/' + z}
+                            className="s-tag mr4"
+                          >
                             {z}
                           </a>
                         );
