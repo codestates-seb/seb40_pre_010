@@ -140,7 +140,7 @@ function SideNav1() {
                 {Linked(IconText(Earth(), 'Question'), '/')}
               </List>
               <List font_md={true} padding="4px 4px 4px 30px">
-                {Linked('Tags', '/')}
+                {Linked('Tags', '/tags')}
               </List>
               <List font_md={true} padding="4px 4px 4px 30px">
                 {Linked('Users', '/')}
