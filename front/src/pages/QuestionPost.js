@@ -70,7 +70,7 @@ const QuestionPost = () => {
               <p>
                 {Post.question_tags.split(',').map((z, j) => {
                   return (
-                    <a key={j} href="/" className="s-tag mr4">
+                    <a key={j} href={'/question/' + z} className="s-tag mr4">
                       {z}
                     </a>
                   );

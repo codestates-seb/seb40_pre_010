@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
 import Footer from './components/footer';
-import NavSide1 from './components/Nav-Side1';
-
+import Tags from './pages/Tags';
 import TopMainNav from './components/TopMainNav';
 import QuestionList from './pages/QuestionList';
 import QuestionPost from './pages/QuestionPost';
@@ -14,11 +13,6 @@ const MainWrapper = styled.div`
   max-width: 1240px;
   width: 100%;
   margin: auto;
-  > div {
-    &:not(:first-child) {
-      padding-top: 80px;
-    }
-  }
 `;
 function App() {
   return (
@@ -28,7 +22,9 @@ function App() {
         <MainWrapper className="d-flex sm:fd-column">
           <Routes className="main">
             <Route path="/" element={<QuestionList />} />
+            <Route path="/question/:tag" element={<QuestionList />} />
             <Route path="/post/:id" element={<QuestionPost />} />
+            <Route path="/tags" element={<Tags />} />
           </Routes>
         </MainWrapper>
         <Footer />
