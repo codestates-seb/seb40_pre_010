@@ -1,9 +1,11 @@
 import dummy1 from '../static/dummy1.json';
 import NavSide1 from './../components/Nav-Side1';
 import NavSide2 from './../components/Nav-Side2';
-import React from 'react';
+import Posts from '../components/post';
+import { React, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Pagination from '../components/pagination';
 const BREAK_POINT_TABLET = 768;
 const BREAK_POINT_PC = 1200;
 
@@ -29,52 +31,51 @@ const PostWrapper = styled.div`
     padding-right: 0;
   }
 `;
-const TagWrap = styled.div`
-  text-align: left;
-`;
+
 const QuestionList = () => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      //const res = await = axios.get(url);
+      const res = dummy1;
+      setPosts(res.Question);
+      setLoading(false);
+    };
+
+    fetchPosts();
+  }, []);
   return (
     <Wrapper>
       <NavSide1 />
-      <div className="pt96">
+      <div className="pt96 w100">
         <div className=" ta-left px16 d-flex jc-space-between pb8">
           <span className="fs-headline1">All Questions</span>
           <Link to="/" className="s-btn s-btn__primary">
             Ask Question
           </Link>
         </div>
-        <div className="d-flex">
+        <div className="d-flex fd-column">
           <PostWrapper>
-            {dummy1.Question.map((x, i) => {
-              return (
-                <div
-                  className="ta-left bt bc-black-100 p12 md:pl12 pl64"
-                  key={i}
-                >
-                  <Link to={'/post/' + i} className="s-link fs-body3">
-                    {x.question_title}
-                  </Link>
-                  <p className="ta-left py12">{x.question_body}</p>
-                  <div className="d-flex jc-space-between">
-                    <TagWrap className="mb12">
-                      {x.question_tags.split(',').map((z, j) => {
-                        return (
-                          <a
-                            key={j}
-                            href={'/question/' + z}
-                            className="s-tag mr4"
-                          >
-                            {z}
-                          </a>
-                        );
-                      })}
-                    </TagWrap>
-                    <div>{x.question_author}</div>
-                  </div>
-                </div>
-              );
+            {currentPosts.map((x, i) => {
+              return <Posts key={i} el={x} />;
             })}
           </PostWrapper>
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={posts.length}
+            paginate={paginate}
+            currentPage={currentPage}
+          />
         </div>
       </div>
       <NavSide2 className="side2" />
