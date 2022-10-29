@@ -4,7 +4,12 @@ import NavSide2 from './../components/Nav-Side2';
 import Posts from '../components/post';
 import { React, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  useLocation,
+} from 'react-router-dom';
 import Pagination from '../components/pagination';
 const BREAK_POINT_TABLET = 768;
 const BREAK_POINT_PC = 1200;
@@ -43,12 +48,24 @@ const QuestionList = () => {
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const location = useLocation();
+
   useEffect(() => {
+    const pathname = location.pathname.split('/')[2];
+    const arr = [];
     const fetchPosts = async () => {
       setLoading(true);
       //const res = await = axios.get(url);
-      const res = dummy1;
-      setPosts(res.Question);
+      if (pathname) {
+        const res = dummy1.Question.filter((x) =>
+          x.question_tags.includes(pathname)
+        );
+        setPosts(res);
+      } else {
+        const res = dummy1;
+        setPosts(res.Question);
+      }
+
       setLoading(false);
     };
 
@@ -67,7 +84,7 @@ const QuestionList = () => {
         <div className="d-flex fd-column">
           <PostWrapper>
             {currentPosts.map((x, i) => {
-              return <Posts key={i} el={x} />;
+              return <Posts key={i} el={x} loading={loading} />;
             })}
           </PostWrapper>
           <Pagination

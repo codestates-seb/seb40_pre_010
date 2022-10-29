@@ -24,6 +24,7 @@ function App() {
             <Route path="/" element={<QuestionList />} />
             <Route path="/question/:tag" element={<QuestionList />} />
             <Route path="/post/:id" element={<QuestionPost />} />
+            <Route path="/tags/:tag" element={<QuestionList />} />
             <Route path="/tags" element={<Tags />} />
           </Routes>
         </MainWrapper>

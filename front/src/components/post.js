@@ -19,7 +19,7 @@ const Posts = ({ index, el, posts, loading }) => {
         <TagWrap className="mb12">
           {el.question_tags.split(',').map((z, j) => {
             return (
-              <a key={j} href={'/question/' + z} className="s-tag mr4">
+              <a key={j} href={'/tags/' + z} className="s-tag mr4">
                 {z}
               </a>
             );
