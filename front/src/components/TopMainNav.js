@@ -301,7 +301,7 @@ const Buttons = styled.div`
 function TopMainNav() {
   return (
     <MainNavBox>
-      <LogoutModal></LogoutModal>
+      {/* <LogoutModal></LogoutModal> */}
       <div className="main-box">
         <Menu>
           <ul>
