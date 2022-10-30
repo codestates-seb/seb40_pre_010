@@ -1,7 +1,7 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     show-sql: true      # (2) SQL 쿼리 출력
     properties:
       hibernate:

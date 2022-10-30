@@ -2,10 +2,8 @@ package com.backendPreProject.question.dto;
 
 import lombok.Getter;
 
-import javax.validation.constraints.NotBlank;
-
 @Getter
-public class requestDto {
+public class QuestionRequestDto {
 
 //    @NotBlank(message = "검색 내용은 공백이 아니어야 합니다.")
 //    private String input;   // 검색한 문자열

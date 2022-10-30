@@ -1,10 +1,11 @@
 package com.backendPreProject.question.controller;
 
+import com.backendPreProject.answer.entity.Answer;
+import com.backendPreProject.answer.server.AnswerServer;
 import com.backendPreProject.question.dto.QuestionPostDto;
 import com.backendPreProject.question.entity.Question;
 import com.backendPreProject.question.mapper.QuestionMapper;
 import com.backendPreProject.question.server.QuestionService;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -22,11 +23,14 @@ public class QuestionController {
 
     private QuestionService questionService;
     private QuestionMapper questionMapper;
+    private AnswerServer answerServer;
 
     public QuestionController(QuestionService questionService,
-                              QuestionMapper questionMapper){
+                              QuestionMapper questionMapper,
+                              AnswerServer answerServer){
         this.questionService=questionService;
         this.questionMapper=questionMapper;
+        this.answerServer=answerServer;
     }
 
     @PostMapping("question")
@@ -44,7 +48,12 @@ public class QuestionController {
             @PathVariable("questionId") @Positive int questionId) {
 
         Question question= questionService.findQuestion(questionId);
-        return new ResponseEntity<>(questionMapper.questionToQuestionResponseDto(question), HttpStatus.OK);
+        List<Answer> answers=answerServer.findAnswers(questionId);
+        // 하나의 question에 관한 answers들을 함께 출력하기 위해
+        // question과 answers가 필요
+        // 2개의 데이터는 mapper를 통해 하나의 question에 여러 answer들이 붙어있는 형태로 출력함
+
+        return new ResponseEntity<>(questionMapper.AnswersToQuestionResponseDto(question,answers), HttpStatus.OK);
     }
 
     @GetMapping("word/{keyword}")  // 질문 검색:

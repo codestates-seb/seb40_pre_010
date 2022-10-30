@@ -1,6 +1,9 @@
 package com.backendPreProject.question.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,6 +18,7 @@ public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "question_id")
     private int questionId;    // 질문 번호, 아이디는 jpa가 자동으로 카운트
 
     @Column(nullable = false)

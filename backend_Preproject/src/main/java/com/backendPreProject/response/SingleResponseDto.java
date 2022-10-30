@@ -1,4 +1,4 @@
-package com.backendPreProject.question.response;
+package com.backendPreProject.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

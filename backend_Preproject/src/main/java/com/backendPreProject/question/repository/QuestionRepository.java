@@ -2,7 +2,6 @@ package com.backendPreProject.question.repository;
 
 import com.backendPreProject.question.entity.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
