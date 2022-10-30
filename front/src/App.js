@@ -8,6 +8,7 @@ import QuestionPost from './pages/QuestionPost';
 
 import styled from 'styled-components';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AskQuestion from './pages/AskQuestion';
 
 const MainWrapper = styled.div`
   max-width: 1240px;
@@ -26,6 +27,7 @@ function App() {
             <Route path="/post/:id" element={<QuestionPost />} />
             <Route path="/tags/:tag" element={<QuestionList />} />
             <Route path="/tags" element={<Tags />} />
+            <Route path="/askquestion" element={<AskQuestion />} />
           </Routes>
         </MainWrapper>
         <Footer />
