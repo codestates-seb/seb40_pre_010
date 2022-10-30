@@ -77,7 +77,7 @@ const QuestionList = () => {
       <div className="pt96 w100">
         <div className=" ta-left px16 d-flex jc-space-between pb8">
           <span className="fs-headline1">All Questions</span>
-          <Link to="/" className="s-btn s-btn__primary">
+          <Link to="/askquestion" className="s-btn s-btn__primary">
             Ask Question
           </Link>
         </div>
