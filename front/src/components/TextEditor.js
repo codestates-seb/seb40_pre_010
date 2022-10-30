@@ -13,12 +13,13 @@ const TextEditor = () => {
   return (
     <>
       <Editor
-        initialValue="<strong>내용을 입력해주세요.</strong>" // 초기 입력값
+        initialValue=" " // 초기 입력값
         previewStyle="tab" // vertical로 설정시 미리보기 화면 분할가능
-        height="300px"
         initialEditType="markdown" // markdown or wysiwyg
         ref={editorRef}
         onChange={onChange}
+        height="388px"
+        width="850px"
       />
     </>
   );
