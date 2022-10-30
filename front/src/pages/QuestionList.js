@@ -10,7 +10,7 @@ import {
   Link,
   useLocation,
 } from 'react-router-dom';
-import Pagination from '../components/pagination';
+import Pagination from './../components/pagination';
 const BREAK_POINT_TABLET = 768;
 const BREAK_POINT_PC = 1200;
 
