@@ -42,7 +42,10 @@ const QuestionList = () => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
-
+  const [search, setSearch] = useState('');
+  const onChangeSearchHandler = (e) => {
+    setSearch(e.target.value);
+  };
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
@@ -51,16 +54,25 @@ const QuestionList = () => {
   const location = useLocation();
 
   useEffect(() => {
+    const path = location.pathname.split('/')[1];
     const pathname = location.pathname.split('/')[2];
-    const arr = [];
+
     const fetchPosts = async () => {
       setLoading(true);
       //const res = await = axios.get(url);
       if (pathname) {
-        const res = dummy1.Question.filter((x) =>
-          x.question_tags.includes(pathname)
-        );
-        setPosts(res);
+        if (path === 'tags') {
+          const res = dummy1.Question.filter((x) =>
+            x.question_tags.includes(pathname)
+          );
+          setPosts(res);
+        }
+        if (path === 'question') {
+          const res = dummy1.Question.filter((x) => {
+            x.question_title.includes(pathname);
+          });
+          setPosts(res);
+        }
       } else {
         const res = dummy1;
         setPosts(res.Question);
@@ -70,7 +82,8 @@ const QuestionList = () => {
     };
 
     fetchPosts();
-  }, []);
+  }, [location]);
+
   return (
     <Wrapper>
       <NavSide1 />
@@ -82,8 +95,22 @@ const QuestionList = () => {
               Ask Question
             </Link>
           </div>
-          <div>
-            <span className="fs-body3">{posts.length} questions</span>
+          <div className="d-flex jc-space-between ai-center py8 mt-4 bt bc-black-075">
+            <div className="fs-body3">{posts.length} questions</div>
+            <div className="d-flex g4">
+              <input
+                type="text"
+                className="s-input__sm s-input"
+                onChange={onChangeSearchHandler}
+              ></input>
+              <Link
+                to={'/question/' + search}
+                className="s-btn s-btn__primary"
+                type="button"
+              >
+                search
+              </Link>
+            </div>
           </div>
         </div>
         <div className="d-flex fd-column">
