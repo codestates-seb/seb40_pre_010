@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 import SearchInput from './SearchInput';
 import LogoutModal from './LogoutModal';
 
@@ -328,12 +330,16 @@ function TopMainNav() {
           <input className="search-bar__input" placeholder="Search"></input>
         </div>
         <Buttons>
-          {/* <div className="logout-state">
-            <button className="btn-login">Log in</button>
-            <button className="btn-logout">Log out</button>
-          </div> */}
+          <div className="logout-state">
+            <Link to="/login">
+              <button className="btn-login">Log In</button>
+            </Link>
+            <Link to="/signup">
+              <button className="btn-logout">Sign Up</button>
+            </Link>
+          </div>
 
-          <div className="login-state">
+          {/* <div className="login-state">
             <ul className="login-icons">
               <li className="search-login-icon">
                 <div className="login-icon_ search"></div>
@@ -354,7 +360,7 @@ function TopMainNav() {
                 <div className="login-icon_ login-icon4"></div>
               </li>
             </ul>
-          </div>
+          </div> */}
         </Buttons>
       </div>
     </MainNavBox>
