@@ -14,7 +14,7 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/answer")
 @Validated
 public class AnswerController {
 
@@ -27,7 +27,7 @@ public class AnswerController {
         this.answerMapper=answerMapper;
     }
 
-    @PostMapping("answer")
+    @PostMapping // 코멘트 등록
     public ResponseEntity postAnswer(@Valid @RequestBody AnswerPostDto answerPostDto){
 
         Answer answer=answerServer.createAnswer(answerMapper.AnswerPostDto(answerPostDto));
@@ -40,7 +40,7 @@ public class AnswerController {
     /////////////////////////////////////////////////////////////////////////////////////////////////
     // answer저장 확인용, api명세서에는 없음
 
-    @GetMapping("answer/{questionId}")
+    @GetMapping("/{questionId}")  //postnum(questionId) 에 해당하는 코멘트 전체 조회
     public ResponseEntity getAnswers(
             @PathVariable("questionId") @Positive int questionId){
 
@@ -52,7 +52,7 @@ public class AnswerController {
     /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    @DeleteMapping("answer/{answerId}")
+    @DeleteMapping("/{answerId}")  // 코멘트 삭제
     public ResponseEntity deleteAnswer(
             @PathVariable("answerId") @Positive int answerId) {
 

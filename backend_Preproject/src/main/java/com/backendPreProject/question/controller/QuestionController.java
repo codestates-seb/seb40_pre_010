@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/question")
 @Validated
 public class QuestionController {
 
@@ -33,7 +33,7 @@ public class QuestionController {
         this.answerServer=answerServer;
     }
 
-    @PostMapping("question")
+    @PostMapping  // 질문 작성
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionPostDto questionDto){
 
         Question question
@@ -43,7 +43,7 @@ public class QuestionController {
     }
 
 
-    @GetMapping("{questionId}")   // 질문 조회: questionId로 질문들어가기
+    @GetMapping("/{questionId}")   // 질문 조회: questionId로 질문들어가기
     public ResponseEntity getQuestion(
             @PathVariable("questionId") @Positive int questionId) {
 
@@ -56,14 +56,14 @@ public class QuestionController {
         return new ResponseEntity<>(questionMapper.AnswersToQuestionResponseDto(question,answers), HttpStatus.OK);
     }
 
-    @GetMapping("word/{keyword}")  // 질문 검색:
+    @GetMapping("/word/{word}")  // 질문 검색: 타이틀에 포함된 키워드 검색
     public ResponseEntity getQuestionWord(@PathVariable("keyword")String word) {
 
         List<Question> listQuestions=questionService.findQuestionWord(word);
         return new ResponseEntity<>(questionMapper.listQuestionToQuestionResponseDto(listQuestions), HttpStatus.OK);
     }
 
-    @DeleteMapping("{questionId}")
+    @DeleteMapping("/{questionId}")
     public ResponseEntity deleteQuestion(
             @PathVariable("questionId") @Positive int questionId) {
 

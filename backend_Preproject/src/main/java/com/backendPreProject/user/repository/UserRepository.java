@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    User findById(int userId);
+    User findById(int id);   // 고유 ID로 조회
+    User findByUserId(String userId); // user 가 직접 설정한 userId 로 조회
     User findByUserName(String userName);
 }

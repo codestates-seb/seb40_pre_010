@@ -12,7 +12,9 @@ public enum ExceptionCode {
     ACCESS_DENIED_USER(403,"Access Denied User"),
     CANNOT_CHANGE_ORDER(403, "Order can not change"),
     NOT_IMPLEMENTATION(501, "Not Implementation"),
-    INVALID_MEMBER_STATUS(400, "Invalid member status");  // TO 추가된 부분
+    INVALID_MEMBER_STATUS(400, "Invalid member status"),  // TO 추가된 부분
+    PASSWORD_MISMATCH(404,"Password mismatch");
+
 
     @Getter
     private int status;

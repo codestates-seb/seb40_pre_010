@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class UserResponseDto {
 
-    private int userId;
+    private String userId;
 
     private String userName;
 
