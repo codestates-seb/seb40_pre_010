@@ -10,7 +10,7 @@ import {
   Link,
   useLocation,
 } from 'react-router-dom';
-import Pagination from '../components/pagination';
+import Pagination from './../components/pagination';
 const BREAK_POINT_TABLET = 768;
 const BREAK_POINT_PC = 1200;
 
@@ -77,7 +77,7 @@ const QuestionList = () => {
       <div className="pt96 w100">
         <div className=" ta-left px16 d-flex jc-space-between pb8">
           <span className="fs-headline1">All Questions</span>
-          <Link to="/" className="s-btn s-btn__primary">
+          <Link to="/askquestion" className="s-btn s-btn__primary">
             Ask Question
           </Link>
         </div>
