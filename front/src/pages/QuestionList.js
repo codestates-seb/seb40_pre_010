@@ -66,7 +66,6 @@ const QuestionList = () => {
             x.question_title.includes(pathname);
           });
           setPosts(res);
-          console.log(res);
         }
         if (path === 'tags') {
           const res = dummy1.Question.filter((x) =>
