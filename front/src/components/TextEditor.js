@@ -28,8 +28,8 @@ const TextEditor = () => {
         initialEditType="markdown" // markdown or wysiwyg
         ref={editorRef}
         onChange={onChange}
-        height="388px"
-        width="100%"
+        height="500px"
+        // width="100%"
       />
     </EditorWrapper>
   );

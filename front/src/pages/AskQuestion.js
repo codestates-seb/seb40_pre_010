@@ -38,9 +38,9 @@ const Question = styled.div`
   display: flex;
   flex-direction: column;
   //width: 854px;
-  height: 607px;
+  /* height: 607px; */
   margin-top: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
 `;
 
 const Input = styled.input`
