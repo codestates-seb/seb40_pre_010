@@ -9,7 +9,6 @@ const Posts = ({ index, el, posts, loading }) => {
   if (loading) {
     return <h2>Loading...</h2>;
   }
-  console.log(el);
   return (
     <div className="ta-left bt bc-black-100 p12 md:pl12 pl64">
       <Link to={'/post/' + el.question_id} className="s-link fs-body3">

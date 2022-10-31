@@ -4,7 +4,7 @@ import NavSide2 from './../components/Nav-Side2';
 import styled from 'styled-components';
 import { React, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { Editor } from '@toast-ui/react-editor';
+import { Editor, Viewer } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 
 const Wrapper = styled.div`
@@ -71,10 +71,7 @@ const QuestionPost = () => {
         <MainBox className="d-flex jc-space-between md:fd-column">
           <PostArea className="pr16">
             <div className="bb bc-black-075">
-              <p
-                dangerouslySetInnerHTML={{ __html: PostBody }}
-                className="mb24"
-              ></p>
+              <Viewer initialValue={PostBody} />
               <p>
                 {Post.question_tags.split(',').map((z, j) => {
                   return (
