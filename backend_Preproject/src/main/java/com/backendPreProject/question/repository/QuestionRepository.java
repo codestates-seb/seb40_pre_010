@@ -11,6 +11,5 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     Question findById(int questionId);
     List<Question> findByQuestionTitleContaining(String word);
-
 }
 
