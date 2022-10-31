@@ -61,16 +61,17 @@ const QuestionList = () => {
       setLoading(true);
       //const res = await = axios.get(url);
       if (pathname) {
-        if (path === 'tags') {
-          const res = dummy1.Question.filter((x) =>
-            x.question_tags.includes(pathname)
-          );
-          setPosts(res);
-        }
         if (path === 'question') {
           const res = dummy1.Question.filter((x) => {
             x.question_title.includes(pathname);
           });
+          setPosts(res);
+          console.log(res);
+        }
+        if (path === 'tags') {
+          const res = dummy1.Question.filter((x) =>
+            x.question_tags.includes(pathname)
+          );
           setPosts(res);
         }
       } else {

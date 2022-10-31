@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
+import dummy2 from '../static/dummy2.json';
 
 const BREAK_POINT_TABLET = 768;
-const BREAK_POINT_PC = 1200;
 const Wrapper = styled.div`
   max-width: 300px;
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
@@ -210,18 +210,17 @@ const MemoCollectives = (img, name, num, text) => {
 };
 const Tags = (name, amount, i) => {
   return (
-    <div className="flex" key={i}>
-      <div className="tag">{name}</div>
-      <div className="tagamount">x {amount}</div>
+    <div className="d-flex mb4 ai-center" key={i}>
+      <a href={'/tags/' + name} className="s-tag">
+        {name}
+      </a>
+      <div className="tagamount fc-black-500 pl4">
+        x {Math.floor(Math.random() * 100)}
+      </div>
     </div>
   );
 };
-const TagsMap = [
-  ['javascript', '2439716'],
-  ['python', '2047600'],
-  ['java', '1873265'],
-  ['C#', '1564987'],
-];
+const TagsMap = dummy2.tags.map((x) => x.name);
 
 const QuestionMap = [
   `What are "equity" and "equitable remedies"`,
@@ -295,15 +294,15 @@ function SideNav2() {
         </SideCollectives>
       </Sidebar>
       <Sidebar>
-        <div className="title mb">Related Tags</div>
+        <div className="title mb fs-body3">Related Tags</div>
         <div className="body">
           {TagsMap.map((x, i) => {
-            return Tags(x[0], x[1], i);
+            return Tags(x, x[1], i);
           })}
         </div>
       </Sidebar>
       <Sidebar>
-        <div className="title mb">Hot Network Questions</div>
+        <div className="title mb fs-body3">Hot Network Questions</div>
         <div className="body question">
           {QuestionMap.map((x, i) => {
             return <div key={i}>{x}</div>;
