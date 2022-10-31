@@ -75,11 +75,16 @@ const QuestionList = () => {
     <Wrapper>
       <NavSide1 />
       <div className="pt96 w100">
-        <div className=" ta-left px16 d-flex jc-space-between pb8">
-          <span className="fs-headline1">All Questions</span>
-          <Link to="/askquestion" className="s-btn s-btn__primary">
-            Ask Question
-          </Link>
+        <div className=" ta-left px16 ">
+          <div className="d-flex jc-space-between pb8">
+            <span className="fs-headline1">All Questions</span>
+            <Link to="/askquestion" className="s-btn s-btn__primary">
+              Ask Question
+            </Link>
+          </div>
+          <div>
+            <span className="fs-body3">{posts.length} questions</span>
+          </div>
         </div>
         <div className="d-flex fd-column">
           <PostWrapper>

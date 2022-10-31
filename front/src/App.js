@@ -11,7 +11,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AskQuestion from './pages/AskQuestion';
 
 const MainWrapper = styled.div`
-  max-width: 1240px;
+  //max-width: 1240px;
   width: 100%;
   margin: auto;
 `;

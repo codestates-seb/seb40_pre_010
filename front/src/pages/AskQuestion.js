@@ -7,6 +7,15 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding: 0px 15px;
   background-color: #f1f2f3;
+  width: 100%;
+  > div {
+    max-width: 1240px;
+    margin-right: auto;
+    margin-left: auto;
+    &:first-child {
+      max-width: 876px;
+    }
+  }
   .main-button {
     margin-top: 20px;
     margin-bottom: 50px;
@@ -28,7 +37,7 @@ const Header = styled.div`
 const Question = styled.div`
   display: flex;
   flex-direction: column;
-  width: 854px;
+  //width: 854px;
   height: 607px;
   margin-top: 30px;
   margin-bottom: 10px;
@@ -40,11 +49,16 @@ const Input = styled.input`
   width: 100%;
   height: 35px;
   padding: 8px 10px;
+  &:focus ~ {
+    .s-popover {
+      display: block;
+    }
+  }
 `;
 
 const StyledDiv = styled.div`
   padding: 20px;
-  width: 894px;
+  max-width: 894px;
   height: 862px;
   border-radius: 3px;
   row-gap: 10px;
@@ -103,6 +117,9 @@ const AskQuestion = () => {
           Add up to 5 tags to describe what your question is about
         </StyledDivv>
         <Input placeholder="e.g. (angular sql-server string)"></Input>
+        <div className="s-popover" id="popover-example" role="menu">
+          <div className="s-popover--arrow"></div>…
+        </div>
       </StyledDiv>
       <div className="main-button">
         <StyledButton>Review your question</StyledButton>

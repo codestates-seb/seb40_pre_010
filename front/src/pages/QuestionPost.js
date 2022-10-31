@@ -22,7 +22,15 @@ const PostArea = styled.div`
     margin-right: 16px;
   }
 `;
-const EditoreWrapper = styled.div``;
+const EditoreWrapper = styled.div`
+  .toastui-editor-defaultUI-toolbar {
+    flex-wrap: wrap;
+  }
+  .toastui-editor-dropdown-toolbar {
+    height: auto;
+    flex-wrap: wrap;
+  }
+`;
 const QuestionPost = () => {
   const postnum = useParams();
   const Post = dummy1.Question[postnum.id];
@@ -45,7 +53,7 @@ const QuestionPost = () => {
   };
 
   return (
-    <Wrapper className="d-flex">
+    <Wrapper className="d-flex sm:fd-column">
       <NavSide1 />
       <div className="pt96 pb24 px16">
         <div className="fs-headline1">{Post.question_title}</div>

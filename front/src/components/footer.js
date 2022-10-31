@@ -81,6 +81,7 @@ const StyledDivTwo = styled.div`
 const StyledDivThree = styled.div`
   display: flex;
   width: 100%;
+  flex-wrap: wrap;
   // 태블릿 : 1200px ~ 768px :: 768px 이상 적용되는 css
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     flex-direction: column;
