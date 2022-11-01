@@ -29,7 +29,8 @@ dependencies {
 //	implementation 'org.springframework.boot:spring-boot-starter-security'//jwt 추가
 //	testImplementation 'org.springframework.security:spring-security-test'//jwt 추가
 
-	//runtimeOnly 'com.h2database:h2'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
 
 	implementation 'mysql:mysql-connector-java'
 

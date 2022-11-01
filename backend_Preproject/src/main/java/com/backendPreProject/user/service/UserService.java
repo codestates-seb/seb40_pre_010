@@ -6,22 +6,29 @@ import com.backendPreProject.user.entity.User;
 import com.backendPreProject.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.core.context.SecurityContextHolder;
-//import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Optional;
 
 
 @Service
 public class UserService {
 
     private UserRepository userRepository;
-//
-//    private BCryptPasswordEncoder;
-    public UserService(UserRepository userRepository){
-//                       BCryptPasswordEncoder bCryptPasswordEncoder) {
+
+    private PasswordEncoder passwordEncoder;
+
+    //private BCryptPasswordEncoder bCryptPasswordEncoder;
+    public UserService(UserRepository userRepository,
+                       PasswordEncoder passwordEncoder
+    //                   ,BCryptPasswordEncoder bCryptPasswordEncoder
+                        ){
         this.userRepository = userRepository;
-//        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.passwordEncoder=passwordEncoder;
+        //this.bCryptPasswordEncoder=bCryptPasswordEncoder;
     }
 
     public User CreateUser(User user) {      // *** 회원가입 ***
@@ -29,7 +36,8 @@ public class UserService {
         if (userId != null) {
             throw new BusinessLogicException(ExceptionCode.USER_EXISTS); // 이미 똑같은 userId 가 존재할 경우 , USER_EXISTS 오류
         }
-//        user.setUserPw(bCryptPasswordEncoder.encode(user.getUserPw())); // 복호화 진행
+
+        user.setUserPw(passwordEncoder.encode(user.getUserPw())); // 복호화 진행
 
         return userRepository.save(user);
     }
