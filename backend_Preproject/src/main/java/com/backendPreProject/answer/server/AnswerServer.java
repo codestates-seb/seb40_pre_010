@@ -25,6 +25,7 @@ public class AnswerServer {
     }
 
     public List<Answer> findAnswers(int postNum){
+
         return answerRepository.findByPostNum(postNum);
     }
 
