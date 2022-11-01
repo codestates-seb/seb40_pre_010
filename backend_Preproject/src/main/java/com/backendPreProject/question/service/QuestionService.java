@@ -1,4 +1,4 @@
-package com.backendPreProject.question.server;
+package com.backendPreProject.question.service;
 
 
 import com.backendPreProject.exception.BusinessLogicException;

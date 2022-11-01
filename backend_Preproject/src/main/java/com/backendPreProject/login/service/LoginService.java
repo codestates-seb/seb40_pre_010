@@ -11,6 +11,10 @@ public class LoginService {
 
     private UserRepository userRepository;
 
+    public LoginService(UserRepository userRepository){
+        this.userRepository=userRepository;
+    }
+
     public void login (String userId , String userPw){
 
         User user = userRepository.findByUserId(userId);
@@ -19,7 +23,6 @@ public class LoginService {
 
         else if (!user.getUserPw().equals(userPw)) throw new BusinessLogicException(ExceptionCode.PASSWORD_MISMATCH); // 로그인 시 user 입력한 userId 와 password 가 일치하지 않을 때 (비밀번호가 틀렸다)
 
-//        return user;    // 리턴이 이게 맞는지 ?   로그인이 리턴값이 필요할까 싶어서 delete 처럼 void 로도 시도해봤다 아마 아닌듯
     }
 
 }

@@ -1,21 +1,21 @@
-package com.backendPreProject.answer.server;
+package com.backendPreProject.answer.service;
 
 import com.backendPreProject.answer.entity.Answer;
 import com.backendPreProject.answer.mapper.AnswerMapper;
 import com.backendPreProject.answer.repository.AnswerRepository;
-import com.backendPreProject.question.server.QuestionService;
+import com.backendPreProject.question.service.QuestionService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AnswerServer {
+public class AnswerService {
 
     private AnswerRepository answerRepository;
 
-    public AnswerServer(AnswerRepository answerRepository,
-                        QuestionService questionService,
-                        AnswerMapper answerMapper){
+    public AnswerService(AnswerRepository answerRepository,
+                         QuestionService questionService,
+                         AnswerMapper answerMapper){
         this.answerRepository=answerRepository;
     }
 

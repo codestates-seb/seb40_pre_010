@@ -2,11 +2,8 @@ package com.backendPreProject.login.controller;
 
 import com.backendPreProject.login.service.LoginService;
 import com.backendPreProject.user.dto.UserLoginDto;
-import com.backendPreProject.user.dto.UserPostDto;
-import com.backendPreProject.user.entity.User;
-import com.backendPreProject.user.mapper.UserMapper;
-import com.backendPreProject.user.repository.UserRepository;
 import com.backendPreProject.user.service.UserService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -37,8 +34,7 @@ public class LoginController {
     public ResponseEntity postLogin(@Valid @RequestBody UserLoginDto userLoginDto) {
        loginService.login(userLoginDto.getUserId(),userLoginDto.getUserPw());
 
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK); // 로그인을 통과하는 경우 200.ok 반환
     }
 }
 

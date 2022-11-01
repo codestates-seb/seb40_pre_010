@@ -3,7 +3,7 @@ package com.backendPreProject.answer.controller;
 import com.backendPreProject.answer.dto.AnswerPostDto;
 import com.backendPreProject.answer.entity.Answer;
 import com.backendPreProject.answer.mapper.AnswerMapper;
-import com.backendPreProject.answer.server.AnswerServer;
+import com.backendPreProject.answer.service.AnswerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,19 +18,19 @@ import java.util.List;
 @Validated
 public class AnswerController {
 
-    private AnswerServer answerServer;
+    private AnswerService answerService;
     private AnswerMapper answerMapper;
 
-    public AnswerController(AnswerServer answerServer,
+    public AnswerController(AnswerService answerService,
                             AnswerMapper answerMapper){
-        this.answerServer=answerServer;
+        this.answerService=answerService;
         this.answerMapper=answerMapper;
     }
 
     @PostMapping // 코멘트 등록
     public ResponseEntity postAnswer(@Valid @RequestBody AnswerPostDto answerPostDto){
 
-        Answer answer=answerServer.createAnswer(answerMapper.AnswerPostDto(answerPostDto));
+        Answer answer=answerService.createAnswer(answerMapper.AnswerPostDto(answerPostDto));
 
 
         return new ResponseEntity<>(answerMapper.AnswerToAnswerResponseDto(answer), HttpStatus.CREATED);
@@ -44,7 +44,7 @@ public class AnswerController {
     public ResponseEntity getAnswers(
             @PathVariable("questionId") @Positive int questionId){
 
-        List<Answer> listAnswers=answerServer.findAnswers(questionId);
+        List<Answer> listAnswers=answerService.findAnswers(questionId);
         return new ResponseEntity<>(answerMapper.listAnswerToAnswerResponseDto(listAnswers), HttpStatus.OK);
 
     }
@@ -56,7 +56,7 @@ public class AnswerController {
     public ResponseEntity deleteAnswer(
             @PathVariable("answerId") @Positive int answerId) {
 
-        answerServer.deleteAnswer(answerId);
+        answerService.deleteAnswer(answerId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
