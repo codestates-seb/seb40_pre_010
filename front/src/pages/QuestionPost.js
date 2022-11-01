@@ -10,6 +10,8 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 
 const Wrapper = styled.div`
   width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
   .fs-headline1 {
     text-align: left;
     margin-bottom: 8px;
@@ -71,18 +73,21 @@ const QuestionPost = () => {
       ) : null}
       <NavSide1 />
       <div className="pt96 pb24 px16">
-        <div className="fs-headline1">{Post.question_title}</div>
-        <div className="d-flex pb8 mb16 bb bc-black-075">
-          <p className="fc-black-500 mr24">
-            Asked <span className="fc-black-800">{Asked}</span>
-          </p>
-          <p className="fc-black-500 mr24">
-            Modified <span className="fc-black-800">{Modified}</span>
-          </p>
-          <p className="fc-black-500">
-            Viewed <span className="fc-black-800">{Viewed}</span>
-          </p>
+        <div className="s-page-title">
+          <h1 className="s-page-title--header">{Post.question_title}</h1>
+          <div className="d-flex mt24">
+            <p className="fc-black-500 mr24">
+              Asked <span className="fc-black-800">{Asked}</span>
+            </p>
+            <p className="fc-black-500 mr24">
+              Modified <span className="fc-black-800">{Modified}</span>
+            </p>
+            <p className="fc-black-500">
+              Viewed <span className="fc-black-800">{Viewed}</span>
+            </p>
+          </div>
         </div>
+
         <MainBox className="d-flex jc-space-between md:fd-column">
           <PostArea className="pr16">
             <div className="bb bc-black-075">

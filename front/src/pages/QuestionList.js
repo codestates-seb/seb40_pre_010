@@ -9,16 +9,16 @@ import {
   Route,
   Link,
   useLocation,
+  useParams,
 } from 'react-router-dom';
 import Pagination from './../components/pagination';
-const BREAK_POINT_TABLET = 768;
-const BREAK_POINT_PC = 1200;
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-right: 1em;
+  max-width: 1240px;
+  margin: 0 auto;
   > div:first-child {
     border-width: 0 !important;
   }
@@ -38,11 +38,14 @@ const PostWrapper = styled.div`
 `;
 
 const QuestionList = () => {
+  const params = useParams();
+  const [search_id, setSearch_id] = useState('title');
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('test');
+
   const onChangeSearchHandler = (e) => {
     setSearch(e.target.value);
   };
@@ -60,17 +63,36 @@ const QuestionList = () => {
     const fetchPosts = async () => {
       setLoading(true);
       //const res = await = axios.get(url);
+      let res = '';
       if (pathname) {
-        if (path === 'question') {
-          const res = dummy1.Question.filter((x) =>
-            x.question_title.includes(pathname)
-          );
-          setPosts(res);
-        } else if (path === 'tags') {
-          const res = dummy1.Question.filter((x) =>
-            x.question_tags.includes(pathname)
-          );
-          setPosts(res);
+        switch (path) {
+          case 'title':
+            res = dummy1.Question.filter((x) =>
+              x.question_title.includes(pathname)
+            );
+            setPosts(res);
+            break;
+          case 'body':
+            res = dummy1.Question.filter((x) =>
+              x.question_body.includes(pathname)
+            );
+            setPosts(res);
+            break;
+          case 'author':
+            res = dummy1.Question.filter((x) =>
+              x.question_author.includes(pathname)
+            );
+            setPosts(res);
+            break;
+          case 'tags':
+            res = dummy1.Question.filter((x) =>
+              x.question_tags.includes(pathname)
+            );
+            setPosts(res);
+            break;
+          default:
+            setPosts(dummy1.Question);
+            break;
         }
       } else {
         const res = dummy1;
@@ -88,22 +110,32 @@ const QuestionList = () => {
       <NavSide1 />
       <div className="pt96 w100">
         <div className=" ta-left px16 ">
-          <div className="d-flex jc-space-between pb8">
-            <span className="fs-headline1">All Questions</span>
+          <div className="d-flex jc-space-between pb8 s-page-title fd-row">
+            <h1 className="s-page-title--header">All Questions</h1>
             <Link to="/askquestion" className="s-btn s-btn__primary">
               Ask Question
             </Link>
           </div>
-          <div className="d-flex jc-space-between ai-center py8 mt-4 bt bc-black-075">
+          <div className="d-flex jc-space-between ai-center py8 mt-4 ">
             <div className="fs-body3">{posts.length} questions</div>
             <div className="d-flex g4">
+              <div className="flex--item s-select w100">
+                <select
+                  id="select-menu"
+                  onChange={(e) => setSearch_id(e.target.value)}
+                >
+                  <option defaultValue={'title'}>title</option>
+                  <option value="body">body</option>
+                  <option value="author">author</option>
+                </select>
+              </div>
               <input
                 type="text"
                 className="s-input__sm s-input"
                 onChange={onChangeSearchHandler}
               ></input>
               <Link
-                to={'/question/' + search}
+                to={'/' + search_id + '/' + search}
                 className="s-btn s-btn__primary"
                 type="button"
               >
