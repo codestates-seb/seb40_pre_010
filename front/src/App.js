@@ -23,7 +23,7 @@ function App() {
         <MainWrapper className="d-flex sm:fd-column">
           <Routes className="main">
             <Route path="/" element={<QuestionList />} />
-            <Route path="/question/:search" element={<QuestionList />} />
+            <Route path="/:search1/:search2" element={<QuestionList />} />
             <Route path="/post/:id" element={<QuestionPost />} />
             <Route path="/tags/:tag" element={<QuestionList />} />
             <Route path="/tags" element={<Tags />} />

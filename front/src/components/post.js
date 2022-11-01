@@ -5,6 +5,16 @@ import { Link } from 'react-router-dom';
 const TagWrap = styled.div`
   text-align: left;
 `;
+const Body = styled.p`
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3; // 원하는 라인수
+  -webkit-box-orient: vertical;
+`;
 const Posts = ({ index, el, posts, loading }) => {
   if (loading) {
     return <h2>Loading...</h2>;
@@ -14,7 +24,7 @@ const Posts = ({ index, el, posts, loading }) => {
       <Link to={'/post/' + el.question_id} className="s-link fs-body3">
         {el.question_title}
       </Link>
-      <p className="ta-left py12">{el.question_body}</p>
+      <Body className="ta-left my12">{el.question_body}</Body>
       <div className="d-flex jc-space-between">
         <TagWrap className="mb12">
           {el.question_tags.split(',').map((z, j) => {
