@@ -1,8 +1,9 @@
 import dummy1 from '../static/dummy1.json';
 import NavSide1 from './../components/Nav-Side1';
 import NavSide2 from './../components/Nav-Side2';
+import AlertError from '../components/alert';
 import styled from 'styled-components';
-import { React, useRef } from 'react';
+import { React, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Editor, Viewer } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
@@ -32,6 +33,8 @@ const EditoreWrapper = styled.div`
   }
 `;
 const QuestionPost = () => {
+  const [IsLogin, setIsLogin] = useState(false);
+  const [IsAlert, setIsAlert] = useState(false);
   const postnum = useParams();
   const Post = dummy1.Question[postnum.id];
   const Answer = [];
@@ -46,14 +49,24 @@ const QuestionPost = () => {
   const Viewed = '';
 
   const handleClick = () => {
-    // 입력창에 입력한 내용을 HTML 태그 형태로 취득
-    console.log(editorRef.current?.getInstance().getHTML());
-    // 입력창에 입력한 내용을 MarkDown 형태로 취득
-    console.log(editorRef.current?.getInstance().getMarkdown());
+    // // 입력창에 입력한 내용을 HTML 태그 형태로 취득
+    // console.log(editorRef.current?.getInstance().getHTML());
+    // // 입력창에 입력한 내용을 MarkDown 형태로 취득
+    // console.log(editorRef.current?.getInstance().getMarkdown());
+    if (!IsLogin) {
+      setIsAlert(true);
+    }
   };
 
   return (
     <Wrapper className="d-flex sm:fd-column">
+      {IsAlert ? (
+        <AlertError
+          title="authorization error"
+          body="Login For Comment"
+          link="/login"
+        />
+      ) : null}
       <NavSide1 />
       <div className="pt96 pb24 px16">
         <div className="fs-headline1">{Post.question_title}</div>
@@ -110,7 +123,7 @@ const QuestionPost = () => {
                 hideModeSwitch="true"
                 useCommandShortcut={true}
               />
-              <div className="ta-right my12">
+              <div className="d-flex jc-end my12">
                 <button className="s-btn s-btn__primary" onClick={handleClick}>
                   Post Your Answer
                 </button>
