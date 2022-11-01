@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import TextEditor from '../components/TextEditor';
+import Accordion from '../components/Accordion';
 
 const Wrapper = styled.div`
   display: flex;
@@ -37,8 +38,6 @@ const Header = styled.div`
 const Question = styled.div`
   display: flex;
   flex-direction: column;
-  //width: 854px;
-  /* height: 607px; */
   margin-top: 30px;
   margin-bottom: 40px;
 `;
@@ -64,18 +63,17 @@ const StyledDiv = styled.div`
   row-gap: 10px;
   background-color: white;
   box-shadow: grey 0px 0px 3px;
-  /* @media (min-width) screen {
-    
-  } */
 `;
 
 const StyledButton = styled.button`
+  margin-right: 790px;
   border: 1px solid;
+
   color: #ffffff;
   background-color: #379fef;
-  width: 148px;
+  width: 160px;
   height: 37px;
-  border-radius: 3px;
+  border-radius: 5px;
   box-shadow: none;
   font-size: 13.6px;
   padding: 2px 9px;
@@ -86,41 +84,91 @@ const StyledDivv = styled.div`
   padding-bottom: 7px;
 `;
 
-const MainDiv = styled.div`
-  width: 100vw;
-  height: 100vh;
+const StyledAccordion = styled.div`
+  display: flex;
+  justify-content: culumn;
 `;
 
+const QuestionDiv = styled.div`
+  display: flex;
+  justify-content: row;
+`;
+
+const tags = ['java', 'javascript', 'c', 'c#', 'c++'];
+
 const AskQuestion = () => {
+  const [title, setTitle] = useState('');
+
+  const [text, setText] = useState('');
+
+  const [hasText, setHasText] = useState(false);
+  const [inputValue, setInputValue] = useState('tags');
+  const [options, setOptions] = useState(tags);
+
+  const editorRef = useRef(null);
+  const onChange = () => {
+    const data = editorRef.current.getInstance().getHTML(); // getHTML or getMarkdown
+    setText(data);
+    console.log(text);
+  };
+
+  // const onChangeTitle = () => {
+  //   setTitle(e.target.value);
+  //   console.log(title);
+  // };
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+    setHasText(true);
+    setOptions(tags.filter((value) => value.includes(e.target.value)));
+  };
+
+  const nameClick = (clickedOption) => {
+    setInputValue(clickedOption);
+    setOptions([clickedOption]);
+  };
+
   return (
     <Wrapper>
       <Header>Ask a public question</Header>
-      <StyledDiv>
-        Title
-        <br />
-        <StyledDivv>
-          Be specific and imagine you`re asking a question to another person
-        </StyledDivv>
-        <Input placeholder="e.g. Is there an R function for finding the index of an element in a vector?"></Input>
-        <Question>
-          Body
+      <QuestionDiv>
+        <StyledDiv>
+          Title
           <br />
           <StyledDivv>
-            Include all the information someone would need to answer your
-            question
+            Be specific and imagine you`re asking a question to another person
           </StyledDivv>
-          <TextEditor />
-        </Question>
-        Tags
-        <br />
-        <StyledDivv>
-          Add up to 5 tags to describe what your question is about
-        </StyledDivv>
-        <Input placeholder="e.g. (angular sql-server string)"></Input>
-        <div className="s-popover" id="popover-example" role="menu">
-          <div className="s-popover--arrow"></div>…
-        </div>
-      </StyledDiv>
+          <Input
+            // onChangeTitle={onChangeTitle}
+            placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
+          ></Input>
+          <Question>
+            Body
+            <br />
+            <StyledDivv>
+              Include all the information someone would need to answer your
+              question
+            </StyledDivv>
+            <TextEditor ref={editorRef} onChange={onChange}></TextEditor>
+          </Question>
+          Tags
+          <br />
+          <StyledDivv>
+            Add up to 5 tags to describe what your question is about
+          </StyledDivv>
+          <Input
+            onChange={handleInputChange}
+            options={options}
+            nameClick={nameClick}
+            placeholder="e.g. (angular sql-server string)"
+          ></Input>
+          <div className="s-popover" id="popover-example" role="menu">
+            <div className="s-popover--arrow"></div> {tags.map((el) => el)}
+          </div>
+        </StyledDiv>
+
+        <Accordion />
+      </QuestionDiv>
       <div className="main-button">
         <StyledButton>Review your question</StyledButton>
       </div>
