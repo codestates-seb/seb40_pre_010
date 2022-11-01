@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+// import {BACKEND_URL } from '/';
+import { useRecoilState } from 'recoil';
+import { userState } from '../_actions/user';
+import { useNavigate } from 'react-router-dom';
+// import dumy from '../static/dummy3.json';
 
 import Logo from '../img/logo.svg';
 
@@ -86,23 +90,59 @@ const LoginBox = styled.div`
 `;
 
 function Login() {
+  const [email, setEmeil] = useState();
+  const [password, setPassword] = useState();
+  const [user, setUser] = useRecoilState(userState); //이건 이제 이 페이지에서만 쓸 수 있는 상태가 아님
+  //로그인성공시 메인 페이지로 이동
+  const navigate = useNavigate();
+
   return (
     <LoginBox>
       <div className="logo"></div>
       <div className="login-box">
-        <div className="input-box">
-          <p>Email</p>
-          <input className="input" type="email" placeholder="Email"></input>
-        </div>
-        <div className="input-box">
-          <p>Password</p>
-          <input
-            className="input"
-            type="password"
-            placeholder="password"
-          ></input>
-        </div>
-        <button className="login-btn">Log in</button>
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            try {
+              const data = await axios({
+                url: `${BACKEND_URL}/user/login`,
+                method: 'POST',
+                data: {
+                  email,
+                  password,
+                },
+              });
+              setEmeil('');
+              setPassword('');
+              setUser(data.data);
+              alert('로그인 성공!');
+              navigate('/');
+            } catch (e) {
+              console.log(e);
+              alert('로그인 실패!');
+            }
+          }}
+        >
+          <div className="input-box">
+            <p>Email</p>
+            <input
+              name="username"
+              className="input"
+              type="text"
+              placeholder="Email"
+            ></input>
+          </div>
+          <div className="input-box">
+            <p>Password</p>
+            <input
+              name="password"
+              className="input"
+              type="password"
+              placeholder="password"
+            ></input>
+          </div>
+          <button className="login-btn">Log in</button>
+        </form>
       </div>
       <div className="text">
         <p>{`Don't have an account?`}</p>

@@ -1,0 +1,26 @@
+{
+    "user" : [
+        {
+            "userName":"name0",
+            "userId":"author0",
+            "userPw":"password0"
+        },{
+            "userName":"name1",
+            "userId":"author1",
+            "userPw":"password1"
+        },{
+            "userName":"name2",
+            "userId":"author2",
+            "userPw":"password2"
+        },{
+            "userName":"name3",
+            "userId":"author3",
+            "userPw":"password3"
+        },{
+            "userName":"name4",
+            "userId":"author4",
+            "userPw":"password4"
+        }
+            
+    ]
+  }
