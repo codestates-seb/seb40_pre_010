@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import TextEditor from '../components/TextEditor';
 import Accordion from '../components/Accordion';
@@ -102,7 +102,7 @@ const AskQuestion = () => {
   const [text, setText] = useState('');
 
   const [hasText, setHasText] = useState(false);
-  const [inputValue, setInputValue] = useState('tags');
+  const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState(tags);
 
   const editorRef = useRef(null);
@@ -112,10 +112,10 @@ const AskQuestion = () => {
     console.log(text);
   };
 
-  // const onChangeTitle = () => {
-  //   setTitle(e.target.value);
-  //   console.log(title);
-  // };
+  const onChangeTitle = (e) => {
+    setTitle(e.target.value);
+    console.log(title);
+  };
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -128,6 +128,12 @@ const AskQuestion = () => {
     setOptions([clickedOption]);
   };
 
+  // const onClickButton = () => {
+  //   axios
+  //   .post(/question)
+  //   .then(())
+  // }
+
   return (
     <Wrapper>
       <Header>Ask a public question</Header>
@@ -139,7 +145,7 @@ const AskQuestion = () => {
             Be specific and imagine you`re asking a question to another person
           </StyledDivv>
           <Input
-            // onChangeTitle={onChangeTitle}
+            onChange={onChangeTitle}
             placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
           ></Input>
           <Question>
@@ -170,7 +176,9 @@ const AskQuestion = () => {
         <Accordion />
       </QuestionDiv>
       <div className="main-button">
-        <StyledButton>Review your question</StyledButton>
+        <StyledButton onClick={onClickButton}>
+          Review your question
+        </StyledButton>
       </div>
     </Wrapper>
   );
