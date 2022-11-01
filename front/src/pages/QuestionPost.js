@@ -55,6 +55,8 @@ const QuestionPost = () => {
     // console.log(editorRef.current?.getInstance().getMarkdown());
     if (!IsLogin) {
       setIsAlert(true);
+    } else {
+      //로그인시 진행
     }
   };
 
