@@ -6,7 +6,6 @@ import styled from 'styled-components';
 const StyledDiv = styled.div`
   display: flex;
   flex-flow: column nowrap;
-
   max-width: 320px;
   height: 755px;
   border-radius: 3px;
