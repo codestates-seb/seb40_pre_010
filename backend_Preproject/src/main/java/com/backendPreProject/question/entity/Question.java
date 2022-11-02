@@ -22,6 +22,9 @@ public class Question {
     private int questionId;    // 질문 번호, 아이디는 jpa가 자동으로 카운트
 
     @Column(nullable = false)
+    private String userId;
+
+    @Column(nullable = false)
     private String questionTitle;  // 글 제목 -> 제목은 공백X
 
     @Column(nullable = false)
