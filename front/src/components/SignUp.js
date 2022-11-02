@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BACKEND_URL } from '../utils';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -30,7 +29,7 @@ const SignUpBox = styled.div`
     font-size: 15px;
     width: 316px;
     min-width: 250px;
-    height: 470px;
+    height: 500px;
     padding: 24px;
     text-align: left;
   }
@@ -243,18 +242,36 @@ function SignUp() {
         <form
           onSubmit={async (e) => {
             e.preventDefault();
-            // alert('전송');
+            // const params = {
+            //   userName: username,
+            //   userId: email,
+            //   userPw: password,
+            // };
+            // axios
+            //   .post(`/user`, { params })
+            //   .then((res) => {
+            //     console.log(JSON.stringify(res?.data));
+            //     setUsername('');
+            //     setEmail('');
+            //     setPassword('');
+            //     alert(`회원가입 성공`);
+            //     navigate('/login');
+            //   })
+            //   .chatch((error) => {
+            //     console.log(error);
+            //   });
+
             try {
-              const data = await axios({
-                url: `${BACKEND_URL}/user`,
+              const response = await axios({
+                url: `/user`,
                 method: 'POST',
                 data: {
-                  id: 0,
                   userName: username,
                   userId: email,
                   userPw: password,
                 },
               });
+              console.log(JSON.stringify(response?.data));
               setUsername('');
               setEmail('');
               setPassword('');
@@ -297,9 +314,9 @@ function SignUp() {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
-              className="text"
+              className="input"
               type="password"
-              placeholder="password"
+              placeholder="Password"
             ></input>
           </div>
           <p className="text">

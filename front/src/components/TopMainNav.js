@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -303,13 +303,12 @@ const Buttons = styled.div`
   }
 `;
 
-function TopMainNav() {
-  // const isLogined = false;
-  const [user, setUser] = useRecoilState(userState); //이건 이제 이 페이지에서만 쓸 수 있는 상태가 아님
+function TopMainNav({ isLogin, setIsLogin }) {
+  // const [user, setUser] = useRecoilState(userState);
 
   return (
     <MainNavBox>
-      {/* <LogoutModal></LogoutModal> */}
+      <LogoutModal></LogoutModal>
       <div className="main-box">
         <Menu>
           <ul>
@@ -335,7 +334,7 @@ function TopMainNav() {
           <input className="search-bar__input" placeholder="Search"></input>
         </div>
         <Buttons>
-          {user ? (
+          {isLogin ? (
             <div className="login-state">
               <ul className="login-icons">
                 <li className="search-login-icon">
@@ -355,6 +354,17 @@ function TopMainNav() {
                 </li>
                 <li className="login-icon ">
                   <div className="login-icon_ login-icon4"></div>
+                </li>
+                <li className="login-icon ">
+                  <button
+                    onClick={() => {
+                      localStorage.removeItem('token');
+                      localStorage.removeItem('userId');
+                      setIsLogin(false);
+                    }}
+                  >
+                    logout
+                  </button>
                 </li>
               </ul>
             </div>
