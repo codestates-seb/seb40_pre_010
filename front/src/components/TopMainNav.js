@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 import SearchInput from './SearchInput';
 import LogoutModal from './LogoutModal';
 
@@ -107,17 +109,18 @@ const Menu = styled.div`
   }
 
   .menu-btn {
-    margin: 0.5em;
-    padding: 0.3em 0.5em 0.3em 0.5em;
+    margin: 10px 2px 10px 2px;
+    padding: 5px 15px 5px 15px;
     border-radius: 40px;
     font-size: 1em;
     color: rgb(59, 64, 69);
     transition-duration: 0.3s;
     cursor: pointer;
   }
-  .btn3 {
+  .btn2 .btn3 {
     min-width: 90px;
   }
+
   .menu-btn:hover {
     background-color: rgb(186, 191, 196);
     transition-duration: 0.3s;
@@ -299,6 +302,8 @@ const Buttons = styled.div`
 `;
 
 function TopMainNav() {
+  const isLogined = false;
+
   return (
     <MainNavBox>
       {/* <LogoutModal></LogoutModal> */}
@@ -317,9 +322,8 @@ function TopMainNav() {
             <li className="menu-btn">About</li>
 
             <li className="menu-btn btn2">Products</li>
-            <a href="/">
-              <li className="menu-btn btn3">For Teams</li>
-            </a>
+
+            <li className="menu-btn btn3">For Teams</li>
           </ul>
         </Menu>
         {/* <SearchInput></SearchInput> */}
@@ -328,33 +332,39 @@ function TopMainNav() {
           <input className="search-bar__input" placeholder="Search"></input>
         </div>
         <Buttons>
-          {/* <div className="logout-state">
-            <button className="btn-login">Log in</button>
-            <button className="btn-logout">Log out</button>
-          </div> */}
-
-          <div className="login-state">
-            <ul className="login-icons">
-              <li className="search-login-icon">
-                <div className="login-icon_ search"></div>
-              </li>
-              <li className="login-icon">
-                <div className="login-icon_ profile"></div>
-              </li>
-              <li className="login-icon">
-                <div className="login-icon_ login-icon1 "></div>
-              </li>
-              <li className="login-icon">
-                <div className="login-icon_ login-icon2"></div>
-              </li>
-              <li className="login-icon">
-                <div className="login-icon_  login-icon3"></div>
-              </li>
-              <li className="login-icon ">
-                <div className="login-icon_ login-icon4"></div>
-              </li>
-            </ul>
-          </div>
+          {isLogined ? (
+            <div className="login-state">
+              <ul className="login-icons">
+                <li className="search-login-icon">
+                  <div className="login-icon_ search"></div>
+                </li>
+                <li className="login-icon">
+                  <div className="login-icon_ profile"></div>
+                </li>
+                <li className="login-icon">
+                  <div className="login-icon_ login-icon1 "></div>
+                </li>
+                <li className="login-icon">
+                  <div className="login-icon_ login-icon2"></div>
+                </li>
+                <li className="login-icon">
+                  <div className="login-icon_  login-icon3"></div>
+                </li>
+                <li className="login-icon ">
+                  <div className="login-icon_ login-icon4"></div>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <div className="logout-state">
+              <Link to="/login">
+                <button className="btn-login">Log In</button>
+              </Link>
+              <Link to="/signup">
+                <button className="btn-logout">Sign Up</button>
+              </Link>
+            </div>
+          )}
         </Buttons>
       </div>
     </MainNavBox>

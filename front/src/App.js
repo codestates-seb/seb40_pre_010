@@ -5,6 +5,8 @@ import Tags from './pages/Tags';
 import TopMainNav from './components/TopMainNav';
 import QuestionList from './pages/QuestionList';
 import QuestionPost from './pages/QuestionPost';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
 
 import styled from 'styled-components';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -28,6 +30,8 @@ function App() {
             <Route path="/tags/:tag" element={<QuestionList />} />
             <Route path="/tags" element={<Tags />} />
             <Route path="/askquestion" element={<AskQuestion />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
           </Routes>
         </MainWrapper>
         <Footer />
