@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-// import {BACKEND_URL } from '/';
+import { BACKEND_URL } from '../utils';
 import { useRecoilState } from 'recoil';
 import { userState } from '../_actions/user';
 import { useNavigate } from 'react-router-dom';
-// import dumy from '../static/dummy3.json';
+import axios from 'axios';
+import AuthContext from '../utils/AuthProvider';
 
 import Logo from '../img/logo.svg';
 
@@ -90,8 +91,13 @@ const LoginBox = styled.div`
 `;
 
 function Login() {
-  const [email, setEmeil] = useState();
-  const [password, setPassword] = useState();
+  const { setAuth } = useContext(AuthContext);
+  const userRef = useRef();
+  const errRef = useRef();
+
+  const [userId, setUserId] = useState('');
+  const [userPw, setUserPw] = useState('');
+
   const [user, setUser] = useRecoilState(userState); //이건 이제 이 페이지에서만 쓸 수 있는 상태가 아님
   //로그인성공시 메인 페이지로 이동
   const navigate = useNavigate();
@@ -101,41 +107,71 @@ function Login() {
       <div className="logo"></div>
       <div className="login-box">
         <form
+          // onSubmit={async (e) => {
+          //   e.preventDefault();
+          //   try {
+          //     const data = await axios.post({
+          //       url: `${BACKEND_URL}/user`,
+          //       method: 'POST',
+          //       data: {
+          //         id: 0,
+          //         userName: username,
+          //         userId: email,
+          //         userPw: password,
+          //       },
           onSubmit={async (e) => {
             e.preventDefault();
             try {
-              const data = await axios({
-                url: `${BACKEND_URL}/user/login`,
-                method: 'POST',
-                data: {
-                  email,
-                  password,
-                },
-              });
-              setEmeil('');
-              setPassword('');
-              setUser(data.data);
-              alert('로그인 성공!');
+              const response = await axios.post(
+                `${BACKEND_URL}/user`,
+                JSON.stringify({ userId, userPw }),
+                {
+                  headers: { 'Content-Type': 'application/json' },
+                  withCredentials: true,
+                }
+              );
+              // const response = await axios.post({
+              //   url: `${BACKEND_URL}/user`,
+              //   method: 'POST',
+              //   data: {
+              //     userId: email,
+              //     userPw: password,
+              //   },
+              // });
+              console.log(JSON.stringify(response?.data));
+              // const accessToken = response?.data?.accessToken;
+              // const roles = response?.data?.roles;
+              // setAuth({ email, password, roles, accessToken });
+              setUserId('');
+              setUserPw('');
+              setUser(response.data);
+              alert('로그인 성공');
               navigate('/');
             } catch (e) {
-              console.log(e);
-              alert('로그인 실패!');
+              console.error(e);
+              alert('로그인 실패');
             }
           }}
         >
           <div className="input-box">
-            <p>Email</p>
+            <p>ID</p>
             <input
-              name="username"
+              value={userId}
+              onChange={(e) => {
+                setUserId(e.target.value);
+              }}
               className="input"
               type="text"
-              placeholder="Email"
+              placeholder="ID"
             ></input>
           </div>
           <div className="input-box">
             <p>Password</p>
             <input
-              name="password"
+              value={userPw}
+              onChange={(e) => {
+                setUserPw(e.target.value);
+              }}
               className="input"
               type="password"
               placeholder="password"
