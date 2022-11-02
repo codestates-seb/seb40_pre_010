@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import dummy2 from '../static/dummy2.json';
 
-const InputTag = () => {
+const InputTag = (props) => {
   const [tagItem, setTagItem] = useState('');
   const [tagList, setTagList] = useState([]);
   const [isNotEmpty, setisNotEmpty] = useState(false);
@@ -36,7 +36,6 @@ const InputTag = () => {
     }
     const filterd = dummy2.tags.filter((x) => x.name.includes(tagItem));
     settagDummy(filterd);
-    console.log(tagDummy, tagItem);
   }, [tagItem]);
 
   useEffect(() => {
@@ -45,6 +44,9 @@ const InputTag = () => {
       setTagList([]);
     }
   }, [searchTag]);
+  useEffect(() => {
+    props.setgetTag(tagList.join(','));
+  }, [tagList]);
   return (
     <WholeBox>
       <TagBox className="s-input">
