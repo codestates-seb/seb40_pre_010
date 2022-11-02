@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { BACKEND_URL } from '../utils';
+import { BACKEND_URL } from '../utils';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import IMG1 from '../img/signup-img1.png';
 import IMG2 from '../img/signup-img2.png';
@@ -184,23 +185,27 @@ function SignUp() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  console.log(username, email, password);
-  const handledSubmit = async (e) => {
-    e.preventDefault();
-    const res = await axios
-      .post('http://localhost:3001/user', {
-        userName: username,
-        userId: email,
-        userPw: password,
-      })
-      .then(() => console.log(res))
-      .catch(
-        (error) => console.error(error)
 
-        // console.log(username, email, password);
-        // console.log(BACKEND_URL);
-      );
-  };
+  const navigate = useNavigate();
+
+  // console.log(username, email, password);
+  // const handledSubmit = async (e) => {
+  //   e.preventDefault();
+  //   await axios
+  //     .post('http://localhost:3001/user', {
+  //       id: 0,
+  //       userName: username,
+  //       userId: email,
+  //       userPw: password,
+  //     })
+  //     .then((res) => console.log(res))
+  //     .catch(
+  //       (error) => console.error(error)
+
+  //       // console.log(username, email, password);
+  //       // console.log(BACKEND_URL);
+  //     );
+  // };
 
   return (
     <SignUpBox>
@@ -236,21 +241,30 @@ function SignUp() {
 
       <div className="signup-box">
         <form
-        // onSubmit={async (e) => {
-        //   e.preventDefault();
-        //   // alert('전송');
-        //   const data = await axios({
-        //     url: BACKEND_URL,
-        //     method: 'POST',
-        //     data: {
-        //       username,
-        //       email,
-        //       password,
-        //     },
-        //   });
-        //   console.log({ username, email, password });
-        //   console.log(data);
-        // }}
+          onSubmit={async (e) => {
+            e.preventDefault();
+            // alert('전송');
+            try {
+              const data = await axios({
+                url: `${BACKEND_URL}/user`,
+                method: 'POST',
+                data: {
+                  id: 0,
+                  userName: username,
+                  userId: email,
+                  userPw: password,
+                },
+              });
+              setUsername('');
+              setEmail('');
+              setPassword('');
+              alert(`회원가입 성공`);
+              navigate('/login');
+            } catch (e) {
+              console.error(e);
+              alert('회원가입 실패');
+            }
+          }}
         >
           <div className="input-box">
             <p>Name</p>
@@ -265,7 +279,7 @@ function SignUp() {
             ></input>
           </div>
           <div className="input-box">
-            <p>Email</p>
+            <p>ID</p>
             <input
               value={email}
               onChange={(e) => {
@@ -273,7 +287,7 @@ function SignUp() {
               }}
               className="input"
               type="text"
-              placeholder="Email"
+              placeholder="ID"
             ></input>
           </div>
           <div className="input-box">
@@ -300,7 +314,7 @@ function SignUp() {
               company announcements, and digests.
             </p>
           </div>
-          <button onClick={handledSubmit} type="submit" className="signup-btn">
+          <button type="submit" className="signup-btn">
             Log in
           </button>
         </form>
