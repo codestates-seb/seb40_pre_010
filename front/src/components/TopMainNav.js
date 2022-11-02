@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { userState } from '../_actions/user';
 
 import SearchInput from './SearchInput';
 import LogoutModal from './LogoutModal';
@@ -302,7 +304,8 @@ const Buttons = styled.div`
 `;
 
 function TopMainNav() {
-  const isLogined = false;
+  // const isLogined = false;
+  const [user, setUser] = useRecoilState(userState); //이건 이제 이 페이지에서만 쓸 수 있는 상태가 아님
 
   return (
     <MainNavBox>
@@ -332,7 +335,7 @@ function TopMainNav() {
           <input className="search-bar__input" placeholder="Search"></input>
         </div>
         <Buttons>
-          {isLogined ? (
+          {user ? (
             <div className="login-state">
               <ul className="login-icons">
                 <li className="search-login-icon">
