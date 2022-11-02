@@ -23,8 +23,8 @@ public class Answer {
     @Column(updatable = false)
     private int postNum;
 
-    //@Column(nullable = false)
-    //private String answerAuthor;
+    @Column(nullable = false)
+    private String userId; // 댓글 작성자 Id
 
     @Column(nullable = false)
     private String answerBody;

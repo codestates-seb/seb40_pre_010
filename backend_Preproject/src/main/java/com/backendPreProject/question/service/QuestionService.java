@@ -31,6 +31,12 @@ public class QuestionService {
         return question;
     }
 
+    public List<Question> findQuestions(){     // 질문 전체 조회
+        List<Question> questions = questionRepository.findAll();
+
+        return questions;
+    }
+
     public List<Question> findQuestionWord(String word){
         // question이 존재하는 경우 해당question반환, 아니면 예외처리
         // word로 입력받았기 때문에 해당 word에 해당하는 question하나를 찾고 question에 해당하는 id를 입력하여 진행
@@ -61,7 +67,7 @@ public class QuestionService {
 
     // question의 유무를 확인하는 메서드 + 예외처리 있음
     public Question findVerifiedQuestion(int questionId){ //요청된 답이 DB에 없으면 에러
-        Optional<Question> optionalQuestionId = Optional.ofNullable(questionRepository.findById(questionId));
+        Optional<Question> optionalQuestionId = Optional.ofNullable(questionRepository.findById(questionId)); //
         Question findQuestion = optionalQuestionId.orElseThrow(()->
                 new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
 

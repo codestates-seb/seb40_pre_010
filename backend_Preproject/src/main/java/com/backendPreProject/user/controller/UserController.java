@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -33,17 +34,24 @@ public class UserController {
         return new ResponseEntity<>(userMapper.UserToUserResponseDto(user), HttpStatus.CREATED);
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////
-    // api명세서에 없는 기능 -> user 정보가 잘 저장되었나 확인 용도
-    @GetMapping("/{userName}") // 확인 용도
-    public ResponseEntity findUser(
-            @PathVariable("userName") String userName){
 
-        User user= userService.FindUser(userName);
+    @GetMapping("/{userId}") // 특정 회원 조회
+    public ResponseEntity findUser(
+            @PathVariable("userId") String userId){
+
+        User user= userService.FindUser(userId);
 
         return new ResponseEntity<>(userMapper.UserToUserResponseDto(user), HttpStatus.OK);
     }
-    //////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @GetMapping("/users") // 회원 전체 조회
+    public ResponseEntity findUsers(){
+
+        List<User> users = userService.FindUsers();
+
+        return new ResponseEntity<>(userMapper.listUserToUserResponseDto(users), HttpStatus.OK);
+    }
+
 
     @DeleteMapping("/{userId}")   // 회원탈퇴
     public ResponseEntity deleteUser(

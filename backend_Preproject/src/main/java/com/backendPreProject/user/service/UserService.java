@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -42,15 +43,22 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User FindUser(String userName) {
+    public User FindUser(String userId) {
 
-        User findUser = userRepository.findByUserName(userName);
+        User findUser = userRepository.findByUserId(userId);
 
         if (findUser == null) {
             throw new BusinessLogicException(ExceptionCode.USER_NOT_FOUND);
         }
 
-        return userRepository.findByUserName(userName);
+        return userRepository.findByUserId(userId);
+    }
+
+    public List<User> FindUsers () {   // 전체 회원 조회
+
+        List<User> findUsers = userRepository.findAll();
+
+        return findUsers;
     }
 
     public void DeleteUser(int userId) {

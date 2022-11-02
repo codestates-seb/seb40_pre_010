@@ -32,9 +32,10 @@ public class LoginController {
 
     @PostMapping("/login")    // 로그인
     public ResponseEntity postLogin(@Valid @RequestBody UserLoginDto userLoginDto) {
-       loginService.login(userLoginDto.getUserId(),userLoginDto.getUserPw());
 
-        return new ResponseEntity<>(HttpStatus.OK); // 로그인을 통과하는 경우 200.ok 반환
+        String token = loginService.login(userLoginDto.getUserId(),userLoginDto.getUserPw());
+
+        return new ResponseEntity<>(token,HttpStatus.OK); // 로그인을 통과하는 경우 200.ok 반환
     }
 }
 

@@ -9,6 +9,9 @@ import lombok.Setter;
 @Setter
 public class UserResponseDto {
 
+
+    private int Id; // 유저의 고유한 Id
+
     private String userId;
 
     private String userName;
