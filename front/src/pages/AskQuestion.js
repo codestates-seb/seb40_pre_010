@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import TextEditor from '../components/TextEditor';
 import Accordion from '../components/Accordion';
+import InputTag from '../components/input-tag';
 
 const Wrapper = styled.div`
   display: flex;
@@ -156,15 +157,16 @@ const AskQuestion = () => {
           <StyledDivv>
             Add up to 5 tags to describe what your question is about
           </StyledDivv>
-          <Input
+          {/* <Input
             onChange={handleInputChange}
             options={options}
             nameClick={nameClick}
             placeholder="e.g. (angular sql-server string)"
-          ></Input>
-          <div className="s-popover" id="popover-example" role="menu">
+          ></Input> */}
+          <InputTag />
+          {/* <div className="s-popover" id="popover-example" role="menu">
             <div className="s-popover--arrow"></div> {tags.map((el) => el)}
-          </div>
+          </div> */}
         </StyledDiv>
 
         <Accordion />
