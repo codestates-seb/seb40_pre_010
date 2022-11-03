@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import TextEditor from '../components/TextEditor';
 import Accordion from '../components/Accordion';
+import InputTag from '../components/input-tag';
 import axios from 'axios';
 
 const Wrapper = styled.div`
@@ -99,7 +100,6 @@ const tags = ['java', 'javascript', 'c', 'c#', 'c++'];
 
 const AskQuestion = () => {
   const [title, setTitle] = useState('');
-
   const [text, setText] = useState('');
 
   const [getTag, setgetTag] = useState();
@@ -107,6 +107,7 @@ const AskQuestion = () => {
   // const [inputValue, setInputValue] = useState('');
   // const [options, setOptions] = useState(tags);
 
+  console.log(getTag);
   const editorRef = useRef(null);
   const onChange = () => {
     const data = editorRef.current.getInstance().getHTML(); // getHTML or getMarkdown
@@ -186,7 +187,7 @@ const AskQuestion = () => {
             nameClick={nameClick}
             placeholder="e.g. (angular sql-server string)"
           ></Input> */}
-          {/* <InputTag setgetTag={setgetTag} /> */}
+          <InputTag setgetTag={setgetTag} />
           {/* <div className="s-popover" id="popover-example" role="menu">
             <div className="s-popover--arrow"></div> {tags.map((el) => el)}
           </div> */}
