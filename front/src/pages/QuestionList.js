@@ -1,4 +1,4 @@
-import dummy1 from '../static/dummy1.json';
+import axios from 'axios';
 import NavSide1 from './../components/Nav-Side1';
 import NavSide2 from './../components/Nav-Side2';
 import Posts from '../components/post';
@@ -40,15 +40,13 @@ const PostWrapper = styled.div`
 const QuestionList = () => {
   const params = useParams();
   const [search_id, setSearch_id] = useState('title');
+  const [lists, setLists] = useState([]);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const [search, setSearch] = useState('test');
 
-  const onChangeSearchHandler = (e) => {
-    setSearch(e.target.value);
-  };
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
@@ -56,53 +54,65 @@ const QuestionList = () => {
 
   const location = useLocation();
 
-  useEffect(() => {
-    const path = location.pathname.split('/')[1];
-    const pathname = location.pathname.split('/')[2];
+  let path = location.pathname.split('/')[1];
+  let pathname = location.pathname.split('/')[2];
+  const fetchPosts = async () => {
+    setLoading(true);
+    //const res = await = axios.get(url);
+    let res = '';
+    if (pathname) {
+      switch (path) {
+        case 'title':
+          res = lists.filter((x) => x.questionTitle.includes(pathname));
+          setPosts(res);
 
-    const fetchPosts = async () => {
-      setLoading(true);
-      //const res = await = axios.get(url);
-      let res = '';
-      if (pathname) {
-        switch (path) {
-          case 'title':
-            res = dummy1.Question.filter((x) =>
-              x.question_title.includes(pathname)
-            );
-            setPosts(res);
-            break;
-          case 'body':
-            res = dummy1.Question.filter((x) =>
-              x.question_body.includes(pathname)
-            );
-            setPosts(res);
-            break;
-          case 'author':
-            res = dummy1.Question.filter((x) =>
-              x.question_author.includes(pathname)
-            );
-            setPosts(res);
-            break;
-          case 'tags':
-            res = dummy1.Question.filter((x) =>
-              x.question_tags.includes(pathname)
-            );
-            setPosts(res);
-            break;
-          default:
-            setPosts(dummy1.Question);
-            break;
-        }
-      } else {
-        const res = dummy1;
-        setPosts(res.Question);
+          break;
+        case 'body':
+          res = lists.filter((x) => x.questionBody.includes(pathname));
+          setPosts(res);
+          break;
+        case 'author':
+          res = lists.filter((x) => x.userId.includes(pathname));
+          setPosts(res);
+          break;
+        case 'tags':
+          res = lists.filter((x) => x.questionTags.includes(pathname));
+          setPosts(res);
+          break;
+        default:
+          setPosts(lists);
+          break;
       }
+    } else {
+      setPosts(lists);
+    }
 
-      setLoading(false);
-    };
+    setLoading(false);
+  };
+  const onChangeSearchHandler = (e) => {
+    setSearch(e.target.value);
+  };
+  const getfetch = async () => {
+    axios
+      .get('/question/questions', {
+        headers: { 'ngrok-skip-browser-warning': 'skip' },
+      })
+      .then((res) => setLists(res.data));
+  };
 
+  useEffect(() => {
+    getfetch();
     fetchPosts();
+  }, []);
+  useEffect(() => {
+    setPosts(lists);
+    fetchPosts();
+  }, [lists]);
+
+  useEffect(() => {
+    //getfetch();
+    fetchPosts();
+    console.log(posts);
   }, [location]);
 
   return (

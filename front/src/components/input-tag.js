@@ -9,14 +9,17 @@ const InputTag = (props) => {
   const [searchTag, setsearchTag] = useState('');
   const [tagDummy, settagDummy] = useState(dummy2.tags);
 
-  const Tagging = async (e) => {
+  const Tagging = (e) => {
     setsearchTag(e.target.value);
   };
 
   const submitTagItem = () => {
     let updatedTagList = [...tagList];
     updatedTagList.push(searchTag);
-    setTagList(updatedTagList);
+    const uniqueArr = updatedTagList.filter((element, index) => {
+      return updatedTagList.indexOf(element) === index;
+    });
+    setTagList(uniqueArr);
     setTagItem('');
   };
 
