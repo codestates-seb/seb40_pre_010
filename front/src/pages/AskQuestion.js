@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import TextEditor from '../components/TextEditor';
 import Accordion from '../components/Accordion';
 import axios from 'axios';
+import InputTag from '../components/input-tag';
 
 const Wrapper = styled.div`
   display: flex;
@@ -102,10 +103,10 @@ const AskQuestion = () => {
 
   const [text, setText] = useState('');
 
-  const [getTag, setgetTag] = useState();
   // const [hasText, setHasText] = useState(false);
   // const [inputValue, setInputValue] = useState('');
   // const [options, setOptions] = useState(tags);
+  const [getTag, setgetTag] = useState('');
 
   const editorRef = useRef(null);
   const onChange = () => {
@@ -186,7 +187,7 @@ const AskQuestion = () => {
             nameClick={nameClick}
             placeholder="e.g. (angular sql-server string)"
           ></Input> */}
-          {/* <InputTag setgetTag={setgetTag} /> */}
+          <InputTag setgetTag={setgetTag} />
           {/* <div className="s-popover" id="popover-example" role="menu">
             <div className="s-popover--arrow"></div> {tags.map((el) => el)}
           </div> */}
