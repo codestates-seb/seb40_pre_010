@@ -9,8 +9,10 @@ import {
   Route,
   Link,
   useLocation,
+  Navigate,
 } from 'react-router-dom';
 import Pagination from './../components/pagination';
+// import { useNavigate } from 'react-router-dom';
 const BREAK_POINT_TABLET = 768;
 const BREAK_POINT_PC = 1200;
 
@@ -50,6 +52,17 @@ const QuestionList = () => {
 
   const location = useLocation();
 
+  // const navigate = useNavigate();
+
+  // const clickAsk = () => {
+  //   if (localStorage.getItem(Token)) {
+  //     navigate('/askQuestion');
+  //   } else {
+  //     alert('로그인을 해주세요.');
+  //     navigate('/login');
+  //   }
+  // };
+
   useEffect(() => {
     const pathname = location.pathname.split('/')[2];
     const arr = [];
@@ -78,7 +91,11 @@ const QuestionList = () => {
         <div className=" ta-left px16 ">
           <div className="d-flex jc-space-between pb8">
             <span className="fs-headline1">All Questions</span>
-            <Link to="/askquestion" className="s-btn s-btn__primary">
+            <Link
+              // onClick={clickAsk}
+              to="/askquestion"
+              className="s-btn s-btn__primary"
+            >
               Ask Question
             </Link>
           </div>

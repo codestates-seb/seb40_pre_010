@@ -1,7 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import TextEditor from '../components/TextEditor';
 import Accordion from '../components/Accordion';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   display: flex;
@@ -101,9 +102,10 @@ const AskQuestion = () => {
 
   const [text, setText] = useState('');
 
-  const [hasText, setHasText] = useState(false);
-  const [inputValue, setInputValue] = useState('');
-  const [options, setOptions] = useState(tags);
+  const [getTag, setgetTag] = useState();
+  // const [hasText, setHasText] = useState(false);
+  // const [inputValue, setInputValue] = useState('');
+  // const [options, setOptions] = useState(tags);
 
   const editorRef = useRef(null);
   const onChange = () => {
@@ -117,22 +119,38 @@ const AskQuestion = () => {
     console.log(title);
   };
 
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-    setHasText(true);
-    setOptions(tags.filter((value) => value.includes(e.target.value)));
-  };
+  // const handleInputChange = (e) => {
+  //   setInputValue(e.target.value);
+  //   setHasText(true);
+  //   setOptions(tags.filter((value) => value.includes(e.target.value)));
+  // };
 
-  const nameClick = (clickedOption) => {
-    setInputValue(clickedOption);
-    setOptions([clickedOption]);
-  };
+  // const nameClick = (clickedOption) => {
+  //   setInputValue(clickedOption);
+  //   setOptions([clickedOption]);
+  // };
 
-  // const onClickButton = () => {
-  //   axios
-  //   .post(/question)
-  //   .then(())
-  // }
+  const onClickButton = () => {
+    axios
+      .post(
+        '/question',
+        {
+          // userName: 'a',
+          userId: 'localstorage의 user',
+          // ex`${localstorage.getItem(user).userId}`
+          questionTitle: `${title}`,
+          questionBody: `${text}`,
+          questionTags: 'c',
+        },
+        {
+          headers: {
+            'ngrok-skip-browser-warning': '111',
+          },
+        }
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <Wrapper>
@@ -162,15 +180,16 @@ const AskQuestion = () => {
           <StyledDivv>
             Add up to 5 tags to describe what your question is about
           </StyledDivv>
-          <Input
+          {/* <Input
             onChange={handleInputChange}
             options={options}
             nameClick={nameClick}
             placeholder="e.g. (angular sql-server string)"
-          ></Input>
-          <div className="s-popover" id="popover-example" role="menu">
+          ></Input> */}
+          {/* <InputTag setgetTag={setgetTag} /> */}
+          {/* <div className="s-popover" id="popover-example" role="menu">
             <div className="s-popover--arrow"></div> {tags.map((el) => el)}
-          </div>
+          </div> */}
         </StyledDiv>
 
         <Accordion />
