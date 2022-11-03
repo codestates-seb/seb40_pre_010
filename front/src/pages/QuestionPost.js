@@ -94,7 +94,7 @@ const QuestionPost = () => {
     setAnswer(editorRef.current?.getInstance().getMarkdown());
   };
   const handleClick = () => {
-    if (!IsLogin) {
+    if (!IsLogin || localStorage.getItem('token') === null) {
       setIsAlert(true);
     } else {
       //로그인시 진행
@@ -108,6 +108,7 @@ const QuestionPost = () => {
         //.then((res) => console.log(res))
         .then(getfetch());
     }
+    setAnswers(posts.answers);
   };
 
   const onClickDelete = () => {
