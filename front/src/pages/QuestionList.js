@@ -10,6 +10,7 @@ import {
   Link,
   useLocation,
   useParams,
+  useNavigate,
 } from 'react-router-dom';
 import Pagination from './../components/pagination';
 
@@ -53,6 +54,15 @@ const QuestionList = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const location = useLocation();
+  const navigate = useNavigate();
+  const clickAsk = () => {
+    if (localStorage.getItem(token)) {
+      navigate('/askQuestion');
+    } else {
+      alert('로그인을 해주세요.');
+      navigate('/login');
+    }
+  };
 
   let path = location.pathname.split('/')[1];
   let pathname = location.pathname.split('/')[2];
@@ -122,11 +132,7 @@ const QuestionList = () => {
         <div className=" ta-left px16 ">
           <div className="d-flex jc-space-between pb8">
             <span className="fs-headline1">All Questions</span>
-            <Link
-              // onClick={clickAsk}
-              to="/askquestion"
-              className="s-btn s-btn__primary"
-            >
+            <Link to={'/askQuestion'} className="s-btn s-btn__primary">
               Ask Question
             </Link>
           </div>
