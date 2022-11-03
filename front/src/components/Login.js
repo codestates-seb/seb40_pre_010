@@ -27,7 +27,7 @@ const LoginBox = styled.div`
     flex-direction: column;
     justify-content: space-between;
     width: 400px;
-    height: 360px;
+    /* height: 360px; */
     padding: 30px;
     margin: 24px 0px;
     background-color: white;
@@ -54,6 +54,7 @@ const LoginBox = styled.div`
     border-radius: 3px;
     border: 0px;
     padding: 2px 9px;
+    margin-top: 20px;
     transition: all 0.4s ease 0s;
     font-size: 0.85rem;
     color: white;
