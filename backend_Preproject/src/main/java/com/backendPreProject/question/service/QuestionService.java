@@ -1,6 +1,8 @@
 package com.backendPreProject.question.service;
 
 
+import com.backendPreProject.answer.entity.Answer;
+import com.backendPreProject.answer.repository.AnswerRepository;
 import com.backendPreProject.exception.BusinessLogicException;
 import com.backendPreProject.exception.ExceptionCode;
 import com.backendPreProject.question.entity.Question;
@@ -15,8 +17,12 @@ public class QuestionService {
 
     private QuestionRepository questionRepository;
 
-    public QuestionService(QuestionRepository questionRepository){
+    private AnswerRepository answerRepository;
+
+    public QuestionService(QuestionRepository questionRepository,
+                           AnswerRepository answerRepository){
         this.questionRepository=questionRepository;
+        this.answerRepository=answerRepository;
     }
 
     public Question createQuestion(Question question){
@@ -59,7 +65,14 @@ public class QuestionService {
     public void deleteQuestion(int questionId) {
         // questionId에 부합하는 question이 있으면 삭제, 아니면 예외처리
         Question question = findVerifiedQuestion(questionId);
-        
+
+        // question에 달려있는 answers를 list로 받음
+        List<Answer> answers=answerRepository.findByPostNum(questionId);
+        for(Answer answer:answers){
+            answerRepository.delete(answer);    // stream으로 구현 못함...
+            // 향상된 for문으로 받은 코멘트들을 삭제
+        }
+
         questionRepository.delete(question);
     }
 

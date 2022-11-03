@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @AllArgsConstructor
@@ -23,7 +24,7 @@ public class QuestionResponseDto {
 
     private String questionTags;   // 글에 달려있는 태크
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private String createdAt;
 
     private List<AnswerResponseDto> answers; // answer의 응답을 추가함
                                                                         // <>안에 response는 answer의 response이다.

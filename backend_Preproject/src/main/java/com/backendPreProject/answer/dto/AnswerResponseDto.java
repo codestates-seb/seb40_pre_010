@@ -14,8 +14,10 @@ public class AnswerResponseDto {
 
     private int postNum;
 
-    //private String answerAuthor;
+    private String userId; //
 
     private String answerBody;
+
+    private String createdAt; //
 
 }

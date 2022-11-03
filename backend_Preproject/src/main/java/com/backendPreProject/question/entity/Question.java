@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,6 +36,6 @@ public class Question {
     private String questionTags;   // 글에 달려있는 태크 -> 태그는 없을 수 있음
 
     @Column(nullable = false, updatable = true)
-    private LocalDateTime createdAt = LocalDateTime.now(); // 글이 생성된 시간, 작성 시간은 글 수정시 업테이트 가능
+    private String createdAt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now());
 
 }
