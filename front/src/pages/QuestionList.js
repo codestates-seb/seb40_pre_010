@@ -56,7 +56,7 @@ const QuestionList = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const clickAsk = () => {
-    if (localStorage.getItem(token)) {
+    if (localStorage.getItem('token')) {
       navigate('/askQuestion');
     } else {
       alert('로그인을 해주세요.');
@@ -132,9 +132,9 @@ const QuestionList = () => {
         <div className=" ta-left px16 ">
           <div className="d-flex jc-space-between pb8">
             <span className="fs-headline1">All Questions</span>
-            <Link to={'/askQuestion'} className="s-btn s-btn__primary">
+            <button onClick={clickAsk} className="s-btn s-btn__primary">
               Ask Question
-            </Link>
+            </button>
           </div>
           <div className="d-flex jc-space-between ai-center py8 mt-4 ">
             <div className="fs-body3">{posts.length} questions</div>
