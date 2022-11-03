@@ -271,15 +271,17 @@ function SignUp() {
                   userPw: password,
                 },
               });
-              console.log(JSON.stringify(response?.data));
+              console.log(JSON.stringify(response?.data.userName));
               setUsername('');
               setEmail('');
               setPassword('');
-              alert(`회원가입 성공`);
+              alert(`환영합니다 ${response?.data.userName}님!`);
               navigate('/login');
             } catch (e) {
               console.error(e);
-              alert('회원가입 실패');
+              alert(
+                '이미 있는 아이디 입니다. 다른 아이디로 가입 해 주세요 :) '
+              );
             }
           }}
         >
@@ -332,7 +334,7 @@ function SignUp() {
             </p>
           </div>
           <button type="submit" className="signup-btn">
-            Log in
+            Sign Up
           </button>
         </form>
         <div className="last-text">
