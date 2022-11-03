@@ -10,6 +10,7 @@ import { Editor, Viewer } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { useEffect } from 'react';
 import UserCard from '../components/user-card';
+import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -26,6 +27,11 @@ const PostArea = styled.div`
     text-align: left;
     margin-bottom: 8px;
     margin-right: 16px;
+  }
+  & delete {
+    border: none;
+    background-color: white;
+    border-radius: 3px;
   }
 `;
 const EditoreWrapper = styled.div`
@@ -44,9 +50,11 @@ const QuestionPost = () => {
   const [tags, setTags] = useState('');
   const [Answers, setAnswers] = useState([]);
   const [Answer, setAnswer] = useState('');
+  const [userId, setUserId] = useState('');
 
   const postnum = useParams();
   const editorRef = useRef();
+  const navigate = useNavigate();
 
   const PostAuthor = ''; //Post.question_author;
   const PostBody = ''; //Post.question'answerbody1_body;
@@ -60,7 +68,10 @@ const QuestionPost = () => {
       .get(`/question/${postnum.id}`, {
         headers: { 'ngrok-skip-browser-warning': 'skip' },
       })
-      .then((res) => setPosts(res.data));
+      .then((res) => {
+        setPosts(res.data);
+        setUserId(res.data.userId);
+      });
   };
   useEffect(() => {
     getfetch();
@@ -89,6 +100,13 @@ const QuestionPost = () => {
         .then((res) => console.log(res))
         .then(getfetch());
     }
+  };
+
+  const onClickDelete = () => {
+    axios
+      .delete(`/question/${postnum.id}`)
+      .catch((res) => console.log(res))
+      .then(navigate('/'));
   };
 
   return (
@@ -133,6 +151,14 @@ const QuestionPost = () => {
                       })
                     : null}
                 </p>
+                <div>
+                  {localStorage.getItem('userId') === userId ? (
+                    <button onClick={onClickDelete} className="delete">
+                      delete
+                    </button>
+                  ) : null}
+                </div>
+
                 <UserCard
                   pic={`https://randomuser.me/api/portraits/men/${Math.floor(
                     Math.random() * 100
