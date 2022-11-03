@@ -6,7 +6,7 @@ import dummy2 from './../static/dummy2.json';
 
 const Wrapper = styled.div`
   width: 100%;
-  max-width: 1240px;
+  max-width: 1440px;
   margin: 0 auto;
 `;
 const TagsWrapper = styled.div`

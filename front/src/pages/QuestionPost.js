@@ -13,7 +13,7 @@ import UserCard from '../components/user-card';
 
 const Wrapper = styled.div`
   width: 100%;
-  max-width: 1240px;
+  max-width: 1440px;
   margin: 0 auto;
   .fs-headline1 {
     text-align: left;
@@ -37,6 +37,9 @@ const EditoreWrapper = styled.div`
     flex-wrap: wrap;
   }
 `;
+const pic = `https://randomuser.me/api/portraits/men/${Math.floor(
+  Math.random() * 100
+)}.jpg`;
 const QuestionPost = () => {
   const [IsLogin, setIsLogin] = useState(true);
   const [IsAlert, setIsAlert] = useState(false);
@@ -133,12 +136,7 @@ const QuestionPost = () => {
                       })
                     : null}
                 </p>
-                <UserCard
-                  pic={`https://randomuser.me/api/portraits/men/${Math.floor(
-                    Math.random() * 100
-                  )}.jpg`}
-                  author={posts.userId}
-                />
+                <UserCard pic={pic} author={posts.userId} />
               </div>
             </div>
             <div className="mt24">
@@ -147,6 +145,7 @@ const QuestionPost = () => {
               ) : null}
               {Answers !== undefined
                 ? Answers.map((x, i) => {
+                    console.log(x);
                     return (
                       <div key={i} className="py12 pr24 bb bc-black-075">
                         {Answers !== undefined ? (
@@ -156,7 +155,7 @@ const QuestionPost = () => {
                           />
                         ) : null}
                         <div className="ta-right">
-                          <span>{x.answer_author}</span>
+                          <span>{x.userId}</span>
                         </div>
                       </div>
                     );
