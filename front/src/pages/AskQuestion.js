@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import TextEditor from '../components/TextEditor';
 import Accordion from '../components/Accordion';
-import InputTag from '../components/input-tag';
+import InputTag from '../components/Input-tag';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 

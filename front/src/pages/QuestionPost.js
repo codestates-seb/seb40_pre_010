@@ -1,6 +1,6 @@
 import NavSide1 from './../components/Nav-Side1';
 import NavSide2 from './../components/Nav-Side2';
-import AlertError from '../components/alert';
+import AlertError from '../components/Alert';
 import styled from 'styled-components';
 import axios from 'axios';
 import { React, useRef, useState } from 'react';
@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { Editor, Viewer } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { useEffect } from 'react';
-import UserCard from '../components/user-card';
+import UserCard from '../components/User-card';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -136,7 +136,11 @@ const QuestionPost = () => {
                       })
                     : null}
                 </p>
-                <UserCard pic={pic} author={posts.userId} />
+                <UserCard
+                  pic={pic}
+                  author={posts.userId}
+                  variation={posts.questionId}
+                />
               </div>
             </div>
             <div className="mt24">

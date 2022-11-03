@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import SideNav1 from '../components/Nav-Side1';
-import Tag from '../components/tag';
+import Tag from '../components/Tag';
 import dummy2 from './../static/dummy2.json';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -19,7 +20,36 @@ const TagsWrapper = styled.div`
     }
   }
 `;
+
 const Tags = () => {
+  const [lists, setlists] = useState([]);
+  const fetchdata = () => {
+    axios
+      .get('/question/questions', {
+        headers: { 'ngrok-skip-browser-warning': 'skip' },
+      })
+      .then((res) => setlists(res.data));
+  };
+  useEffect(() => {
+    fetchdata();
+  }, []);
+
+  //Related Tags 숫자 random->직접연결
+  const Tagslist = lists.map((x) =>
+    x.questionTags.includes(',') ? x.questionTags.split(',') : [x.questionTags]
+  );
+  const Tagslist2 = Tagslist.flat();
+  const result = {};
+  Tagslist2.forEach((x) => {
+    result[x] = (result[x] || 0) + 1;
+  });
+  let uniqueArr = [];
+  Tagslist2.forEach((element) => {
+    if (!uniqueArr.includes(element)) {
+      uniqueArr.push(element);
+    }
+  });
+
   return (
     <Wrapper className="d-flex">
       <SideNav1 />
@@ -36,7 +66,14 @@ const Tags = () => {
         </p>
         <TagsWrapper className="d-flex g12 pb24">
           {dummy2.tags.map((x, i) => {
-            return <Tag key={i} name={x.name} description={x.description} />;
+            return (
+              <Tag
+                key={i}
+                name={x.name}
+                amount={result[uniqueArr[i]]}
+                description={x.description}
+              />
+            );
           })}
         </TagsWrapper>
       </div>

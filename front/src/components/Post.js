@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import UserCard from './user-card';
+import UserCard from './User-card';
 
 const TagWrap = styled.div`
   text-align: left;
@@ -42,10 +42,9 @@ const Posts = ({ index, el, posts, loading }) => {
         </div>
       </div>
       <UserCard
-        pic={`https://randomuser.me/api/portraits/men/${Math.floor(
-          Math.random() * 100
-        )}.jpg`}
+        pic={`https://randomuser.me/api/portraits/men/${el.questionId}.jpg`}
         author={el.userId}
+        variation={el.questionId}
       />
     </div>
   );

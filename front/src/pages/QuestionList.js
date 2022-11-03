@@ -1,7 +1,7 @@
 import axios from 'axios';
 import NavSide1 from './../components/Nav-Side1';
 import NavSide2 from './../components/Nav-Side2';
-import Posts from '../components/post';
+import Posts from '../components/Post';
 import { React, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {
@@ -12,7 +12,7 @@ import {
   useParams,
   useNavigate,
 } from 'react-router-dom';
-import Pagination from './../components/pagination';
+import Pagination from '../components/Pagination';
 
 const Wrapper = styled.div`
   display: flex;

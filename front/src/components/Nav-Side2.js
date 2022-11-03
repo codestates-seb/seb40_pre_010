@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import React from 'react';
 import dummy2 from '../static/dummy2.json';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { object } from 'prop-types';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const BREAK_POINT_TABLET = 768;
 const Wrapper = styled.div`
@@ -245,7 +245,7 @@ function SideNav2() {
       })
       .then((res) => setlists(res.data));
   };
-  useState(() => {
+  useEffect(() => {
     fetchdata();
   }, []);
 
