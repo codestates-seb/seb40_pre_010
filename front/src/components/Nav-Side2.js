@@ -10,6 +10,8 @@ const Wrapper = styled.div`
   max-width: 300px;
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     width: 100%;
+    max-width: 100%;
+    padding: 0 8px;
   }
 `;
 const Sidebar = styled.div`

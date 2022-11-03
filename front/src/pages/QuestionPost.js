@@ -41,7 +41,7 @@ const pic = `https://randomuser.me/api/portraits/men/${Math.floor(
   Math.random() * 100
 )}.jpg`;
 const QuestionPost = () => {
-  const [IsLogin, setIsLogin] = useState(true);
+  const [IsLogin, setIsLogin] = useState(false);
   const [IsAlert, setIsAlert] = useState(false);
   const [posts, setPosts] = useState([]);
   const [tags, setTags] = useState('');
@@ -51,8 +51,6 @@ const QuestionPost = () => {
   const postnum = useParams();
   const editorRef = useRef();
 
-  const PostAuthor = ''; //Post.question_author;
-  const PostBody = ''; //Post.question'answerbody1_body;
   const Asked =
     posts.createdAt !== undefined ? posts.createdAt.split('T')[0] : null; //Post.created_at;
   const Modified =
@@ -68,7 +66,9 @@ const QuestionPost = () => {
   useEffect(() => {
     getfetch();
   }, []);
-
+  useEffect(() => {
+    setIsLogin(localStorage.getItem('token') ? true : false);
+  });
   useEffect(() => {
     setTags(posts.questionTags);
     setAnswers(posts.answers);
@@ -85,7 +85,7 @@ const QuestionPost = () => {
       console.log(postnum.id);
       axios
         .post('/answer', {
-          userId: 'loginId',
+          userId: localStorage.getItem('userId'),
           answerBody: Answer,
           postNum: postnum.id,
         })
@@ -159,7 +159,11 @@ const QuestionPost = () => {
                           />
                         ) : null}
                         <div className="ta-right">
-                          <span>{x.userId}</span>
+                          <UserCard
+                            pic={`https://randomuser.me/api/portraits/men/${i}.jpg`}
+                            author={x.userId}
+                            variation={x.answerId}
+                          />
                         </div>
                       </div>
                     );
