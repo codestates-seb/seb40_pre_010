@@ -99,13 +99,14 @@ const tags = ['java', 'javascript', 'c', 'c#', 'c++'];
 
 const AskQuestion = () => {
   const [title, setTitle] = useState('');
-
   const [text, setText] = useState('');
 
   const [hasText, setHasText] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState(tags);
+  const [getTag, setgetTag] = useState('');
 
+  console.log(getTag);
   const editorRef = useRef(null);
   const onChange = () => {
     const data = editorRef.current.getInstance().getHTML(); // getHTML or getMarkdown
@@ -169,7 +170,7 @@ const AskQuestion = () => {
             nameClick={nameClick}
             placeholder="e.g. (angular sql-server string)"
           ></Input> */}
-          <InputTag />
+          <InputTag setgetTag={setgetTag} />
           {/* <div className="s-popover" id="popover-example" role="menu">
             <div className="s-popover--arrow"></div> {tags.map((el) => el)}
           </div> */}

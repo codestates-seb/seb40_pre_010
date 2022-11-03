@@ -2,21 +2,24 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import dummy2 from '../static/dummy2.json';
 
-const InputTag = () => {
+const InputTag = (props) => {
   const [tagItem, setTagItem] = useState('');
   const [tagList, setTagList] = useState([]);
   const [isNotEmpty, setisNotEmpty] = useState(false);
   const [searchTag, setsearchTag] = useState('');
   const [tagDummy, settagDummy] = useState(dummy2.tags);
 
-  const Tagging = async (e) => {
+  const Tagging = (e) => {
     setsearchTag(e.target.value);
   };
 
   const submitTagItem = () => {
     let updatedTagList = [...tagList];
     updatedTagList.push(searchTag);
-    setTagList(updatedTagList);
+    const uniqueArr = updatedTagList.filter((element, index) => {
+      return updatedTagList.indexOf(element) === index;
+    });
+    setTagList(uniqueArr);
     setTagItem('');
   };
 
@@ -36,7 +39,6 @@ const InputTag = () => {
     }
     const filterd = dummy2.tags.filter((x) => x.name.includes(tagItem));
     settagDummy(filterd);
-    console.log(tagDummy, tagItem);
   }, [tagItem]);
 
   useEffect(() => {
@@ -45,6 +47,9 @@ const InputTag = () => {
       setTagList([]);
     }
   }, [searchTag]);
+  useEffect(() => {
+    props.setgetTag(tagList.join(','));
+  }, [tagList]);
   return (
     <WholeBox>
       <TagBox className="s-input">

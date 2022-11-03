@@ -1,12 +1,15 @@
-import dummy1 from '../static/dummy1.json';
 import NavSide1 from './../components/Nav-Side1';
 import NavSide2 from './../components/Nav-Side2';
 import AlertError from '../components/alert';
 import styled from 'styled-components';
+import axios from 'axios';
 import { React, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 import { Editor, Viewer } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
+import { useEffect } from 'react';
+import UserCard from '../components/user-card';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -35,30 +38,56 @@ const EditoreWrapper = styled.div`
   }
 `;
 const QuestionPost = () => {
-  const [IsLogin, setIsLogin] = useState(false);
+  const [IsLogin, setIsLogin] = useState(true);
   const [IsAlert, setIsAlert] = useState(false);
-  const postnum = useParams();
-  const Post = dummy1.Question[postnum.id];
-  const Answer = [];
-  dummy1.Answer.forEach((x) => {
-    if (x.post_num === postnum.id) {
-      Answer.push(x);
-    }
-  });
-  const PostBody = Post.question_body;
-  const Asked = Post.created_at;
-  const Modified = Post.created_at;
-  const Viewed = '';
+  const [posts, setPosts] = useState([]);
+  const [tags, setTags] = useState('');
+  const [Answers, setAnswers] = useState([]);
+  const [Answer, setAnswer] = useState('');
 
+  const postnum = useParams();
+  const editorRef = useRef();
+
+  const PostAuthor = ''; //Post.question_author;
+  const PostBody = ''; //Post.question'answerbody1_body;
+  const Asked =
+    posts.createdAt !== undefined ? posts.createdAt.split('T')[0] : null; //Post.created_at;
+  const Modified =
+    posts.createdAt !== undefined ? posts.createdAt.split('T')[0] : null;
+
+  const getfetch = async () => {
+    axios
+      .get(`/question/${postnum.id}`, {
+        headers: { 'ngrok-skip-browser-warning': 'skip' },
+      })
+      .then((res) => setPosts(res.data));
+  };
+  useEffect(() => {
+    getfetch();
+  }, []);
+
+  useEffect(() => {
+    setTags(posts.questionTags);
+    setAnswers(posts.answers);
+  }, [posts]);
+
+  const onchangehandle = () => {
+    setAnswer(editorRef.current?.getInstance().getMarkdown());
+  };
   const handleClick = () => {
-    // // 입력창에 입력한 내용을 HTML 태그 형태로 취득
-    // console.log(editorRef.current?.getInstance().getHTML());
-    // // 입력창에 입력한 내용을 MarkDown 형태로 취득
-    // console.log(editorRef.current?.getInstance().getMarkdown());
     if (!IsLogin) {
       setIsAlert(true);
     } else {
       //로그인시 진행
+      console.log(postnum.id);
+      axios
+        .post('/answer', {
+          userId: 'loginId',
+          answerBody: Answer,
+          postNum: postnum.id,
+        })
+        .then((res) => console.log(res))
+        .then(getfetch());
     }
   };
 
@@ -74,7 +103,7 @@ const QuestionPost = () => {
       <NavSide1 />
       <div className="pt96 pb24 px16">
         <div className="s-page-title">
-          <h1 className="s-page-title--header">{Post.question_title}</h1>
+          <h1 className="s-page-title--header">{posts.questionTitle}</h1>
           <div className="d-flex mt24">
             <p className="fc-black-500 mr24">
               Asked <span className="fc-black-800">{Asked}</span>
@@ -82,54 +111,69 @@ const QuestionPost = () => {
             <p className="fc-black-500 mr24">
               Modified <span className="fc-black-800">{Modified}</span>
             </p>
-            <p className="fc-black-500">
-              Viewed <span className="fc-black-800">{Viewed}</span>
-            </p>
           </div>
         </div>
 
         <MainBox className="d-flex jc-space-between md:fd-column">
           <PostArea className="pr16">
             <div className="bb bc-black-075">
-              <Viewer initialValue={PostBody} />
-              <p>
-                {Post.question_tags.split(',').map((z, j) => {
-                  return (
-                    <a key={j} href={'/tags/' + z} className="s-tag mr4">
-                      {z}
-                    </a>
-                  );
-                })}
-              </p>
+              {posts.questionBody !== undefined ? (
+                <Viewer initialValue={posts.questionBody} />
+              ) : null}
+
+              <div className="d-flex jc-space-between mb8">
+                <p>
+                  {tags !== undefined
+                    ? tags.split(',').map((z, j) => {
+                        return (
+                          <a key={j} href={'/tags/' + z} className="s-tag mr4">
+                            {z}
+                          </a>
+                        );
+                      })
+                    : null}
+                </p>
+                <UserCard
+                  pic={`https://randomuser.me/api/portraits/men/${Math.floor(
+                    Math.random() * 100
+                  )}.jpg`}
+                  author={posts.userId}
+                />
+              </div>
             </div>
             <div className="mt24">
-              <div className="fs-headline1">{Answer.length} Answer</div>
-              {Answer.map((x, i) => {
-                return (
-                  <div key={i} className="py12 pr24 bb bc-black-075">
-                    <div
-                      dangerouslySetInnerHTML={{ __html: x.answer_body }}
-                      className="ta-left"
-                    ></div>
-                    <div className="ta-right">
-                      <span>{x.answer_author}</span>
-                      <span className="fc-black-500 mx16">{x.user_id}</span>
-                      <span className="fc-black-500">{x.created_at}</span>
-                    </div>
-                  </div>
-                );
-              })}
+              {Answers !== undefined ? (
+                <div className="fs-headline1">{Answers.length} Answer</div>
+              ) : null}
+              {Answers !== undefined
+                ? Answers.map((x, i) => {
+                    return (
+                      <div key={i} className="py12 pr24 bb bc-black-075">
+                        {Answers !== undefined ? (
+                          <Viewer
+                            initialValue={x.answerBody}
+                            className="ta-left"
+                          />
+                        ) : null}
+                        <div className="ta-right">
+                          <span>{x.answer_author}</span>
+                        </div>
+                      </div>
+                    );
+                  })
+                : null}
             </div>
             <EditoreWrapper>
               <div className="my24 fs-headline1">Your Answer</div>
               <Editor
-                initialValue="INSERT ANSWER"
-                previewStyle="vertical" // 미리보기 스타일 지정
-                height="300px" // 에디터 창 높이
-                initialEditType="wysiwyg" // 초기 입력모드 설정(디폴트 markdown)
-                hideModeSwitch="true"
+                initialValue=" "
+                previewStyle="tab"
+                height="300px"
+                initialEditType="markdown"
                 useCommandShortcut={true}
-              />
+                ref={editorRef}
+                onChange={onchangehandle}
+              ></Editor>
               <div className="d-flex jc-end my12">
                 <button className="s-btn s-btn__primary" onClick={handleClick}>
                   Post Your Answer

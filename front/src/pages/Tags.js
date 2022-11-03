@@ -4,14 +4,18 @@ import SideNav1 from '../components/Nav-Side1';
 import Tag from '../components/tag';
 import dummy2 from './../static/dummy2.json';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+`;
 const TagsWrapper = styled.div`
   flex-wrap: wrap;
   div {
-    flex: 1 0 20%;
+    flex: 0 1 24%;
 
     @media screen and (max-width: 768px) {
-      flex: 1 0 33%;
+      flex: 0 1 48%;
     }
   }
 `;

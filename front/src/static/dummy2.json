@@ -29,10 +29,6 @@
             "description" : "HTML (HyperText Markup Language) is the markup language for creating web pages and other information to be displayed in a web browser. Questions"
         },
         {
-            "name" : "android",
-            "description" : "Android is Google's mobile operating system, used for programming or developing digital devices (Smartphones, Tablets, Automobiles,"
-        },
-        {
             "name" : "jquery",
             "description" : "jQuery is a JavaScript library. Consider also adding the JavaScript tag. jQuery is a popular cross-browser JavaScript library that facilitates Document Object"
         },
