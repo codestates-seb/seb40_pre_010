@@ -1,4 +1,4 @@
-import dummy1 from '../static/dummy1.json';
+import axios from 'axios';
 import NavSide1 from './../components/Nav-Side1';
 import NavSide2 from './../components/Nav-Side2';
 import Posts from '../components/post';
@@ -9,18 +9,17 @@ import {
   Route,
   Link,
   useLocation,
-  Navigate,
+  useParams,
 } from 'react-router-dom';
 import Pagination from './../components/pagination';
-// import { useNavigate } from 'react-router-dom';
-const BREAK_POINT_TABLET = 768;
-const BREAK_POINT_PC = 1200;
+
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-right: 1em;
+  max-width: 1240px;
+  margin: 0 auto;
   > div:first-child {
     border-width: 0 !important;
   }
@@ -40,10 +39,14 @@ const PostWrapper = styled.div`
 `;
 
 const QuestionList = () => {
+  const params = useParams();
+  const [search_id, setSearch_id] = useState('title');
+  const [lists, setLists] = useState([]);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
+  const [search, setSearch] = useState('test');
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -52,55 +55,111 @@ const QuestionList = () => {
 
   const location = useLocation();
 
-  // const navigate = useNavigate();
 
-  // const clickAsk = () => {
-  //   if (localStorage.getItem(Token)) {
-  //     navigate('/askQuestion');
-  //   } else {
-  //     alert('로그인을 해주세요.');
-  //     navigate('/login');
-  //   }
-  // };
+  let path = location.pathname.split('/')[1];
+  let pathname = location.pathname.split('/')[2];
+  const fetchPosts = async () => {
+    setLoading(true);
+    //const res = await = axios.get(url);
+    let res = '';
+    if (pathname) {
+      switch (path) {
+        case 'title':
+          res = lists.filter((x) => x.questionTitle.includes(pathname));
+          setPosts(res);
+
+          break;
+        case 'body':
+          res = lists.filter((x) => x.questionBody.includes(pathname));
+          setPosts(res);
+          break;
+        case 'author':
+          res = lists.filter((x) => x.userId.includes(pathname));
+          setPosts(res);
+          break;
+        case 'tags':
+          res = lists.filter((x) => x.questionTags.includes(pathname));
+          setPosts(res);
+          break;
+        default:
+          setPosts(lists);
+          break;
+      }
+    } else {
+      setPosts(lists);
+    }
+
+    setLoading(false);
+  };
+  const onChangeSearchHandler = (e) => {
+    setSearch(e.target.value);
+  };
+  const getfetch = async () => {
+    axios
+      .get('/question/questions', {
+        headers: { 'ngrok-skip-browser-warning': 'skip' },
+      })
+      .then((res) => setLists(res.data));
+  };
 
   useEffect(() => {
-    const pathname = location.pathname.split('/')[2];
-    const arr = [];
-    const fetchPosts = async () => {
-      setLoading(true);
-      //const res = await = axios.get(url);
-      if (pathname) {
-        const res = dummy1.Question.filter((x) =>
-          x.question_tags.includes(pathname)
-        );
-        setPosts(res);
-      } else {
-        const res = dummy1;
-        setPosts(res.Question);
-      }
-
-      setLoading(false);
-    };
-
+    getfetch();
     fetchPosts();
   }, []);
+  useEffect(() => {
+    setPosts(lists);
+    fetchPosts();
+  }, [lists]);
+
+  useEffect(() => {
+    //getfetch();
+    fetchPosts();
+    console.log(posts);
+  }, [location]);
+
   return (
     <Wrapper>
       <NavSide1 />
       <div className="pt96 w100">
         <div className=" ta-left px16 ">
-          <div className="d-flex jc-space-between pb8">
-            <span className="fs-headline1">All Questions</span>
+
+          <div className="d-flex jc-space-between pb8 s-page-title fd-row">
+            <h1 className="s-page-title--header">All Questions</h1>
             <Link
               // onClick={clickAsk}
               to="/askquestion"
               className="s-btn s-btn__primary"
             >
+
               Ask Question
             </Link>
           </div>
-          <div>
-            <span className="fs-body3">{posts.length} questions</span>
+          <div className="d-flex jc-space-between ai-center py8 mt-4 ">
+            <div className="fs-body3">{posts.length} questions</div>
+            <div className="d-flex g4">
+              <div className="flex--item s-select w100">
+                <select
+                  id="select-menu"
+                  onChange={(e) => setSearch_id(e.target.value)}
+                >
+                  <option defaultValue={'title'}>title</option>
+                  <option value="body">body</option>
+                  <option value="author">author</option>
+                </select>
+              </div>
+              <input
+                type="text"
+                className="s-input__sm s-input"
+                onChange={onChangeSearchHandler}
+              ></input>
+              <Link
+                to={'/' + search_id + '/' + search}
+                className="s-btn s-btn__primary"
+                type="button"
+              >
+                search
+              </Link>
+            </div>
           </div>
         </div>
         <div className="d-flex fd-column">

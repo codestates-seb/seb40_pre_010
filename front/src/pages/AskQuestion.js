@@ -100,14 +100,16 @@ const tags = ['java', 'javascript', 'c', 'c#', 'c++'];
 
 const AskQuestion = () => {
   const [title, setTitle] = useState('');
-
   const [text, setText] = useState('');
+
 
   // const [hasText, setHasText] = useState(false);
   // const [inputValue, setInputValue] = useState('');
   // const [options, setOptions] = useState(tags);
+
   const [getTag, setgetTag] = useState('');
 
+  console.log(getTag);
   const editorRef = useRef(null);
   const onChange = () => {
     const data = editorRef.current.getInstance().getHTML(); // getHTML or getMarkdown

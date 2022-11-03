@@ -3,7 +3,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const BREAK_POINT_TABLET = 768;
-const BREAK_POINT_PC = 1200;
 
 const LeftArea = styled.div`
   font-size: 13px;

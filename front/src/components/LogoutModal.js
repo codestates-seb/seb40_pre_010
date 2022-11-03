@@ -65,7 +65,16 @@ const LogoutModal = () => {
         <div className="profile"></div>
         <h3 className="uesr-name">박여울</h3>
         <p className="uesr-mail">qyoong3579@gmail.com</p>
-        <button className="logout-btn">Log Out</button>
+        <button
+          className="logout-btn"
+          onClick={() => {
+            // localStorage.removeItem('token');
+            // localStorage.removeItem('userId');
+            // setIsLogin(false);
+          }}
+        >
+          Log Out
+        </button>
       </div>
     </Modal>
   );

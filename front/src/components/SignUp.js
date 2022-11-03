@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import IMG1 from '../img/signup-img1.png';
 import IMG2 from '../img/signup-img2.png';
@@ -26,7 +29,7 @@ const SignUpBox = styled.div`
     font-size: 15px;
     width: 316px;
     min-width: 250px;
-    height: 660px;
+    height: 500px;
     padding: 24px;
     text-align: left;
   }
@@ -77,7 +80,7 @@ const SignUpBox = styled.div`
     line-height: 15.7px;
     font-size: 12px;
     font-weight: 600;
-    margin: 4px 0px;
+    margin: 20px 0px 10px 0px;
     color: hsl(210, 8%, 45%);
     text-align: left;
   }
@@ -178,6 +181,31 @@ const SignUpBox = styled.div`
 `;
 
 function SignUp() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+
+  // console.log(username, email, password);
+  // const handledSubmit = async (e) => {
+  //   e.preventDefault();
+  //   await axios
+  //     .post('http://localhost:3001/user', {
+  //       id: 0,
+  //       userName: username,
+  //       userId: email,
+  //       userPw: password,
+  //     })
+  //     .then((res) => console.log(res))
+  //     .catch(
+  //       (error) => console.error(error)
+
+  //       // console.log(username, email, password);
+  //       // console.log(BACKEND_URL);
+  //     );
+  // };
+
   return (
     <SignUpBox>
       <div className="main-text-box">
@@ -211,35 +239,104 @@ function SignUp() {
       </div>
 
       <div className="signup-box">
-        <div className="input-box">
-          <p>Name</p>
-          <input className="input" type="name" placeholder="Name"></input>
-        </div>
-        <div className="input-box">
-          <p>Email</p>
-          <input className="input" type="email" placeholder="Email"></input>
-        </div>
-        <div className="input-box">
-          <p>Password</p>
-          <input
-            className="input"
-            type="password"
-            placeholder="password"
-          ></input>
-        </div>
-        <p className="text">
-          Passwords must contain at least eight characters, including at least 1
-          letter and 1 number.
-        </p>
-        <div className="checkbox-box">
-          <input className="checkbox" type="checkbox"></input>
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            // const params = {
+            //   userName: username,
+            //   userId: email,
+            //   userPw: password,
+            // };
+            // axios
+            //   .post(`/user`, { params })
+            //   .then((res) => {
+            //     console.log(JSON.stringify(res?.data));
+            //     setUsername('');
+            //     setEmail('');
+            //     setPassword('');
+            //     alert(`회원가입 성공`);
+            //     navigate('/login');
+            //   })
+            //   .chatch((error) => {
+            //     console.log(error);
+            //   });
+
+            try {
+              const response = await axios({
+                url: `/user`,
+                method: 'POST',
+                data: {
+                  userName: username,
+                  userId: email,
+                  userPw: password,
+                },
+              });
+              console.log(JSON.stringify(response?.data.userName));
+              setUsername('');
+              setEmail('');
+              setPassword('');
+              alert(`환영합니다 ${response?.data.userName}님!`);
+              navigate('/login');
+            } catch (e) {
+              console.error(e);
+              alert(
+                '이미 있는 아이디 입니다. 다른 아이디로 가입 해 주세요 :) '
+              );
+            }
+          }}
+        >
+          <div className="input-box">
+            <p>Name</p>
+            <input
+              className="input"
+              type="text"
+              placeholder="Name"
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+            ></input>
+          </div>
+          <div className="input-box">
+            <p>ID</p>
+            <input
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              className="input"
+              type="text"
+              placeholder="ID"
+            ></input>
+          </div>
+          <div className="input-box">
+            <p>Password</p>
+            <input
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              className="input"
+              type="password"
+              placeholder="Password"
+            ></input>
+          </div>
           <p className="text">
-            Opt-in to receive occasional product
-            <br /> updates, user research invitations, <br />
-            company announcements, and digests.
+            Passwords must contain at least eight characters, including at least
+            1 letter and 1 number.
           </p>
-        </div>
-        <button className="signup-btn">Log in</button>
+          <div className="checkbox-box">
+            <input className="checkbox" type="checkbox"></input>
+            <p className="text">
+              Opt-in to receive occasional product
+              <br /> updates, user research invitations, <br />
+              company announcements, and digests.
+            </p>
+          </div>
+          <button type="submit" className="signup-btn">
+            Sign Up
+          </button>
+        </form>
         <div className="last-text">
           <span>By clicking “Sign up”, you agree to our</span>
           <a href="/">terms of service</a>
