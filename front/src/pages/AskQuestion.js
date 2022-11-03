@@ -102,7 +102,6 @@ const AskQuestion = () => {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
 
-
   // const [hasText, setHasText] = useState(false);
   // const [inputValue, setInputValue] = useState('');
   // const [options, setOptions] = useState(tags);
@@ -171,7 +170,6 @@ const AskQuestion = () => {
           ></Input>
           <Question>
             Body
-            <br />
             <StyledDivv>
               Include all the information someone would need to answer your
               question

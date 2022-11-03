@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
 import dummy2 from '../static/dummy2.json';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { object } from 'prop-types';
 
 const BREAK_POINT_TABLET = 768;
 const Wrapper = styled.div`
@@ -214,9 +217,7 @@ const Tags = (name, amount, i) => {
       <a href={'/tags/' + name} className="s-tag">
         {name}
       </a>
-      <div className="tagamount fc-black-500 pl4">
-        x {Math.floor(Math.random() * 100)}
-      </div>
+      <div className="tagamount fc-black-500 pl4">x {amount}</div>
     </div>
   );
 };
@@ -235,6 +236,35 @@ const QuestionMap = [
   `I want to cite a theorem from a book written by influential scientists. However the theorem is not proven in the book. Should I add a proof of my own?`,
 ];
 function SideNav2() {
+  const [lists, setlists] = useState([]);
+  const [gettag, setGetTag] = useState([]);
+  const fetchdata = () => {
+    axios
+      .get('/question/questions', {
+        headers: { 'ngrok-skip-browser-warning': 'skip' },
+      })
+      .then((res) => setlists(res.data));
+  };
+  useState(() => {
+    fetchdata();
+  }, []);
+
+  //Related Tags 숫자 random->직접연결
+  const Tagslist = lists.map((x) =>
+    x.questionTags.includes(',') ? x.questionTags.split(',') : [x.questionTags]
+  );
+  const Tagslist2 = Tagslist.flat();
+  const result = {};
+  Tagslist2.forEach((x) => {
+    result[x] = (result[x] || 0) + 1;
+  });
+  let uniqueArr = [];
+  Tagslist2.forEach((element) => {
+    if (!uniqueArr.includes(element)) {
+      uniqueArr.push(element);
+    }
+  });
+
   return (
     <Wrapper>
       <Sidebar>
@@ -296,8 +326,8 @@ function SideNav2() {
       <Sidebar>
         <div className="title mb fs-body3">Related Tags</div>
         <div className="body">
-          {TagsMap.map((x, i) => {
-            return Tags(x, x[1], i);
+          {uniqueArr.map((x, i) => {
+            return Tags(x, result[uniqueArr[i]], i);
           })}
         </div>
       </Sidebar>
