@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import TextEditor from '../components/TextEditor';
 import Accordion from '../components/Accordion';
 import InputTag from '../components/input-tag';
-import axios from 'axios';
 
 const Wrapper = styled.div`
   display: flex;
