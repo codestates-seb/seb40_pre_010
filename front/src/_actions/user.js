@@ -4,5 +4,5 @@ import { atom } from 'recoil';
 // 아톰 만들기 시작
 export const userState = atom({
   key: 'userState',
-  default: null,
+  default: false,
 });

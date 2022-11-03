@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Footer from './components/footer';
 import Tags from './pages/Tags';
@@ -18,10 +18,18 @@ const MainWrapper = styled.div`
   margin: auto;
 `;
 function App() {
+  const [isLogin, setIsLogin] = useState(false);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (!!token) {
+      setIsLogin(true);
+    }
+  }, [isLogin]);
   return (
     <>
       <BrowserRouter>
-        <TopMainNav />
+        <TopMainNav isLogin={isLogin} setIsLogin={setIsLogin} />
         <MainWrapper className="d-flex sm:fd-column">
           <Routes className="main">
             <Route path="/" element={<QuestionList />} />
@@ -30,7 +38,7 @@ function App() {
             <Route path="/tags/:tag" element={<QuestionList />} />
             <Route path="/tags" element={<Tags />} />
             <Route path="/askquestion" element={<AskQuestion />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
             <Route path="/signup" element={<SignUp />} />
           </Routes>
         </MainWrapper>
