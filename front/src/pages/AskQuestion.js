@@ -2,8 +2,8 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import TextEditor from '../components/TextEditor';
 import Accordion from '../components/Accordion';
-import axios from 'axios';
 import InputTag from '../components/input-tag';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   display: flex;
@@ -103,9 +103,9 @@ const AskQuestion = () => {
 
   const [text, setText] = useState('');
 
-  // const [hasText, setHasText] = useState(false);
-  // const [inputValue, setInputValue] = useState('');
-  // const [options, setOptions] = useState(tags);
+  const [hasText, setHasText] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [options, setOptions] = useState(tags);
   const [getTag, setgetTag] = useState('');
 
   const editorRef = useRef(null);
