@@ -11,7 +11,9 @@ const UserCard = (props) => {
           {props.author}
         </a>
         <ul className="s-user-card--awards">
-          <li className="s-user-card--rep">{props.variation * 500}</li>
+          <li className="s-user-card--rep">
+            {Number.isInteger(props.variation) ? props.variation * 500 : null}
+          </li>
           <li className="s-award-bling s-award-bling__gold">
             {props.variation}
           </li>
