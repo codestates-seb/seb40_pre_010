@@ -11,6 +11,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { useEffect } from 'react';
 import UserCard from '../components/User-card';
 import { useNavigate } from 'react-router-dom';
+import { offset } from '@popperjs/core';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -76,14 +77,18 @@ const QuestionPost = () => {
   };
   useEffect(() => {
     getfetch();
+    if (localStorage.getItem('token')) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
   }, []);
+  useEffect(() => {
+    setTags(posts.questionTags);
+    setAnswers(posts.answers);
+  }, [posts, Answers]);
 
-  //setIsLogin(localStorage.getItem('token') ? true : false);
-  console.log(IsLogin);
-  // useEffect(() => {
-  //   setTags(posts.questionTags);
-  //   setAnswers(posts.answers);
-  // }, [posts]);
+  //setIsLogin(localStorage.getItem('token') !== null ? true : false);
 
   const onchangehandle = () => {
     setAnswer(editorRef.current?.getInstance().getMarkdown());
@@ -93,14 +98,14 @@ const QuestionPost = () => {
       setIsAlert(true);
     } else {
       //로그인시 진행
-      console.log(postnum.id);
+
       axios
         .post('/answer', {
           userId: localStorage.getItem('userId'),
           answerBody: Answer,
           postNum: postnum.id,
         })
-        .then((res) => console.log(res))
+        //.then((res) => console.log(res))
         .then(getfetch());
     }
   };
@@ -175,16 +180,18 @@ const QuestionPost = () => {
               ) : null}
               {Answers !== undefined
                 ? Answers.map((x, i) => {
-                    console.log(x);
                     return (
-                      <div key={i} className="py12 pr24 bb bc-black-075">
+                      <div
+                        key={i}
+                        className="py12 bb bc-black-075 d-flex jc-space-between"
+                      >
                         {Answers !== undefined ? (
                           <Viewer
                             initialValue={x.answerBody}
                             className="ta-left"
                           />
                         ) : null}
-                        <div className="ta-right">
+                        <div className="">
                           <UserCard
                             pic={`https://randomuser.me/api/portraits/men/${i}.jpg`}
                             author={x.userId}
