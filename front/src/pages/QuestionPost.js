@@ -1,6 +1,6 @@
 import NavSide1 from './../components/Nav-Side1';
 import NavSide2 from './../components/Nav-Side2';
-import AlertError from '../components/alert';
+import AlertError from '../components/Alert';
 import styled from 'styled-components';
 import axios from 'axios';
 import { React, useRef, useState } from 'react';
@@ -9,12 +9,12 @@ import { useParams } from 'react-router-dom';
 import { Editor, Viewer } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { useEffect } from 'react';
-import UserCard from '../components/user-card';
+import UserCard from '../components/User-card';
 import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.div`
   width: 100%;
-  max-width: 1240px;
+  max-width: 1440px;
   margin: 0 auto;
   .fs-headline1 {
     text-align: left;
@@ -43,8 +43,11 @@ const EditoreWrapper = styled.div`
     flex-wrap: wrap;
   }
 `;
+const pic = `https://randomuser.me/api/portraits/men/${Math.floor(
+  Math.random() * 100
+)}.jpg`;
 const QuestionPost = () => {
-  const [IsLogin, setIsLogin] = useState(true);
+  const [IsLogin, setIsLogin] = useState(false);
   const [IsAlert, setIsAlert] = useState(false);
   const [posts, setPosts] = useState([]);
   const [tags, setTags] = useState('');
@@ -56,8 +59,6 @@ const QuestionPost = () => {
   const editorRef = useRef();
   const navigate = useNavigate();
 
-  const PostAuthor = ''; //Post.question_author;
-  const PostBody = ''; //Post.question'answerbody1_body;
   const Asked =
     posts.createdAt !== undefined ? posts.createdAt.split('T')[0] : null; //Post.created_at;
   const Modified =
@@ -77,10 +78,12 @@ const QuestionPost = () => {
     getfetch();
   }, []);
 
-  useEffect(() => {
-    setTags(posts.questionTags);
-    setAnswers(posts.answers);
-  }, [posts]);
+  //setIsLogin(localStorage.getItem('token') ? true : false);
+  console.log(IsLogin);
+  // useEffect(() => {
+  //   setTags(posts.questionTags);
+  //   setAnswers(posts.answers);
+  // }, [posts]);
 
   const onchangehandle = () => {
     setAnswer(editorRef.current?.getInstance().getMarkdown());
@@ -93,7 +96,7 @@ const QuestionPost = () => {
       console.log(postnum.id);
       axios
         .post('/answer', {
-          userId: 'loginId',
+          userId: localStorage.getItem('userId'),
           answerBody: Answer,
           postNum: postnum.id,
         })
@@ -160,10 +163,9 @@ const QuestionPost = () => {
                 </div>
 
                 <UserCard
-                  pic={`https://randomuser.me/api/portraits/men/${Math.floor(
-                    Math.random() * 100
-                  )}.jpg`}
+                  pic={pic}
                   author={posts.userId}
+                  variation={posts.questionId}
                 />
               </div>
             </div>
@@ -173,6 +175,7 @@ const QuestionPost = () => {
               ) : null}
               {Answers !== undefined
                 ? Answers.map((x, i) => {
+                    console.log(x);
                     return (
                       <div key={i} className="py12 pr24 bb bc-black-075">
                         {Answers !== undefined ? (
@@ -182,7 +185,11 @@ const QuestionPost = () => {
                           />
                         ) : null}
                         <div className="ta-right">
-                          <span>{x.answer_author}</span>
+                          <UserCard
+                            pic={`https://randomuser.me/api/portraits/men/${i}.jpg`}
+                            author={x.userId}
+                            variation={x.answerId}
+                          />
                         </div>
                       </div>
                     );

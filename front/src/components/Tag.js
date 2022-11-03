@@ -9,6 +9,9 @@ const Tag = (props) => {
           <Link to={'/tags/' + props.name} className="s-tag" href="#">
             {props.name}
           </Link>
+          {props.amount ? (
+            <span className="fc-black-500"> x {props.amount}</span>
+          ) : null}
         </div>
         <div className="ta-left">{props.description}</div>
       </div>

@@ -2,9 +2,7 @@ import React from 'react';
 const UserCard = (props) => {
   return (
     <div className="as-end s-user-card s-user-card__highlighted">
-      <time className="s-user-card--time">
-        {Math.floor(Math.random() * 50)} min ago
-      </time>
+      <time className="s-user-card--time">{props.variation} min ago</time>
       <a href="..." className="s-avatar s-avatar__32 s-user-card--avatar">
         <img className="s-avatar--image" src={props.pic} alt="profile" />
       </a>
@@ -13,17 +11,15 @@ const UserCard = (props) => {
           {props.author}
         </a>
         <ul className="s-user-card--awards">
-          <li className="s-user-card--rep">
-            {Math.floor(Math.random() * 3000)}
-          </li>
+          <li className="s-user-card--rep">{props.variation * 500}</li>
           <li className="s-award-bling s-award-bling__gold">
-            {Math.floor(Math.random() * 10)}
+            {props.variation}
           </li>
           <li className="s-award-bling s-award-bling__silver">
-            {Math.floor(Math.random() * 10)}
+            {props.variation}
           </li>
           <li className="s-award-bling s-award-bling__bronze">
-            {Math.floor(Math.random() * 10)}
+            {props.variation}
           </li>
         </ul>
       </div>

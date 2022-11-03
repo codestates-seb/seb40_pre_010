@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import TextEditor from '../components/TextEditor';
 import Accordion from '../components/Accordion';
-import InputTag from '../components/input-tag';
+import InputTag from '../components/Input-tag';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   background-color: #f1f2f3;
   width: 100%;
   > div {
-    max-width: 1240px;
+    max-width: 1440px;
     margin-right: auto;
     margin-left: auto;
     &:first-child {

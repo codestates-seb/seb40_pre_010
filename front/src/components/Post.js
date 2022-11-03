@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import UserCard from './user-card';
+import UserCard from './User-card';
 
 const TagWrap = styled.div`
   text-align: left;
@@ -26,7 +26,9 @@ const Posts = ({ index, el, posts, loading }) => {
         <Link to={'/post/' + el.questionId} className="s-link fs-body3">
           {el.questionTitle}
         </Link>
-        <Body className="ta-left my12">{el.questionBody}</Body>
+        <Body className="ta-left my12">
+          {el.questionBody.replace(/<[^>]*>?/g, '')}
+        </Body>
         <div className="d-flex jc-space-between">
           <TagWrap className="mb12">
             {el.questionTags.split(',').map((z, j) => {
@@ -40,10 +42,9 @@ const Posts = ({ index, el, posts, loading }) => {
         </div>
       </div>
       <UserCard
-        pic={`https://randomuser.me/api/portraits/men/${Math.floor(
-          Math.random() * 100
-        )}.jpg`}
+        pic={`https://randomuser.me/api/portraits/men/${el.questionId}.jpg`}
         author={el.userId}
+        variation={el.questionId}
       />
     </div>
   );

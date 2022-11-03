@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Footer from './components/footer';
+import Footer from './components/Footer';
 import Tags from './pages/Tags';
 import TopMainNav from './components/TopMainNav';
 import QuestionList from './pages/QuestionList';

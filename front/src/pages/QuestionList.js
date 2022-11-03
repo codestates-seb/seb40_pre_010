@@ -1,7 +1,7 @@
 import axios from 'axios';
 import NavSide1 from './../components/Nav-Side1';
 import NavSide2 from './../components/Nav-Side2';
-import Posts from '../components/post';
+import Posts from '../components/Post';
 import { React, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {
@@ -12,13 +12,13 @@ import {
   useParams,
   useNavigate,
 } from 'react-router-dom';
-import Pagination from './../components/pagination';
+import Pagination from './../components/Pagination';
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 1240px;
+  max-width: 1440px;
   margin: 0 auto;
   > div:first-child {
     border-width: 0 !important;
@@ -74,27 +74,27 @@ const QuestionList = () => {
       switch (path) {
         case 'title':
           res = lists.filter((x) => x.questionTitle.includes(pathname));
-          setPosts(res);
+          setPosts(res.reverse());
 
           break;
         case 'body':
           res = lists.filter((x) => x.questionBody.includes(pathname));
-          setPosts(res);
+          setPosts(res.reverse());
           break;
         case 'author':
           res = lists.filter((x) => x.userId.includes(pathname));
-          setPosts(res);
+          setPosts(res.reverse());
           break;
         case 'tags':
           res = lists.filter((x) => x.questionTags.includes(pathname));
-          setPosts(res);
+          setPosts(res.reverse());
           break;
         default:
-          setPosts(lists);
+          setPosts(lists.reverse());
           break;
       }
     } else {
-      setPosts(lists);
+      setPosts(lists.reverse());
     }
 
     setLoading(false);
@@ -114,6 +114,7 @@ const QuestionList = () => {
     getfetch();
     fetchPosts();
   }, []);
+
   useEffect(() => {
     setPosts(lists);
     fetchPosts();
@@ -122,7 +123,6 @@ const QuestionList = () => {
   useEffect(() => {
     //getfetch();
     fetchPosts();
-    console.log(posts);
   }, [location]);
 
   return (
