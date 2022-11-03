@@ -13,6 +13,7 @@ import {
 } from 'react-router-dom';
 import Pagination from './../components/pagination';
 
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -53,6 +54,7 @@ const QuestionList = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const location = useLocation();
+
 
   let path = location.pathname.split('/')[1];
   let pathname = location.pathname.split('/')[2];
@@ -120,9 +122,15 @@ const QuestionList = () => {
       <NavSide1 />
       <div className="pt96 w100">
         <div className=" ta-left px16 ">
+
           <div className="d-flex jc-space-between pb8 s-page-title fd-row">
             <h1 className="s-page-title--header">All Questions</h1>
-            <Link to="/askquestion" className="s-btn s-btn__primary">
+            <Link
+              // onClick={clickAsk}
+              to="/askquestion"
+              className="s-btn s-btn__primary"
+            >
+
               Ask Question
             </Link>
           </div>
