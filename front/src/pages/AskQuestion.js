@@ -128,7 +128,6 @@ const AskQuestion = () => {
         },
         {
           headers: {
-            // 'ngrok-skip-browser-warning': '111',
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }
