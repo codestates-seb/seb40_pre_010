@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { inputState } from '../_actions';
-import { useRecoilState } from 'recoil';
 
 import IMG1 from '../img/signup-img1.png';
 import IMG2 from '../img/signup-img2.png';
@@ -82,7 +80,6 @@ const SignUpBox = styled.div`
     line-height: 15.7px;
     font-size: 12px;
     font-weight: 600;
-    /* margin: 20px 0px 10px 0px; */
     margin: 0;
     color: hsl(210, 8%, 45%);
     text-align: left;
@@ -151,7 +148,6 @@ const SignUpBox = styled.div`
     width: 24px;
     height: 21px;
     background-color: red;
-    /* background-image: url(https://user-images.githubusercontent.com/104320234/188269169-bf7b987f-e597-46cd-a8e7-c227efde5679.png); */
     margin-right: 10px;
   }
 
@@ -206,29 +202,23 @@ const SignUpBox = styled.div`
 `;
 
 function SignUp() {
-  // const [username, setUsername] = useState('');
-
   const navigate = useNavigate();
 
-  //이름, 이메일, 비밀번호, 비밀번호 확인
   const [name, setName] = useState('');
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
-  //오류메시지 상태저장
   const [nameMessage, setNameMessage] = useState('');
   const [idMessage, setIdMessage] = useState('');
   const [passwordMessage, setPasswordMessage] = useState('');
   const [passwordConfirmMessage, setPasswordConfirmMessage] = useState('');
 
-  // 유효성 검사
   const [isName, setIsName] = useState(false);
   const [isId, setIsId] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
 
-  // 이름
   const onChangeName = useCallback((e) => {
     setName(e.target.value);
     if (e.target.value.length < 2 || e.target.value.length > 5) {
@@ -240,10 +230,9 @@ function SignUp() {
     }
   }, []);
 
-  // 아이디
   const onChangeId = useCallback((e) => {
     const idRegex = /^[a-zA-z0-9]{4,12}$/;
-    // /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
     const idCurrent = e.target.value;
     setUserId(idCurrent);
 
@@ -256,7 +245,6 @@ function SignUp() {
     }
   }, []);
 
-  // 비밀번호
   const onChangePassword = useCallback((e) => {
     const passwordRegex =
       /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
@@ -272,7 +260,6 @@ function SignUp() {
     }
   }, []);
 
-  // 비밀번호 확인
   const onChangePasswordConfirm = useCallback(
     (e) => {
       const passwordConfirmCurrent = e.target.value;
@@ -288,25 +275,6 @@ function SignUp() {
     },
     [password]
   );
-
-  // console.log(username, email, password);
-  // const handledSubmit = async (e) => {
-  //   e.preventDefault();
-  //   await axios
-  //     .post('http://localhost:3001/user', {
-  //       id: 0,
-  //       userName: username,
-  //       userId: email,
-  //       userPw: password,
-  //     })
-  //     .then((res) => console.log(res))
-  //     .catch(
-  //       (error) => console.error(error)
-
-  //       // console.log(username, email, password);
-  //       // console.log(BACKEND_URL);
-  //     );
-  // };
 
   return (
     <SignUpBox>
@@ -344,24 +312,6 @@ function SignUp() {
         <form
           onSubmit={async (e) => {
             e.preventDefault();
-            // const params = {
-            //   userName: username,
-            //   userId: email,
-            //   userPw: password,
-            // };
-            // axios
-            //   .post(`/user`, { params })
-            //   .then((res) => {
-            //     console.log(JSON.stringify(res?.data));
-            //     setUsername('');
-            //     setEmail('');
-            //     setPassword('');
-            //     alert(`회원가입 성공`);
-            //     navigate('/login');
-            //   })
-            //   .chatch((error) => {
-            //     console.log(error);
-            //   });
 
             try {
               const response = await axios({
