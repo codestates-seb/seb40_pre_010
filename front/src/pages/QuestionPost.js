@@ -66,14 +66,10 @@ const QuestionPost = () => {
     posts.createdAt !== undefined ? posts.createdAt.split('T')[0] : null;
 
   const getfetch = async () => {
-    axios
-      .get(`/question/${postnum.id}`, {
-        headers: { 'ngrok-skip-browser-warning': 'skip' },
-      })
-      .then((res) => {
-        setPosts(res.data);
-        setUserId(res.data.userId);
-      });
+    axios.get(`/question/${postnum.id}`).then((res) => {
+      setPosts(res.data);
+      setUserId(res.data.userId);
+    });
   };
   useEffect(() => {
     getfetch();
@@ -86,9 +82,7 @@ const QuestionPost = () => {
   useEffect(() => {
     setTags(posts.questionTags);
     setAnswers(posts.answers);
-  }, [posts, Answers]);
-
-  //setIsLogin(localStorage.getItem('token') !== null ? true : false);
+  }, [posts]);
 
   const onchangehandle = () => {
     setAnswer(editorRef.current?.getInstance().getMarkdown());
@@ -97,7 +91,6 @@ const QuestionPost = () => {
     if (!IsLogin || localStorage.getItem('token') === null) {
       setIsAlert(true);
     } else {
-      //로그인시 진행
       if (Answer.length >= 10) {
         axios
           .post('/answer', {
@@ -105,8 +98,7 @@ const QuestionPost = () => {
             answerBody: Answer,
             postNum: postnum.id,
           })
-          //.then((res) => console.log(res))
-          .then(getfetch());
+          .then(window.location.reload());
       } else {
         alert('10자 이상 작성해주세요');
       }
@@ -149,7 +141,7 @@ const QuestionPost = () => {
             <div className="bb bc-black-075 d-flex pb8">
               <Triangle />
               <div className="flex--item fl-grow1 d-flex jc-space-between">
-                <div>
+                <div className="flex--item flex-grow-1">
                   {posts.questionBody !== undefined ? (
                     <Viewer initialValue={posts.questionBody} />
                   ) : null}
@@ -171,7 +163,7 @@ const QuestionPost = () => {
                         : null}
                     </p>
                     <div className="d-flex jc-space-between ">
-                      <div>
+                      <div className="d-flex">
                         <button className="s-link s-link__muted BTN">
                           Share
                         </button>

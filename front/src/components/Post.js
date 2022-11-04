@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import UserCard from './User-card';
-import Triangle from './Triangle';
 
 const TagWrap = styled.div`
   text-align: left;
@@ -14,7 +13,7 @@ const Body = styled.p`
   word-break: break-word;
 
   display: -webkit-box;
-  -webkit-line-clamp: 3; // 원하는 라인수
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 `;
 const Posts = ({ index, el, posts, loading }) => {
@@ -23,7 +22,6 @@ const Posts = ({ index, el, posts, loading }) => {
   }
   return (
     <div className="ta-left bt bc-black-100 p12 md:pl12 pl64 d-flex">
-      <Triangle />
       <div className="d-flex jc-space-between flex--item flex-grow-1">
         <div>
           <Link to={'/post/' + el.questionId} className="s-link fs-body3">

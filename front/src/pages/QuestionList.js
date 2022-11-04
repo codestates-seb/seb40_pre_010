@@ -104,11 +104,7 @@ const QuestionList = () => {
     setSearch(e.target.value);
   };
   const getfetch = () => {
-    axios
-      .get('/question/questions', {
-        // headers: { 'ngrok-skip-browser-warning': 'skip' },
-      })
-      .then((res) => setLists(res.data));
+    axios.get('/question/questions').then((res) => setLists(res.data));
   };
 
   useEffect(() => {
