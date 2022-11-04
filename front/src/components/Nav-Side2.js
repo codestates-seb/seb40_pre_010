@@ -238,7 +238,7 @@ const QuestionMap = [
   `I want to cite a theorem from a book written by influential scientists. However the theorem is not proven in the book. Should I add a proof of my own?`,
 ];
 function SideNav2() {
-  const [lists, setlists] = useState([a, a, a, a]);
+  const [lists, setlists] = useState([]);
   const [gettag, setGetTag] = useState([]);
   const fetchdata = () => {
     axios.get('/question/questions').then((res) => setlists(res.data));
