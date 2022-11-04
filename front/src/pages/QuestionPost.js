@@ -68,14 +68,10 @@ const QuestionPost = () => {
     posts.createdAt !== undefined ? posts.createdAt.split('T')[0] : null;
 
   const getfetch = async () => {
-    axios
-      .get(`/question/${postnum.id}`, {
-        headers: { 'ngrok-skip-browser-warning': 'skip' },
-      })
-      .then((res) => {
-        setPosts(res.data);
-        setUserId(res.data.userId);
-      });
+    axios.get(`/question/${postnum.id}`).then((res) => {
+      setPosts(res.data);
+      setUserId(res.data.userId);
+    });
   };
   useEffect(() => {
     getfetch();

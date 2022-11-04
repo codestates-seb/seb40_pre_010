@@ -243,7 +243,7 @@ function SideNav2() {
   const fetchdata = () => {
     axios
       .get('/question/questions', {
-        headers: { 'ngrok-skip-browser-warning': 'skip' },
+        //headers: { 'ngrok-skip-browser-warning': 'skip' },
       })
       .then((res) => setlists(res.data));
   };
