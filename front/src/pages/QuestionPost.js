@@ -218,7 +218,7 @@ const QuestionPost = () => {
                         </div>
                         <div className="d-flex jc-end">
                           <UserCard
-                            pic={`https://randomuser.me/api/portraits/men/${i}.jpg`}
+                            pic={`https://randomuser.me/api/portraits/men/1.jpg`}
                             author={x.userId}
                             variation={x.answerId}
                           />
