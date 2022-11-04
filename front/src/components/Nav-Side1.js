@@ -132,7 +132,7 @@ const Linked = (text, link) => {
 };
 function SideNav1() {
   const [isOpen, setIsOpen] = useRecoilState(toggleState);
-  // console.log(isOpen);
+
   return (
     <ToggleState>
       <div className={isOpen ? `open` : `closed`}>
