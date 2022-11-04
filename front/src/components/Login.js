@@ -1,10 +1,6 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-// import { useRecoilState } from 'recoil';
-// import { setCookie } from '../utils/cookie';
-
-// import { userState } from '../_actions/user';
 import axios from 'axios';
 
 import Logo from '../img/logo.svg';
@@ -27,7 +23,6 @@ const LoginBox = styled.div`
     flex-direction: column;
     justify-content: space-between;
     width: 400px;
-    /* height: 360px; */
     padding: 30px;
     margin: 24px 0px;
     background-color: white;
@@ -94,9 +89,6 @@ const LoginBox = styled.div`
 function Login({ setIsLogin }) {
   const [userId, setUserId] = useState('');
   const [userPw, setUserPw] = useState('');
-
-  // const [user, setUser] = useRecoilState(userState); //이건 이제 이 페이지에서만 쓸 수 있는 상태가 아님
-  //로그인성공시 메인 페이지로 이동
   const navigate = useNavigate();
 
   return (
@@ -104,18 +96,6 @@ function Login({ setIsLogin }) {
       <div className="logo"></div>
       <div className="login-box">
         <form
-          // onSubmit={async (e) => {
-          //   e.preventDefault();
-          //   try {
-          //     const data = await axios.post({
-          //       url: `${BACKEND_URL}/user`,
-          //       method: 'POST',
-          //       data: {
-          //         id: 0,
-          //         userName: username,
-          //         userId: email,
-          //         userPw: password,
-          //       },
           onSubmit={async (e) => {
             e.preventDefault();
             try {
@@ -127,14 +107,6 @@ function Login({ setIsLogin }) {
                   withCredentials: true,
                 }
               );
-              // const response = await axios.post({
-              //   url: `${BACKEND_URL}/user`,
-              //   method: 'POST',
-              //   data: {
-              //     userId: email,
-              //     userPw: password,
-              //   },
-              // });
 
               const { data: token, status } = response;
               if (status === 200 || status === '200') {
@@ -142,19 +114,12 @@ function Login({ setIsLogin }) {
                 localStorage.setItem('userId', userId);
                 setUserId('');
                 setUserPw('');
-                // setUser(true);
                 setIsLogin(true);
                 alert('로그인 성공');
                 navigate('/');
               } else {
                 alert('아이디 혹은 비밀번호를 다시 확인 해주세요 :)');
               }
-
-              // console.log(JSON.stringify(response.data));
-
-              // const accessToken = response?.data;
-              // const roles = response?.data?.roles;
-              // setAuth({ userId, userPw, roles, accessToken });
             } catch (e) {
               console.error(e);
               alert('아이디 혹은 비밀번호를 다시 확인 해주세요 :)');

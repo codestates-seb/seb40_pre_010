@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { toggleState } from '../_actions';
@@ -6,12 +6,10 @@ import { useRecoilState } from 'recoil';
 
 import Logo from '../img/logo.svg';
 import MenuIcon from '../img/MenuIcon.svg';
-import Xicon from '../img/Xicon.svg';
 import BoxIcon from '../img/inbox-solid.svg';
 import Trophy from '../img/trophy-solid.svg';
 import Question from '../img/circle-question-solid.svg';
 import Profile from '../img/user-solid.svg';
-import Search from '../img/magnifying-glass-solid.svg';
 
 const MainNavBox = styled.div`
   position: fixed;
@@ -44,12 +42,6 @@ const MainNavBox = styled.div`
     transition-duration: 0.3s;
     margin-left: 15px;
   }
-
-  /* @media screen and (max-width: 550px) {
-    .logo {
-      width: 35px;
-    }
-  } */
 
   .search-bar {
     width: 100%;
@@ -241,7 +233,6 @@ const Buttons = styled.div`
 
     color: white;
     background-color: rgb(10, 149, 255);
-    /* border-color: rgb(122, 167, 199); */
     box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 70%);
     border-radius: 3px;
     transition-duration: 0.3s;
@@ -329,9 +320,6 @@ const Buttons = styled.div`
       transition-duration: 0.3s;
       cursor: pointer;
     }
-    /* .search {
-      background-image: url(${Search});
-    } */
     .login-icon {
       display: none;
     }
@@ -345,19 +333,11 @@ const Buttons = styled.div`
 
 function TopMainNav({ isLogin, setIsLogin }) {
   const [isOpen, setIsOpen] = useRecoilState(toggleState);
-  // const [isToggleOpen, setIsToggleOpen] = useState(false);
-
-  // const handleToggleOpen = () => {
-  //   setIsToggleOpen(!isToggleOpen);
-  // };
 
   return (
     <MainNavBox>
-      {/* <LogoutModal></LogoutModal> */}
-
       <div className="main-box">
         <Menu>
-          {/* <NavSide2 /> */}
           <ul>
             <div className="hiden-menu-icon">
               <button
@@ -380,7 +360,6 @@ function TopMainNav({ isLogin, setIsLogin }) {
             <li className="menu-btn btn3">For Teams</li>
           </ul>
         </Menu>
-        {/* <SearchInput></SearchInput> */}
         <div className="search-bar">
           <i className="fas fa-search"></i>
           <input className="search-bar__input" placeholder="Search"></input>
@@ -389,9 +368,6 @@ function TopMainNav({ isLogin, setIsLogin }) {
           {isLogin ? (
             <div className="login-state">
               <ul className="login-icons">
-                {/* <li className="search-login-icon">
-                  <div className="login-icon_ search"></div>
-                </li> */}
                 <li className="login-icon">
                   <div className="login-icon_ profile"></div>
                 </li>
