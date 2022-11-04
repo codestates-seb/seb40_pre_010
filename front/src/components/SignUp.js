@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { inputState } from '../_actions';
@@ -31,7 +31,7 @@ const SignUpBox = styled.div`
     font-size: 15px;
     width: 316px;
     min-width: 250px;
-    height: 500px;
+    height: 600px;
     padding: 24px;
     text-align: left;
   }
@@ -82,7 +82,8 @@ const SignUpBox = styled.div`
     line-height: 15.7px;
     font-size: 12px;
     font-weight: 600;
-    margin: 20px 0px 10px 0px;
+    /* margin: 20px 0px 10px 0px; */
+    margin: 0;
     color: hsl(210, 8%, 45%);
     text-align: left;
   }
@@ -175,37 +176,118 @@ const SignUpBox = styled.div`
     text-align: left;
   }
 
+  .formbox {
+    position: relative;
+    margin-bottom: 20px;
+    .message {
+      font-weight: 500;
+      font-size: 11px;
+      line-height: 15px;
+      letter-spacing: -1px;
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      &.success {
+        color: #8f8c8b;
+      }
+      &.error {
+        color: #ff2727;
+      }
+    }
+  }
+
   @media screen and (max-width: 375px) {
     .main-text-box {
       display: none;
+    }
+    .checkbox-box {
     }
   }
 `;
 
 function SignUp() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const [inputValue, setInputValue] = useState({
-    userName: '',
-    email: '',
-    password: '',
-  });
-
-  const { userName, eMail, passWord } = inputValue;
-
-  // const [inputCheck, setInputCheck] = useRecoilState(inputState);
-
-  const handleInput = (event) => {
-    const { name, value } = event.target;
-    setInputValue({
-      ...inputValue,
-      [name]: value,
-    });
-  };
+  // const [username, setUsername] = useState('');
 
   const navigate = useNavigate();
+
+  //이름, 이메일, 비밀번호, 비밀번호 확인
+  const [name, setName] = useState('');
+  const [userId, setUserId] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+
+  //오류메시지 상태저장
+  const [nameMessage, setNameMessage] = useState('');
+  const [idMessage, setIdMessage] = useState('');
+  const [passwordMessage, setPasswordMessage] = useState('');
+  const [passwordConfirmMessage, setPasswordConfirmMessage] = useState('');
+
+  // 유효성 검사
+  const [isName, setIsName] = useState(false);
+  const [isId, setIsId] = useState(false);
+  const [isPassword, setIsPassword] = useState(false);
+  const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
+
+  // 이름
+  const onChangeName = useCallback((e) => {
+    setName(e.target.value);
+    if (e.target.value.length < 2 || e.target.value.length > 5) {
+      setNameMessage('2글자 이상 5글자 미만');
+      setIsName(false);
+    } else {
+      setNameMessage('올바른 이름 형식입니다 :)');
+      setIsName(true);
+    }
+  }, []);
+
+  // 아이디
+  const onChangeId = useCallback((e) => {
+    const idRegex = /^[a-zA-z0-9]{4,12}$/;
+    // /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    const idCurrent = e.target.value;
+    setUserId(idCurrent);
+
+    if (!idRegex.test(idCurrent)) {
+      setIdMessage('4~12자의 영문 대소문자와 숫자');
+      setIsId(false);
+    } else {
+      setIdMessage('올바른 아이디 형식이에요 : )');
+      setIsId(true);
+    }
+  }, []);
+
+  // 비밀번호
+  const onChangePassword = useCallback((e) => {
+    const passwordRegex =
+      /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+    const passwordCurrent = e.target.value;
+    setPassword(passwordCurrent);
+
+    if (!passwordRegex.test(passwordCurrent)) {
+      setPasswordMessage('숫자+영문자+특수문자 8자리 이상');
+      setIsPassword(false);
+    } else {
+      setPasswordMessage('안전한 비밀번호에요 : )');
+      setIsPassword(true);
+    }
+  }, []);
+
+  // 비밀번호 확인
+  const onChangePasswordConfirm = useCallback(
+    (e) => {
+      const passwordConfirmCurrent = e.target.value;
+      setPasswordConfirm(passwordConfirmCurrent);
+
+      if (password === passwordConfirmCurrent) {
+        setPasswordConfirmMessage('비밀번호를 똑같이 입력했어요 : )');
+        setIsPasswordConfirm(true);
+      } else {
+        setPasswordConfirmMessage('비밀번호가 틀려요. 다시 확인해주세요 ㅜ ㅜ');
+        setIsPasswordConfirm(false);
+      }
+    },
+    [password]
+  );
 
   // console.log(username, email, password);
   // const handledSubmit = async (e) => {
@@ -286,14 +368,14 @@ function SignUp() {
                 url: `/user`,
                 method: 'POST',
                 data: {
-                  userName: username,
-                  userId: email,
+                  userName: name,
+                  userId: userId,
                   userPw: password,
                 },
               });
               console.log(JSON.stringify(response?.data.userName));
-              setUsername('');
-              setEmail('');
+              setName('');
+              setUserId('');
               setPassword('');
               alert(`환영합니다 ${response?.data.userName}님!`);
               navigate('/login');
@@ -305,45 +387,82 @@ function SignUp() {
             }
           }}
         >
-          <div className="input-box">
+          <div className="input-box formbox">
             <p>Name</p>
             <input
               className="input"
-              name="userName"
               type="text"
               placeholder="Name"
-              value={username}
+              value={name}
               onChange={
                 ((e) => {
                   setUsername(e.target.value);
                 },
-                handleInput)
+                onChangeName)
               }
             ></input>
+            {name.length > 0 && (
+              <span className={`message ${isName ? 'success' : 'error'}`}>
+                {nameMessage}
+              </span>
+            )}
           </div>
-          <div className="input-box">
+          <div className="input-box formbox">
             <p>ID</p>
             <input
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
+              value={userId}
+              onChange={
+                ((e) => {
+                  setUserId(e.target.value);
+                },
+                onChangeId)
+              }
               className="input"
               type="text"
               placeholder="ID"
             ></input>
+            {userId.length > 0 && (
+              <span className={`message ${isId ? 'success' : 'error'}`}>
+                {idMessage}
+              </span>
+            )}
           </div>
-          <div className="input-box">
+          <div className="input-box formbox">
             <p>Password</p>
             <input
               value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
+              onChange={
+                ((e) => {
+                  setPassword(e.target.value);
+                },
+                onChangePassword)
+              }
               className="input"
               type="password"
               placeholder="Password"
             ></input>
+            {password.length > 0 && (
+              <span className={`message ${isPassword ? 'success' : 'error'}`}>
+                {passwordMessage}
+              </span>
+            )}
+          </div>
+          <div className="input-box formbox">
+            <p>Password Check</p>
+            <input
+              value={passwordConfirm}
+              onChange={onChangePasswordConfirm}
+              className="input"
+              type="password"
+              placeholder="Password"
+            ></input>
+            {passwordConfirm.length > 0 && (
+              <span
+                className={`message ${isPasswordConfirm ? 'success' : 'error'}`}
+              >
+                {passwordConfirmMessage}
+              </span>
+            )}
           </div>
           <p className="text">
             Passwords must contain at least eight characters, including at least
@@ -357,7 +476,11 @@ function SignUp() {
               company announcements, and digests.
             </p>
           </div>
-          <button type="submit" className="signup-btn">
+          <button
+            type="submit"
+            className="signup-btn"
+            disabled={!(isName && isId && isPassword && isPasswordConfirm)}
+          >
             Sign Up
           </button>
         </form>
