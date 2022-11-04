@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import UserCard from '../components/User-card';
 import { useNavigate } from 'react-router-dom';
 import { offset } from '@popperjs/core';
+import Triangle from '../components/Triangle';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -28,6 +29,7 @@ const PostArea = styled.div`
     text-align: left;
     margin-bottom: 8px;
     margin-right: 16px;
+    font-size: 16px;
   }
   & delete {
     border: none;
@@ -129,7 +131,7 @@ const QuestionPost = () => {
       ) : null}
       <NavSide1 />
       <div className="pt96 pb24 px16">
-        <div className="s-page-title">
+        <div className="s-page-title mb16 pl16">
           <h1 className="s-page-title--header">{posts.questionTitle}</h1>
           <div className="d-flex mt24">
             <p className="fc-black-500 mr24">
@@ -143,29 +145,38 @@ const QuestionPost = () => {
 
         <MainBox className="d-flex jc-space-between md:fd-column">
           <PostArea className="pr16">
-            <div className="bb bc-black-075">
-              {posts.questionBody !== undefined ? (
-                <Viewer initialValue={posts.questionBody} />
-              ) : null}
-
-              <div className="d-flex jc-space-between mb8">
-                <p>
-                  {tags !== undefined
-                    ? tags.split(',').map((z, j) => {
-                        return (
-                          <a key={j} href={'/tags/' + z} className="s-tag mr4">
-                            {z}
-                          </a>
-                        );
-                      })
-                    : null}
-                </p>
+            <div className="bb bc-black-075 d-flex pb8">
+              <Triangle />
+              <div className="flex--item fl-grow1 d-flex jc-space-between">
                 <div>
-                  {localStorage.getItem('userId') === userId ? (
-                    <button onClick={onClickDelete} className="delete">
-                      delete
-                    </button>
+                  {posts.questionBody !== undefined ? (
+                    <Viewer initialValue={posts.questionBody} />
                   ) : null}
+
+                  <div className="d-flex jc-space-between mb8">
+                    <p>
+                      {tags !== undefined
+                        ? tags.split(',').map((z, j) => {
+                            return (
+                              <a
+                                key={j}
+                                href={'/tags/' + z}
+                                className="s-tag mr4"
+                              >
+                                {z}
+                              </a>
+                            );
+                          })
+                        : null}
+                    </p>
+                  </div>
+                  <div>
+                    {localStorage.getItem('userId') === userId ? (
+                      <button onClick={onClickDelete} className="delete">
+                        delete
+                      </button>
+                    ) : null}
+                  </div>
                 </div>
 
                 <UserCard
@@ -184,14 +195,19 @@ const QuestionPost = () => {
                     return (
                       <div
                         key={i}
-                        className="py12 bb bc-black-075 d-flex jc-space-between"
+                        className="pl24 py12 bb bc-black-075 d-flex jc-space-between"
                       >
-                        {Answers !== undefined ? (
-                          <Viewer
-                            initialValue={x.answerBody}
-                            className="ta-left"
-                          />
-                        ) : null}
+                        <div className="d-flex">
+                          <Triangle />
+                          <div className="d-flex fd-column jc-space-between">
+                            {Answers !== undefined ? (
+                              <Viewer initialValue={x.answerBody} />
+                            ) : null}
+                            <div className="fc-black-500 pb16">
+                              {x.createdAt}
+                            </div>
+                          </div>
+                        </div>
                         <div className="">
                           <UserCard
                             pic={`https://randomuser.me/api/portraits/men/${i}.jpg`}
