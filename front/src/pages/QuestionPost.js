@@ -100,15 +100,18 @@ const QuestionPost = () => {
       setIsAlert(true);
     } else {
       //로그인시 진행
-
-      axios
-        .post('/answer', {
-          userId: localStorage.getItem('userId'),
-          answerBody: Answer,
-          postNum: postnum.id,
-        })
-        //.then((res) => console.log(res))
-        .then(getfetch());
+      if (Answer.length >= 10) {
+        axios
+          .post('/answer', {
+            userId: localStorage.getItem('userId'),
+            answerBody: Answer,
+            postNum: postnum.id,
+          })
+          //.then((res) => console.log(res))
+          .then(getfetch());
+      } else {
+        alert('10자 이상 작성해주세요');
+      }
     }
     setAnswers(posts.answers);
   };
@@ -208,7 +211,7 @@ const QuestionPost = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="">
+                        <div className="d-flex jc-end">
                           <UserCard
                             pic={`https://randomuser.me/api/portraits/men/${i}.jpg`}
                             author={x.userId}
@@ -224,6 +227,7 @@ const QuestionPost = () => {
               <div className="my24 fs-headline1">Your Answer</div>
               <Editor
                 initialValue=" "
+                placeholder="10자이상 작성해주세요"
                 previewStyle="tab"
                 height="300px"
                 initialEditType="markdown"
@@ -231,6 +235,7 @@ const QuestionPost = () => {
                 ref={editorRef}
                 onChange={onchangehandle}
               ></Editor>
+              <div>10자 이상 작성해주세요.</div>
               <div className="d-flex jc-end my12">
                 <button className="s-btn s-btn__primary" onClick={handleClick}>
                   Post Your Answer
