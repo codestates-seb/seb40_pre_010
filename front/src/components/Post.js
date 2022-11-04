@@ -13,7 +13,7 @@ const Body = styled.p`
   word-break: break-word;
 
   display: -webkit-box;
-  -webkit-line-clamp: 3; // 원하는 라인수
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 `;
 const Posts = ({ index, el, posts, loading }) => {

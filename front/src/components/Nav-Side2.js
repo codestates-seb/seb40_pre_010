@@ -241,17 +241,12 @@ function SideNav2() {
   const [lists, setlists] = useState([]);
   const [gettag, setGetTag] = useState([]);
   const fetchdata = () => {
-    axios
-      .get('/question/questions', {
-        //headers: { 'ngrok-skip-browser-warning': 'skip' },
-      })
-      .then((res) => setlists(res.data));
+    axios.get('/question/questions').then((res) => setlists(res.data));
   };
   useEffect(() => {
     fetchdata();
   }, []);
 
-  //Related Tags 숫자 random->직접연결
   const Tagslist = lists.map((x) =>
     x.questionTags.includes(',') ? x.questionTags.split(',') : [x.questionTags]
   );
