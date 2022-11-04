@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { toggleState } from '../_actions';
+import { useRecoilState } from 'recoil';
 
 import Logo from '../img/logo.svg';
 import MenuIcon from '../img/MenuIcon.svg';
@@ -134,6 +136,10 @@ const Menu = styled.div`
   .hiden-menu-icon {
     display: none;
   }
+  .hiden-menu-btn {
+    display: none;
+  }
+
   @media screen and (max-width: 1050px) {
     .logo {
       width: 35px;
@@ -149,6 +155,20 @@ const Menu = styled.div`
       padding: 12px;
       transition-duration: 0.3s;
     }
+
+    .logo {
+      margin-left: 2px;
+    }
+
+    .login-icon2 {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .menu-btn {
+      display: none;
+    }
     .hiden-menu-btn {
       display: flex;
       justify-content: center;
@@ -159,19 +179,8 @@ const Menu = styled.div`
       background-image: url(${MenuIcon});
       cursor: pointer;
       transition-duration: 0.3s;
-    }
-    .logo {
-      margin-left: 2px;
-    }
-
-    .login-icon2 {
-      display: none;
-    }
-  }
-
-  @media screen and (max-width: 700px) {
-    .menu-btn {
-      display: none;
+      border: 0px solid;
+      cursor: pointer;
     }
   }
 
@@ -335,17 +344,28 @@ const Buttons = styled.div`
 `;
 
 function TopMainNav({ isLogin, setIsLogin }) {
-  // const [user, setUser] = useRecoilState(userState);
-  const [hidenMenu, setHideMenu] = useState(false);
+  const [isOpen, setIsOpen] = useRecoilState(toggleState);
+  // const [isToggleOpen, setIsToggleOpen] = useState(false);
+
+  // const handleToggleOpen = () => {
+  //   setIsToggleOpen(!isToggleOpen);
+  // };
 
   return (
     <MainNavBox>
       {/* <LogoutModal></LogoutModal> */}
+
       <div className="main-box">
         <Menu>
+          {/* <NavSide2 /> */}
           <ul>
             <div className="hiden-menu-icon">
-              <div className="hiden-menu-btn"></div>
+              <button
+                className="hiden-menu-btn"
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                }}
+              ></button>
             </div>
             <a className="logo-box" href="/">
               <li>
