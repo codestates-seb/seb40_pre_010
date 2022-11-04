@@ -68,7 +68,7 @@ const QuestionPost = () => {
   const getfetch = async () => {
     axios
       .get(`/question/${postnum.id}`, {
-        // headers: { 'ngrok-skip-browser-warning': 'skip' },
+        headers: { 'ngrok-skip-browser-warning': 'skip' },
       })
       .then((res) => {
         setPosts(res.data);
@@ -88,12 +88,7 @@ const QuestionPost = () => {
     setAnswers(posts.answers);
   }, [posts, Answers]);
 
-  //setIsLogin(localStorage.getItem('token') ? true : false);
-  console.log(IsLogin);
-  // useEffect(() => {
-  //   setTags(posts.questionTags);
-  //   setAnswers(posts.answers);
-  // }, [posts]);
+  //setIsLogin(localStorage.getItem('token') !== null ? true : false);
 
   const onchangehandle = () => {
     setAnswer(editorRef.current?.getInstance().getMarkdown());
@@ -159,7 +154,7 @@ const QuestionPost = () => {
                     <Viewer initialValue={posts.questionBody} />
                   ) : null}
 
-                  <div className="d-flex jc-space-between mb8">
+                  <div className="d-flex jc-space-between mb8 fd-column">
                     <p>
                       {tags !== undefined
                         ? tags.split(',').map((z, j) => {
@@ -175,21 +170,36 @@ const QuestionPost = () => {
                           })
                         : null}
                     </p>
-                    <div>
-                      {localStorage.getItem('userId') === userId ? (
-                        <button onClick={onClickDelete} className="delete">
-                          delete
+                    <div className="d-flex jc-space-between ">
+                      <div>
+                        <button className="s-link s-link__muted BTN">
+                          Share
                         </button>
-                      ) : null}
+                        {localStorage.getItem('userId') === userId ? (
+                          <div>
+                            <button className="s-link s-link__muted BTN">
+                              Edit
+                            </button>
+                            <button
+                              onClick={onClickDelete}
+                              className="s-link s-link__muted BTN"
+                            >
+                              delete
+                            </button>
+                          </div>
+                        ) : null}
+                        <button className="s-link s-link__muted BTN">
+                          Following
+                        </button>
+                      </div>
                     </div>
-
-                    <UserCard
-                      pic={pic}
-                      author={posts.userId}
-                      variation={posts.questionId}
-                    />
                   </div>
                 </div>
+                <UserCard
+                  pic={pic}
+                  author={posts.userId}
+                  variation={posts.questionId}
+                />
               </div>
             </div>
             <div className="mt24">
