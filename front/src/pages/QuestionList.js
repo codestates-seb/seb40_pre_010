@@ -1,7 +1,7 @@
 import axios from 'axios';
 import NavSide1 from './../components/Nav-Side1';
 import NavSide2 from './../components/Nav-Side2';
-import Posts from '../components/post';
+import Posts from '../components/Post';
 import { React, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {
@@ -10,14 +10,15 @@ import {
   Link,
   useLocation,
   useParams,
+  useNavigate,
 } from 'react-router-dom';
-import Pagination from './../components/pagination';
+import Pagination from './../components/Pagination';
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 1240px;
+  max-width: 1440px;
   margin: 0 auto;
   > div:first-child {
     border-width: 0 !important;
@@ -53,38 +54,48 @@ const QuestionList = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const location = useLocation();
+  const navigate = useNavigate();
+  const clickAsk = () => {
+    if (localStorage.getItem('token')) {
+      navigate('/askQuestion');
+    } else {
+      alert('로그인을 해주세요.');
+      navigate('/login');
+    }
+  };
 
   let path = location.pathname.split('/')[1];
   let pathname = location.pathname.split('/')[2];
-  const fetchPosts = async () => {
+  const fetchPosts = () => {
     setLoading(true);
-    //const res = await = axios.get(url);
     let res = '';
     if (pathname) {
       switch (path) {
         case 'title':
           res = lists.filter((x) => x.questionTitle.includes(pathname));
-          setPosts(res);
+          setPosts(res.reverse());
 
           break;
         case 'body':
           res = lists.filter((x) => x.questionBody.includes(pathname));
-          setPosts(res);
+          setPosts(res.reverse());
           break;
         case 'author':
           res = lists.filter((x) => x.userId.includes(pathname));
-          setPosts(res);
+          setPosts(res.reverse());
           break;
         case 'tags':
           res = lists.filter((x) => x.questionTags.includes(pathname));
-          setPosts(res);
+          setPosts(res.reverse());
           break;
         default:
-          setPosts(lists);
+          res = [...lists];
+          setPosts(res.reverse());
           break;
       }
     } else {
-      setPosts(lists);
+      res = [...lists];
+      setPosts(res.reverse());
     }
 
     setLoading(false);
@@ -92,39 +103,27 @@ const QuestionList = () => {
   const onChangeSearchHandler = (e) => {
     setSearch(e.target.value);
   };
-  const getfetch = async () => {
-    axios
-      .get('/question/questions', {
-        headers: { 'ngrok-skip-browser-warning': 'skip' },
-      })
-      .then((res) => setLists(res.data));
+  const getfetch = () => {
+    axios.get('/question/questions').then((res) => setLists(res.data));
   };
 
   useEffect(() => {
     getfetch();
-    fetchPosts();
   }, []);
   useEffect(() => {
-    setPosts(lists);
     fetchPosts();
-  }, [lists]);
-
-  useEffect(() => {
-    //getfetch();
-    fetchPosts();
-    console.log(posts);
-  }, [location]);
-
+    console.log('test');
+  }, [lists, location]);
   return (
     <Wrapper>
       <NavSide1 />
       <div className="pt96 w100">
         <div className=" ta-left px16 ">
-          <div className="d-flex jc-space-between pb8 s-page-title fd-row">
-            <h1 className="s-page-title--header">All Questions</h1>
-            <Link to="/askquestion" className="s-btn s-btn__primary">
+          <div className="d-flex jc-space-between pb8">
+            <span className="fs-headline1">All Questions</span>
+            <button onClick={clickAsk} className="s-btn s-btn__primary">
               Ask Question
-            </Link>
+            </button>
           </div>
           <div className="d-flex jc-space-between ai-center py8 mt-4 ">
             <div className="fs-body3">{posts.length} questions</div>

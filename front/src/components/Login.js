@@ -1,11 +1,7 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { BACKEND_URL } from '../utils';
-import { useRecoilState } from 'recoil';
-import { userState } from '../_actions/user';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import AuthContext from '../utils/AuthProvider';
 
 import Logo from '../img/logo.svg';
 
@@ -27,7 +23,6 @@ const LoginBox = styled.div`
     flex-direction: column;
     justify-content: space-between;
     width: 400px;
-    height: 360px;
     padding: 30px;
     margin: 24px 0px;
     background-color: white;
@@ -54,6 +49,7 @@ const LoginBox = styled.div`
     border-radius: 3px;
     border: 0px;
     padding: 2px 9px;
+    margin-top: 20px;
     transition: all 0.4s ease 0s;
     font-size: 0.85rem;
     color: white;
@@ -90,16 +86,9 @@ const LoginBox = styled.div`
   }
 `;
 
-function Login() {
-  const { setAuth } = useContext(AuthContext);
-  const userRef = useRef();
-  const errRef = useRef();
-
+function Login({ setIsLogin }) {
   const [userId, setUserId] = useState('');
   const [userPw, setUserPw] = useState('');
-
-  const [user, setUser] = useRecoilState(userState); //이건 이제 이 페이지에서만 쓸 수 있는 상태가 아님
-  //로그인성공시 메인 페이지로 이동
   const navigate = useNavigate();
 
   return (
@@ -107,49 +96,33 @@ function Login() {
       <div className="logo"></div>
       <div className="login-box">
         <form
-          // onSubmit={async (e) => {
-          //   e.preventDefault();
-          //   try {
-          //     const data = await axios.post({
-          //       url: `${BACKEND_URL}/user`,
-          //       method: 'POST',
-          //       data: {
-          //         id: 0,
-          //         userName: username,
-          //         userId: email,
-          //         userPw: password,
-          //       },
           onSubmit={async (e) => {
             e.preventDefault();
             try {
               const response = await axios.post(
-                `${BACKEND_URL}/user`,
+                `/user/login`,
                 JSON.stringify({ userId, userPw }),
                 {
                   headers: { 'Content-Type': 'application/json' },
                   withCredentials: true,
                 }
               );
-              // const response = await axios.post({
-              //   url: `${BACKEND_URL}/user`,
-              //   method: 'POST',
-              //   data: {
-              //     userId: email,
-              //     userPw: password,
-              //   },
-              // });
-              console.log(JSON.stringify(response?.data));
-              // const accessToken = response?.data?.accessToken;
-              // const roles = response?.data?.roles;
-              // setAuth({ email, password, roles, accessToken });
-              setUserId('');
-              setUserPw('');
-              setUser(response.data);
-              alert('로그인 성공');
-              navigate('/');
+
+              const { data: token, status } = response;
+              if (status === 200 || status === '200') {
+                localStorage.setItem('token', token);
+                localStorage.setItem('userId', userId);
+                setUserId('');
+                setUserPw('');
+                setIsLogin(true);
+                alert('로그인 성공');
+                navigate('/');
+              } else {
+                alert('아이디 혹은 비밀번호를 다시 확인 해주세요 :)');
+              }
             } catch (e) {
               console.error(e);
-              alert('로그인 실패');
+              alert('아이디 혹은 비밀번호를 다시 확인 해주세요 :)');
             }
           }}
         >

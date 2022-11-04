@@ -2,7 +2,9 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import TextEditor from '../components/TextEditor';
 import Accordion from '../components/Accordion';
-import InputTag from '../components/input-tag';
+import InputTag from '../components/Input-tag';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.div`
   display: flex;
@@ -11,7 +13,7 @@ const Wrapper = styled.div`
   background-color: #f1f2f3;
   width: 100%;
   > div {
-    max-width: 1240px;
+    max-width: 1440px;
     margin-right: auto;
     margin-left: auto;
     &:first-child {
@@ -95,18 +97,13 @@ const QuestionDiv = styled.div`
   justify-content: row;
 `;
 
-const tags = ['java', 'javascript', 'c', 'c#', 'c++'];
-
 const AskQuestion = () => {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
+  const [getTag, setgetTag] = useState();
 
-  const [hasText, setHasText] = useState(false);
-  const [inputValue, setInputValue] = useState('tags');
-  const [options, setOptions] = useState(tags);
-  const [getTag, setgetTag] = useState('');
+  const navigate = useNavigate();
 
-  console.log(getTag);
   const editorRef = useRef(null);
   const onChange = () => {
     const data = editorRef.current.getInstance().getHTML(); // getHTML or getMarkdown
@@ -114,20 +111,31 @@ const AskQuestion = () => {
     console.log(text);
   };
 
-  // const onChangeTitle = () => {
-  //   setTitle(e.target.value);
-  //   console.log(title);
-  // };
-
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-    setHasText(true);
-    setOptions(tags.filter((value) => value.includes(e.target.value)));
+  const onChangeTitle = (e) => {
+    setTitle(e.target.value);
+    console.log(title);
   };
 
-  const nameClick = (clickedOption) => {
-    setInputValue(clickedOption);
-    setOptions([clickedOption]);
+  const onClickButton = () => {
+    axios
+      .post(
+        '/question',
+        {
+          userId: `${localStorage.getItem('userId')}`,
+          questionTitle: `${title}`,
+          questionBody: `${text}`,
+          questionTags: `${getTag}`,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
+      .then(() => {
+        navigate('/');
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -141,7 +149,7 @@ const AskQuestion = () => {
             Be specific and imagine you`re asking a question to another person
           </StyledDivv>
           <Input
-            // onChangeTitle={onChangeTitle}
+            onChange={onChangeTitle}
             placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
           ></Input>
           <Question>
@@ -158,22 +166,15 @@ const AskQuestion = () => {
           <StyledDivv>
             Add up to 5 tags to describe what your question is about
           </StyledDivv>
-          {/* <Input
-            onChange={handleInputChange}
-            options={options}
-            nameClick={nameClick}
-            placeholder="e.g. (angular sql-server string)"
-          ></Input> */}
           <InputTag setgetTag={setgetTag} />
-          {/* <div className="s-popover" id="popover-example" role="menu">
-            <div className="s-popover--arrow"></div> {tags.map((el) => el)}
-          </div> */}
         </StyledDiv>
 
         <Accordion />
       </QuestionDiv>
       <div className="main-button">
-        <StyledButton>Review your question</StyledButton>
+        <StyledButton onClick={onClickButton}>
+          Review your question
+        </StyledButton>
       </div>
     </Wrapper>
   );

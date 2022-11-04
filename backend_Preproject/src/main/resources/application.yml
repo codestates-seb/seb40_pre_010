@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: create
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://pre-project-010.c3jkbmgmjhr8.ap-northeast-2.rds.amazonaws.com:13306/pre_project010?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: admin
+    password: binary010!
+
+config:
+  domain: http://pre-project-010.s3-website.ap-northeast-2.amazonaws.com
