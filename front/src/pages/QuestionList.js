@@ -112,7 +112,6 @@ const QuestionList = () => {
   }, []);
   useEffect(() => {
     fetchPosts();
-    console.log('test');
   }, [lists, location]);
   return (
     <Wrapper>

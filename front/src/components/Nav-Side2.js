@@ -238,7 +238,7 @@ const QuestionMap = [
   `I want to cite a theorem from a book written by influential scientists. However the theorem is not proven in the book. Should I add a proof of my own?`,
 ];
 function SideNav2() {
-  const [lists, setlists] = useState([]);
+  const [lists, setlists] = useState([a, a, a, a]);
   const [gettag, setGetTag] = useState([]);
   const fetchdata = () => {
     axios.get('/question/questions').then((res) => setlists(res.data));
@@ -246,14 +246,15 @@ function SideNav2() {
   useEffect(() => {
     fetchdata();
   }, []);
-  let Tagslist = [];
-  if (lists.length > 0) {
-    Tagslist = lists.map((x) =>
+
+  const Tagslist =
+    lists &&
+    lists.map((x) =>
       x.questionTags.includes(',')
         ? x.questionTags.split(',')
         : [x.questionTags]
     );
-  }
+
   const Tagslist2 = Tagslist.flat();
   const result = {};
   Tagslist2.forEach((x) => {
