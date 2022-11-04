@@ -70,6 +70,7 @@ const InputTag = (props) => {
         </div>
         <TagInput
           type="text"
+          className="flex--item flex-grow-1"
           placeholder="Press enter to add tags"
           onChange={(e) => setTagItem(e.target.value)}
           value={tagItem}
