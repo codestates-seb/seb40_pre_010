@@ -2,8 +2,10 @@ import styled from 'styled-components';
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
+import { toggleState } from '../_actions';
+import { useRecoilState } from 'recoil';
+
 const BREAK_POINT_TABLET = 768;
-const BREAK_POINT_PC = 1200;
 
 const LeftArea = styled.div`
   font-size: 13px;
@@ -11,10 +13,11 @@ const LeftArea = styled.div`
   width: 164px;
   color: #525960;
   // 태블릿 : 1200px ~ 768px :: 768px 이상 적용되는 css
-  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+  /* @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     display: none;
-  }
+  } */
 `;
+
 const Wrapper = styled.div`
   border-right: 1px solid #d6d9dc;
   padding: 24px 0 0 0;
@@ -128,65 +131,90 @@ const Linked = (text, link) => {
   );
 };
 function SideNav1() {
+  const [isOpen, setIsOpen] = useRecoilState(toggleState);
+
   return (
-    <LeftArea>
-      <Wrapper>
-        <LGroup>
-          <List padding="4px 4px 4px 8px">{Linked('HOME', '/')}</List>
-          <List margin="16px 0px 4px 8px">
-            PUBLIC
-            <LGroup margin_left="-8px">
-              <List font_md={true} selected={true} padding="8px 6px 8px 8px">
-                {Linked(IconText(Earth(), 'Question'), '/')}
+    <ToggleState>
+      <div className={isOpen ? `open` : `closed`}>
+        <LeftArea>
+          <Wrapper>
+            <LGroup>
+              <List padding="4px 4px 4px 8px">{Linked('HOME', '/')}</List>
+              <List margin="16px 0px 4px 8px">
+                PUBLIC
+                <LGroup margin_left="-8px">
+                  <List
+                    font_md={true}
+                    selected={true}
+                    padding="8px 6px 8px 8px"
+                  >
+                    {Linked(IconText(Earth(), 'Question'), '/')}
+                  </List>
+                  <List font_md={true} padding="4px 4px 4px 30px">
+                    {Linked('Tags', '/tags')}
+                  </List>
+                  <List font_md={true} padding="4px 4px 4px 30px">
+                    {Linked('Users', '/')}
+                  </List>
+                  <List font_md={true} padding="4px 4px 4px 30px">
+                    {Linked('Compaines', '/')}
+                  </List>
+                </LGroup>
               </List>
-              <List font_md={true} padding="4px 4px 4px 30px">
-                {Linked('Tags', '/tags')}
+              <List margin="16px 4px 0px 8px" Display="flex">
+                COLLECTIVES
+                <MySvg
+                  fill="#525960"
+                  aria-hidden="true"
+                  className="svg-icon iconInfoSm"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                >
+                  <path d="M7 1a6 6 0 1 1 0 12A6 6 0 0 1 7 1Zm1 10V6H6v5h2Zm0-6V3H6v2h2Z"></path>
+                </MySvg>
               </List>
-              <List font_md={true} padding="4px 4px 4px 30px">
-                {Linked('Users', '/')}
-              </List>
-              <List font_md={true} padding="4px 4px 4px 30px">
-                {Linked('Compaines', '/')}
-              </List>
+              <LGroup>
+                <List font_md={true} padding="8px 6px 8px 8px">
+                  {Linked(IconText(Star(), 'Explore Collective'), '/')}
+                </List>
+              </LGroup>
+              <List margin="16px 0px 8px 8px">TEAMS</List>
+              <Banner>
+                <strong>Stack Overflow for Teams</strong> – Start collaborating
+                and sharing organizational knowledge.
+                <img
+                  width="139"
+                  height="114"
+                  src="https://cdn.sstatic.net/Img/teams/teams-illo-free-sidebar-promo.svg?v=47faa659a05e"
+                  alt=""
+                />
+                <MyButton boxshadow={true} theme="darkorange" href="/">
+                  Create a free Team
+                </MyButton>
+                <MyButton href="/">Why Teams?</MyButton>
+              </Banner>
             </LGroup>
-          </List>
-          <List margin="16px 4px 0px 8px" Display="flex">
-            COLLECTIVES
-            <MySvg
-              fill="#525960"
-              aria-hidden="true"
-              className="svg-icon iconInfoSm"
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-            >
-              <path d="M7 1a6 6 0 1 1 0 12A6 6 0 0 1 7 1Zm1 10V6H6v5h2Zm0-6V3H6v2h2Z"></path>
-            </MySvg>
-          </List>
-          <LGroup>
-            <List font_md={true} padding="8px 6px 8px 8px">
-              {Linked(IconText(Star(), 'Explore Collective'), '/')}
-            </List>
-          </LGroup>
-          <List margin="16px 0px 8px 8px">TEAMS</List>
-          <Banner>
-            <strong>Stack Overflow for Teams</strong> – Start collaborating and
-            sharing organizational knowledge.
-            <img
-              width="139"
-              height="114"
-              src="https://cdn.sstatic.net/Img/teams/teams-illo-free-sidebar-promo.svg?v=47faa659a05e"
-              alt=""
-            />
-            <MyButton boxshadow={true} theme="darkorange" href="/">
-              Create a free Team
-            </MyButton>
-            <MyButton href="/">Why Teams?</MyButton>
-          </Banner>
-        </LGroup>
-      </Wrapper>
-    </LeftArea>
+          </Wrapper>
+        </LeftArea>
+      </div>
+    </ToggleState>
   );
 }
 
 export default SideNav1;
+
+const ToggleState = styled.div`
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+    .open {
+      display: block;
+      position: absolute;
+      z-index: 1;
+      margin-top: 52px;
+      background-color: white;
+    }
+    .closed {
+      display: none;
+    }
+  }
+`;

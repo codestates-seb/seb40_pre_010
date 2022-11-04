@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 import React from 'react';
+import dummy2 from '../static/dummy2.json';
+import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const BREAK_POINT_TABLET = 768;
-const BREAK_POINT_PC = 1200;
 const Wrapper = styled.div`
   max-width: 300px;
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     width: 100%;
+    max-width: 100%;
+    padding: 0 8px;
   }
 `;
 const Sidebar = styled.div`
@@ -210,18 +215,15 @@ const MemoCollectives = (img, name, num, text) => {
 };
 const Tags = (name, amount, i) => {
   return (
-    <div className="flex" key={i}>
-      <div className="tag">{name}</div>
-      <div className="tagamount">x {amount}</div>
+    <div className="d-flex mb4 ai-center" key={i}>
+      <a href={'/tags/' + name} className="s-tag">
+        {name}
+      </a>
+      <div className="tagamount fc-black-500 pl4">x {amount}</div>
     </div>
   );
 };
-const TagsMap = [
-  ['javascript', '2439716'],
-  ['python', '2047600'],
-  ['java', '1873265'],
-  ['C#', '1564987'],
-];
+const TagsMap = dummy2.tags.map((x) => x.name);
 
 const QuestionMap = [
   `What are "equity" and "equitable remedies"`,
@@ -236,6 +238,30 @@ const QuestionMap = [
   `I want to cite a theorem from a book written by influential scientists. However the theorem is not proven in the book. Should I add a proof of my own?`,
 ];
 function SideNav2() {
+  const [lists, setlists] = useState([]);
+  const [gettag, setGetTag] = useState([]);
+  const fetchdata = () => {
+    axios.get('/question/questions').then((res) => setlists(res.data));
+  };
+  useEffect(() => {
+    fetchdata();
+  }, []);
+
+  const Tagslist = lists.map((x) =>
+    x.questionTags.includes(',') ? x.questionTags.split(',') : [x.questionTags]
+  );
+  const Tagslist2 = Tagslist.flat();
+  const result = {};
+  Tagslist2.forEach((x) => {
+    result[x] = (result[x] || 0) + 1;
+  });
+  let uniqueArr = [];
+  Tagslist2.forEach((element) => {
+    if (!uniqueArr.includes(element)) {
+      uniqueArr.push(element);
+    }
+  });
+
   return (
     <Wrapper>
       <Sidebar>
@@ -295,15 +321,15 @@ function SideNav2() {
         </SideCollectives>
       </Sidebar>
       <Sidebar>
-        <div className="title mb">Related Tags</div>
+        <div className="title mb fs-body3">Related Tags</div>
         <div className="body">
-          {TagsMap.map((x, i) => {
-            return Tags(x[0], x[1], i);
+          {uniqueArr.map((x, i) => {
+            return Tags(x, result[uniqueArr[i]], i);
           })}
         </div>
       </Sidebar>
       <Sidebar>
-        <div className="title mb">Hot Network Questions</div>
+        <div className="title mb fs-body3">Hot Network Questions</div>
         <div className="body question">
           {QuestionMap.map((x, i) => {
             return <div key={i}>{x}</div>;
