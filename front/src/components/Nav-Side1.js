@@ -13,9 +13,9 @@ const LeftArea = styled.div`
   width: 164px;
   color: #525960;
   // 태블릿 : 1200px ~ 768px :: 768px 이상 적용되는 css
-  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+  /* @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     display: none;
-  }
+  } */
 `;
 
 const Wrapper = styled.div`
@@ -132,7 +132,7 @@ const Linked = (text, link) => {
 };
 function SideNav1() {
   const [isOpen, setIsOpen] = useRecoilState(toggleState);
-
+  // console.log(isOpen);
   return (
     <ToggleState>
       <div className={isOpen ? `open` : `closed`}>
@@ -205,10 +205,16 @@ function SideNav1() {
 export default SideNav1;
 
 const ToggleState = styled.div`
-  .open {
-    display: block;
-  }
-  .closed {
-    display: none;
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+    .open {
+      display: block;
+      position: absolute;
+      z-index: 1;
+      margin-top: 52px;
+      background-color: white;
+    }
+    .closed {
+      display: none;
+    }
   }
 `;
