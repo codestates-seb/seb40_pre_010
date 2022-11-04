@@ -28,7 +28,9 @@ const Posts = ({ index, el, posts, loading }) => {
             {el.questionTitle}
           </Link>{' '}
           <Body className="ta-left my12">
-            {el.questionBody.replace(/<[^>]*>?/g, '')}
+            {el.questionBody !== undefined
+              ? el.questionBody.replace(/<[^>]*>?/g, '')
+              : null}
           </Body>
           <div className="d-flex jc-space-between">
             <TagWrap className="mb12">
