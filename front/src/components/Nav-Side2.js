@@ -247,25 +247,25 @@ function SideNav2() {
     fetchdata();
   }, []);
 
-  const Tagslist =
-    lists &&
-    lists.map((x) =>
-      x.questionTags.includes(',')
-        ? x.questionTags.split(',')
-        : [x.questionTags]
-    );
+  // const Tagslist =
+  //   lists &&
+  //   lists.map((x) =>
+  //     x.questionTags.includes(',')
+  //       ? x.questionTags.split(',')
+  //       : [x.questionTags]
+  //   );
 
-  const Tagslist2 = Tagslist.flat();
-  const result = {};
-  Tagslist2.forEach((x) => {
-    result[x] = (result[x] || 0) + 1;
-  });
-  let uniqueArr = [];
-  Tagslist2.forEach((element) => {
-    if (!uniqueArr.includes(element)) {
-      uniqueArr.push(element);
-    }
-  });
+  // const Tagslist2 = Tagslist.flat();
+  // const result = {};
+  // Tagslist2.forEach((x) => {
+  //   result[x] = (result[x] || 0) + 1;
+  // });
+  // let uniqueArr = [];
+  // Tagslist2.forEach((element) => {
+  //   if (!uniqueArr.includes(element)) {
+  //     uniqueArr.push(element);
+  //   }
+  // });
 
   return (
     <Wrapper>
@@ -328,9 +328,9 @@ function SideNav2() {
       <Sidebar>
         <div className="title mb fs-body3">Related Tags</div>
         <div className="body">
-          {uniqueArr.map((x, i) => {
+          {/* {uniqueArr.map((x, i) => {
             return Tags(x, result[uniqueArr[i]], i);
-          })}
+          })} */}
         </div>
       </Sidebar>
       <Sidebar>
