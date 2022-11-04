@@ -12,10 +12,6 @@ const LeftArea = styled.div`
   position: relative;
   width: 164px;
   color: #525960;
-  // 태블릿 : 1200px ~ 768px :: 768px 이상 적용되는 css
-  /* @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
-    display: none;
-  } */
 `;
 
 const Wrapper = styled.div`

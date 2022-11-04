@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const BREAK_POINT_TABLET = 768;
 const BREAK_POINT_PC = 1200;
@@ -18,6 +19,14 @@ const Wrapper = styled.div`
   // PC : 1200px 이상 :: 1200px 이상 적용되는 css
   @media only screen and (min-width: ${BREAK_POINT_PC}px) {
   }
+`;
+
+const StyledLinkk = styled(Link)`
+  text-decoration: none;
+  color: #818a91;
+  margin: 0 20px;
+  font-size: 13px;
+  text-align: left;
 `;
 
 const StyledLink = styled.a`
@@ -123,10 +132,8 @@ const Footer = () => {
             </svg>
           </StyledDiv>
           <StyledDiv>
-            <StyledLinkTwo href="http://localhost:3000/">
-              STACK OVERFLOW
-            </StyledLinkTwo>
-            <StyledLink href="http://localhost:3000/">Questions</StyledLink>
+            <StyledLinkk to={'/'}>STACK OVERFLOW</StyledLinkk>
+            <StyledLinkk to={'/'}>Questions</StyledLinkk>
             <StyledLink href="https://stackoverflow.com/help">Help</StyledLink>
           </StyledDiv>
           <StyledDiv>
@@ -166,10 +173,8 @@ const Footer = () => {
             <StyledLink href="https://stackoverflow.com/legal/terms-of-service">
               Terms of Service
             </StyledLink>
-            <StyledLink href="https://stackoverflow.co/company/contact">
-              Contact Us
-            </StyledLink>
-            <StyledLink href="http://localhost:3000/">
+            <StyledLinkk to={'/'}>Contact Us</StyledLinkk>
+            <StyledLink href="https://seb40-pre-010-xpp1-eznt2n5b2-010team.vercel.app/">
               Cookie Settings
             </StyledLink>
             <StyledLink href="https://stackoverflow.com/legal/cookie-policy">
