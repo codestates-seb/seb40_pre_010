@@ -246,10 +246,14 @@ function SideNav2() {
   useEffect(() => {
     fetchdata();
   }, []);
-
-  const Tagslist = lists.map((x) =>
-    x.questionTags.includes(',') ? x.questionTags.split(',') : [x.questionTags]
-  );
+  let Tagslist = [];
+  if (lists.length > 0) {
+    Tagslist = lists.map((x) =>
+      x.questionTags.includes(',')
+        ? x.questionTags.split(',')
+        : [x.questionTags]
+    );
+  }
   const Tagslist2 = Tagslist.flat();
   const result = {};
   Tagslist2.forEach((x) => {
