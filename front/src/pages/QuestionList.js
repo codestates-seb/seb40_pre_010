@@ -106,7 +106,7 @@ const QuestionList = () => {
   const getfetch = () => {
     axios
       .get('/question/questions', {
-        headers: { 'ngrok-skip-browser-warning': 'skip' },
+        // headers: { 'ngrok-skip-browser-warning': 'skip' },
       })
       .then((res) => setLists(res.data));
   };

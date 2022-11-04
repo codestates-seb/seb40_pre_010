@@ -31,10 +31,8 @@ const PostArea = styled.div`
     margin-right: 16px;
     font-size: 16px;
   }
-  & delete {
-    border: none;
-    background-color: white;
-    border-radius: 3px;
+  & .BTN {
+    margin-right: 10px;
   }
 `;
 const EditoreWrapper = styled.div`
@@ -156,7 +154,7 @@ const QuestionPost = () => {
                     <Viewer initialValue={posts.questionBody} />
                   ) : null}
 
-                  <div className="d-flex jc-space-between mb8">
+                  <div className="d-flex jc-space-between mb8 fd-column">
                     <p>
                       {tags !== undefined
                         ? tags.split(',').map((z, j) => {
@@ -172,16 +170,31 @@ const QuestionPost = () => {
                           })
                         : null}
                     </p>
-                  </div>
-                  <div>
-                    {localStorage.getItem('userId') === userId ? (
-                      <button onClick={onClickDelete} className="delete">
-                        delete
-                      </button>
-                    ) : null}
+                    <div className="d-flex jc-space-between ">
+                      <div>
+                        <button className="s-link s-link__muted BTN">
+                          Share
+                        </button>
+                        {localStorage.getItem('userId') === userId ? (
+                          <div>
+                            <button className="s-link s-link__muted BTN">
+                              Edit
+                            </button>
+                            <button
+                              onClick={onClickDelete}
+                              className="s-link s-link__muted BTN"
+                            >
+                              delete
+                            </button>
+                          </div>
+                        ) : null}
+                        <button className="s-link s-link__muted BTN">
+                          Following
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-
                 <UserCard
                   pic={pic}
                   author={posts.userId}
