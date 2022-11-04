@@ -34,13 +34,15 @@ const Posts = ({ index, el, posts, loading }) => {
           </Body>
           <div className="d-flex jc-space-between">
             <TagWrap className="mb12">
-              {el.questionTags.split(',').map((z, j) => {
-                return (
-                  <a key={j} href={'/tags/' + z} className="s-tag mr4">
-                    {z}
-                  </a>
-                );
-              })}
+              {el.questionTags !== undefined
+                ? el.questionTags.split(',').map((z, j) => {
+                    return (
+                      <a key={j} href={'/tags/' + z} className="s-tag mr4">
+                        {z}
+                      </a>
+                    );
+                  })
+                : null}
             </TagWrap>
           </div>
         </div>
