@@ -66,9 +66,8 @@ const QuestionList = () => {
 
   let path = location.pathname.split('/')[1];
   let pathname = location.pathname.split('/')[2];
-  const fetchPosts = async () => {
+  const fetchPosts = () => {
     setLoading(true);
-    //const res = await = axios.get(url);
     let res = '';
     if (pathname) {
       switch (path) {
@@ -90,11 +89,13 @@ const QuestionList = () => {
           setPosts(res.reverse());
           break;
         default:
-          setPosts(lists.reverse());
+          res = [...lists];
+          setPosts(res.reverse());
           break;
       }
     } else {
-      setPosts(lists.reverse());
+      res = [...lists];
+      setPosts(res.reverse());
     }
 
     setLoading(false);
@@ -102,29 +103,21 @@ const QuestionList = () => {
   const onChangeSearchHandler = (e) => {
     setSearch(e.target.value);
   };
-  const getfetch = async () => {
+  const getfetch = () => {
     axios
       .get('/question/questions', {
-        headers: { 'ngrok-skip-browser-warning': 'skip' },
+        // headers: { 'ngrok-skip-browser-warning': 'skip' },
       })
       .then((res) => setLists(res.data));
   };
 
   useEffect(() => {
     getfetch();
-    fetchPosts();
   }, []);
-
   useEffect(() => {
-    setPosts(lists);
     fetchPosts();
-  }, [lists]);
-
-  useEffect(() => {
-    //getfetch();
-    fetchPosts();
-  }, [location]);
-
+    console.log('test');
+  }, [lists, location]);
   return (
     <Wrapper>
       <NavSide1 />
