@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { inputState } from '../_actions';
+import { useRecoilState } from 'recoil';
 
 import IMG1 from '../img/signup-img1.png';
 import IMG2 from '../img/signup-img2.png';
@@ -185,6 +187,24 @@ function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [inputValue, setInputValue] = useState({
+    userName: '',
+    email: '',
+    password: '',
+  });
+
+  const { userName, eMail, passWord } = inputValue;
+
+  // const [inputCheck, setInputCheck] = useRecoilState(inputState);
+
+  const handleInput = (event) => {
+    const { name, value } = event.target;
+    setInputValue({
+      ...inputValue,
+      [name]: value,
+    });
+  };
+
   const navigate = useNavigate();
 
   // console.log(username, email, password);
@@ -289,12 +309,16 @@ function SignUp() {
             <p>Name</p>
             <input
               className="input"
+              name="userName"
               type="text"
               placeholder="Name"
               value={username}
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
+              onChange={
+                ((e) => {
+                  setUsername(e.target.value);
+                },
+                handleInput)
+              }
             ></input>
           </div>
           <div className="input-box">

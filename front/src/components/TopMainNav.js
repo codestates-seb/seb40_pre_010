@@ -21,7 +21,7 @@ const MainNavBox = styled.div`
 
   height: 50px;
   width: 100%;
-  z-index: 1;
+  z-index: 20;
 
   .main-box {
     box-shadow: 0 1px 6px rgb(98, 100, 100);
