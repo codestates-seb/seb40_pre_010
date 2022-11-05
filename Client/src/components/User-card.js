@@ -1,6 +1,8 @@
 import React from 'react';
 const UserCard = (props) => {
-  const minivariation = props.variation[props.variation.length - 1];
+  const minivariation = Number.isInteger(props.variation)
+    ? props.variation[props.variation.length - 1]
+    : null;
   console.log(minivariation);
   return (
     <div className="as-end s-user-card s-user-card__highlighted">
