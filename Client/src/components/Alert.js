@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -18,9 +19,9 @@ const AlertError = (props) => {
       <div className="s-card p0 bs-lg">
         <div className="s-card ps-relative b4 l4 pt24 ta-center">
           <h2 className="fs-body3 lh-sm fc-dark">{props.title}</h2>
-          <a href={props.link} className="s-btn s-btn__sm s-btn__danger">
+          <Link to={props.link} className="s-btn s-btn__sm s-btn__danger">
             {props.body}
-          </a>
+          </Link>
         </div>
       </div>
     </Wrapper>
