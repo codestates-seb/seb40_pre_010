@@ -45,6 +45,7 @@ const Tags = () => {
       uniqueArr.push(element);
     }
   });
+  console.log(result, uniqueArr);
 
   return (
     <Wrapper className="d-flex">
@@ -66,7 +67,7 @@ const Tags = () => {
               <Tag
                 key={i}
                 name={x.name}
-                amount={result[uniqueArr[x.name]]}
+                amount={result[uniqueArr[i]]}
                 description={x.description}
               />
             );
