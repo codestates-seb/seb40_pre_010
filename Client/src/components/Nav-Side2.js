@@ -239,7 +239,6 @@ const QuestionMap = [
 ];
 function SideNav2() {
   const [lists, setlists] = useState([]);
-  const [gettag, setGetTag] = useState([]);
 
   const fetchdata = () => {
     axios.get('/api/question/questions').then((res) => setlists(res.data));
@@ -250,8 +249,7 @@ function SideNav2() {
     x.questionTags.includes(',') ? x.questionTags.split(',') : [x.questionTags]
   );
 
-  console.log(Tagslist);
-  const Tagslist2 = Tagslist.flat(); //['지연님', '지연님', 'javascript', 'javascript']
+  const Tagslist2 = Tagslist.flat();
   const result = {};
   const uniqueArr = [];
   Tagslist2.forEach((x) => {
@@ -263,7 +261,6 @@ function SideNav2() {
       uniqueArr.push(x);
     }
   });
-  console.log(Tagslist, Tagslist2);
 
   useEffect(() => {
     fetchdata();

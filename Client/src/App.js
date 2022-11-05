@@ -34,7 +34,7 @@ function App() {
             <Route path="/" element={<QuestionList />} />
             <Route path="/:search1/:search2" element={<QuestionList />} />
             <Route path="/post/:id" element={<QuestionPost />} />
-            <Route path="/tags/:tag" element={<QuestionList />} />
+            {/* <Route path="/tags/:tag" element={<QuestionList />} /> */}
             <Route path="/tags" element={<Tags />} />
             <Route path="/askquestion" element={<AskQuestion />} />
             <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
