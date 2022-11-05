@@ -49,7 +49,7 @@ const Posts = ({ index, el, posts, loading }) => {
         <UserCard
           pic={`https://randomuser.me/api/portraits/men/1.jpg`}
           author={el.userId}
-          variation={el.questionId}
+          variation={el.createAt}
         />
       </div>
     </div>
