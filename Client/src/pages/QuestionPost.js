@@ -102,7 +102,7 @@ const QuestionPost = () => {
             answerBody: Answer,
             postNum: postnum.id,
           })
-          .then(location.reload());
+          .then(window.location.reload());
       } else {
         alert('10자 이상 작성해주세요');
       }
