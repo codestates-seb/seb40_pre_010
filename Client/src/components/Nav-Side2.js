@@ -240,16 +240,28 @@ const QuestionMap = [
 function SideNav2() {
   const [lists, setlists] = useState([]);
   const [gettag, setGetTag] = useState([]);
+  const [Tagslist, setTagsList] = useState('');
   const fetchdata = () => {
-    axios.get('/question/questions').then((res) => setlists(res.data));
+    axios
+      .get('/question/questions')
+      .then((res) => setlists(res.data))
+      .then((data) => {
+        setTagsList(
+          [...lists].map((x) =>
+            x.questionTags.includes(',')
+              ? x.questionTags.split(',')
+              : [x.questionTags]
+          )
+        );
+      });
   };
   useEffect(() => {
     fetchdata();
   }, []);
 
-  const Tagslist = [...lists].map((x) =>
-    x.questionTags.includes(',') ? x.questionTags.split(',') : [x.questionTags]
-  );
+  // const Tagslist = [...lists].map((x) =>
+  //   x.questionTags.includes(',') ? x.questionTags.split(',') : [x.questionTags]
+  // );
 
   const Tagslist2 = Tagslist.flat();
   const result = {};
