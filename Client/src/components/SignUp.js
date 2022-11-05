@@ -17,6 +17,7 @@ const SignUpBox = styled.div`
   padding: 24px;
   width: 100%;
   height: calc(100vh - 50px);
+  margin-top: 50px;
 
   .signup-box {
     display: flex;
@@ -29,7 +30,7 @@ const SignUpBox = styled.div`
     font-size: 15px;
     width: 316px;
     min-width: 250px;
-    height: 600px;
+    min-height: 600px;
     padding: 24px;
     text-align: left;
   }
@@ -122,7 +123,7 @@ const SignUpBox = styled.div`
     justify-content: center;
     align-items: center;
     width: 500px;
-    height: 285px;
+    min-height: 285px;
     > h1 {
       display: flex;
       text-align: left;
@@ -192,7 +193,7 @@ const SignUpBox = styled.div`
     }
   }
 
-  @media screen and (max-width: 375px) {
+  @media screen and (max-width: 475px) {
     .main-text-box {
       display: none;
     }
