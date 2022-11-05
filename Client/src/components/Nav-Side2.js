@@ -244,7 +244,6 @@ function SideNav2() {
     axios.get('/api/question/questions').then((res) => setlists(res.data));
   };
 
-  console.log(lists);
   const Tagslist = [...lists].map((x) =>
     x.questionTags.includes(',') ? x.questionTags.split(',') : [x.questionTags]
   );
