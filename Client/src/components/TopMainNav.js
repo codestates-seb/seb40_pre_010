@@ -82,7 +82,7 @@ const MainNavBox = styled.div`
   .fa-search {
     font-size: 15px;
   }
-  @media screen and (max-width: 375px) {
+  @media screen and (max-width: 475px) {
     .login-icons {
       width: 100px;
       margin-left: 5px;
@@ -306,7 +306,7 @@ const Buttons = styled.div`
     background-color: #dc143c;
   }
 
-  @media screen and (max-width: 375px) {
+  @media screen and (max-width: 475px) {
     .search-login-icon {
       min-width: 29px;
       height: 29px;
