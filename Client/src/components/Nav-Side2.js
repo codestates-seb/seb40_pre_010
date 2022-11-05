@@ -245,19 +245,31 @@ function SideNav2() {
   const [uniqueArr, setUniqueArr] = useState([]);
 
   const fetchdata = () => {
-    axios.get('/api/question/questions').then((res) => setlists(res.data));
+    axios
+      .get('/api/question/questions')
+      .then((res) => setlists(res.data))
+      .then(
+        setTagsList(
+          [...lists].map((x) =>
+            x.questionTags.includes(',')
+              ? x.questionTags.split(',')
+              : [x.questionTags]
+          )
+        )
+      )
+      .then(console.log(lists, Tagslist));
   };
 
   const fetchTags = () => {
-    console.log(lists);
-    setTagsList(
-      [...lists].map((x) =>
-        x.questionTags.includes(',')
-          ? x.questionTags.split(',')
-          : [x.questionTags]
-      )
-    );
-    console.log(Tagslist);
+    // console.log(lists);
+    // setTagsList(
+    //   [...lists].map((x) =>
+    //     x.questionTags.includes(',')
+    //       ? x.questionTags.split(',')
+    //       : [x.questionTags]
+    //   )
+    // );
+    // console.log(Tagslist);
     const Tagslist2 = Tagslist.flat(); //['지연님', '지연님', 'javascript', 'javascript']
     const result = {};
     const uniqueArr = [];
