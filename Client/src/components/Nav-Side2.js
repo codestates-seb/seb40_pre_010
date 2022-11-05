@@ -245,58 +245,34 @@ function SideNav2() {
   const [uniqueArr, setUniqueArr] = useState([]);
 
   const fetchdata = () => {
-    axios
-      .get('/api/question/questions')
-      .then((res) => setlists(res.data))
-      .then(console.log(lists))
-      .then(
-        setTagsList(
-          [...lists].map((x) =>
-            x.questionTags.includes(',')
-              ? x.questionTags.split(',')
-              : [x.questionTags]
-          )
-        )
-      );
+    axios.get('/api/question/questions').then((res) => setlists(res.data));
+  };
+
+  const fetchTags = () => {
+    const Tagslist = [...lists].map((x) =>
+      x.questionTags.includes(',')
+        ? x.questionTags.split(',')
+        : [x.questionTags]
+    );
+
+    const Tagslist2 = Tagslist.flat();
+    const result = {};
+    Tagslist2.forEach((x) => {
+      result[x] = (result[x] || 0) + 1;
+    });
+    const uniqueArr = [];
+    Tagslist2.forEach((element) => {
+      if (!uniqueArr.includes(element)) {
+        uniqueArr.push(element);
+      }
+    });
   };
   useEffect(() => {
     fetchdata();
   }, []);
-
   useEffect(() => {
-    console.log(Tagslist);
-    if (Tagslist.length > 0) {
-      const Tagslist2 = Tagslist.flat();
-      const result2 = {};
-      Tagslist2.forEach((x) => {
-        result2[x] = (result2[x] || 0) + 1;
-      });
-      setResult({ ...result2 });
-      const uniqueArr2 = [];
-      Tagslist2.forEach((element) => {
-        if (!uniqueArr2.includes(element)) {
-          uniqueArr2.push(element);
-        }
-      });
-      setUniqueArr([...uniqueArr2]);
-    }
-  }, [Tagslist]);
-
-  // const Tagslist = [...lists].map((x) =>
-  //   x.questionTags.includes(',') ? x.questionTags.split(',') : [x.questionTags]
-  // );
-
-  // const Tagslist2 = Tagslist.flat();
-  // const result = {};
-  // Tagslist2.forEach((x) => {
-  //   result[x] = (result[x] || 0) + 1;
-  // });
-  // const uniqueArr = [];
-  // Tagslist2.forEach((element) => {
-  //   if (!uniqueArr.includes(element)) {
-  //     uniqueArr.push(element);
-  //   }
-  // });
+    fetchTags();
+  }, [lists]);
 
   return (
     <Wrapper>
