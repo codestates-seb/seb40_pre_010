@@ -240,7 +240,7 @@ const QuestionMap = [
 function SideNav2() {
   const [lists, setlists] = useState([]);
   const [gettag, setGetTag] = useState([]);
-  const [Tagslist, setTagsList] = useState('');
+  const [Tagslist, setTagsList] = useState([]);
   const [result, setResult] = useState({});
   const [uniqueArr, setUniqueArr] = useState([]);
 
@@ -250,31 +250,32 @@ function SideNav2() {
 
   const fetchTags = () => {
     console.log(lists);
-    const Tagslist = [...lists].map((x) =>
-      x.questionTags.includes(',')
-        ? x.questionTags.split(',')
-        : [x.questionTags]
+    setTagsList(
+      [...lists].map((x) =>
+        x.questionTags.includes(',')
+          ? x.questionTags.split(',')
+          : [x.questionTags]
+      )
     );
-
-    const Tagslist2 = Tagslist.flat();
+    console.log(Tagslist);
+    const Tagslist2 = Tagslist.flat(); //['지연님', '지연님', 'javascript', 'javascript']
     const result = {};
+    const uniqueArr = [];
     Tagslist2.forEach((x) => {
       result[x] = (result[x] || 0) + 1;
     });
-    const uniqueArr = [];
-    Tagslist2.forEach((element) => {
-      if (!uniqueArr.includes(element)) {
-        uniqueArr.push(element);
+
+    Tagslist2.forEach((x) => {
+      if (!uniqueArr.includes(x)) {
+        uniqueArr.push(x);
       }
     });
     console.log(Tagslist, Tagslist2);
   };
   useEffect(() => {
     fetchdata();
-  }, []);
-  useEffect(() => {
     fetchTags();
-  }, [lists]);
+  }, []);
 
   return (
     <Wrapper>
