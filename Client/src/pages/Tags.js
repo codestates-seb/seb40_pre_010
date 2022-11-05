@@ -45,7 +45,6 @@ const Tags = () => {
       uniqueArr.push(element);
     }
   });
-  console.log(result, uniqueArr);
 
   return (
     <Wrapper className="d-flex">
