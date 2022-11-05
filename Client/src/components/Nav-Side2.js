@@ -248,6 +248,7 @@ function SideNav2() {
     axios
       .get('/api/question/questions')
       .then((res) => setlists(res.data))
+      .then(console.log(lists))
       .then(
         setTagsList(
           [...lists].map((x) =>

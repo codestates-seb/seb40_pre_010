@@ -22,6 +22,10 @@ const Wrapper = styled.div`
     text-align: left;
     margin-bottom: 8px;
   }
+  .toastui-editor-contents ol p,
+  .toastui-editor-contents ul p {
+    word-break: break-all;
+  }
 `;
 const MainBox = styled.div``;
 const PostArea = styled.div`
@@ -42,10 +46,6 @@ const EditoreWrapper = styled.div`
   .toastui-editor-dropdown-toolbar {
     height: auto;
     flex-wrap: wrap;
-  }
-  .toastui-editor-contents ol p,
-  .toastui-editor-contents ul p {
-    word-break: break-all;
   }
 `;
 const pic = `https://randomuser.me/api/portraits/men/${Math.floor(
