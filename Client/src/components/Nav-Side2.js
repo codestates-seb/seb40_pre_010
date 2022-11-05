@@ -243,6 +243,7 @@ function SideNav2() {
   const [Tagslist, setTagsList] = useState('');
   const [result, setResult] = useState({});
   const [uniqueArr, setUniqueArr] = useState([]);
+
   const fetchdata = () => {
     axios
       .get('/api/question/questions')
@@ -256,6 +257,12 @@ function SideNav2() {
           )
         )
       );
+  };
+  useEffect(() => {
+    fetchdata();
+  }, []);
+
+  useEffect(() => {
     if (Tagslist.length > 0) {
       const Tagslist2 = Tagslist.flat();
       const result2 = {};
@@ -271,10 +278,7 @@ function SideNav2() {
       });
       setUniqueArr([...uniqueArr2]);
     }
-  };
-  useEffect(() => {
-    fetchdata();
-  }, []);
+  }, [Tagslist]);
 
   // const Tagslist = [...lists].map((x) =>
   //   x.questionTags.includes(',') ? x.questionTags.split(',') : [x.questionTags]
