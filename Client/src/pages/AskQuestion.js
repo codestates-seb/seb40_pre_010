@@ -119,7 +119,7 @@ const AskQuestion = () => {
   const onClickButton = () => {
     axios
       .post(
-        '/question',
+        '/api/question',
         {
           userId: `${localStorage.getItem('userId')}`,
           questionTitle: `${title}`,

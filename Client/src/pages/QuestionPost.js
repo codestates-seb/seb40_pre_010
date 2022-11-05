@@ -70,7 +70,7 @@ const QuestionPost = () => {
     posts.createdAt !== undefined ? posts.createdAt.split('T')[0] : null;
 
   const getfetch = async () => {
-    axios.get(`/question/${postnum.id}`).then((res) => {
+    axios.get(`/api/question/${postnum.id}`).then((res) => {
       setPosts(res.data);
       setUserId(res.data.userId);
     });
@@ -97,7 +97,7 @@ const QuestionPost = () => {
     } else {
       if (Answer.length >= 10) {
         axios
-          .post('/answer', {
+          .post('/api/answer', {
             userId: localStorage.getItem('userId'),
             answerBody: Answer,
             postNum: postnum.id,
@@ -112,7 +112,7 @@ const QuestionPost = () => {
 
   const onClickDelete = () => {
     axios
-      .delete(`/question/${postnum.id}`)
+      .delete(`/api/question/${postnum.id}`)
       .catch((res) => console.log(res))
       .then(navigate('/'));
   };

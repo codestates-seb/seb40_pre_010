@@ -315,7 +315,7 @@ function SignUp() {
 
             try {
               const response = await axios({
-                url: `/user`,
+                url: `/api/user`,
                 method: 'POST',
                 data: {
                   userName: name,

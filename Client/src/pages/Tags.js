@@ -24,7 +24,7 @@ const TagsWrapper = styled.div`
 const Tags = () => {
   const [lists, setlists] = useState([]);
   const fetchdata = () => {
-    axios.get('/question/questions').then((res) => setlists(res.data));
+    axios.get('/api/question/questions').then((res) => setlists(res.data));
   };
   useEffect(() => {
     fetchdata();

@@ -100,7 +100,7 @@ function Login({ setIsLogin }) {
             e.preventDefault();
             try {
               const response = await axios.post(
-                `/user/login`,
+                `/api/user/login`,
                 JSON.stringify({ userId, userPw }),
                 {
                   headers: { 'Content-Type': 'application/json' },
