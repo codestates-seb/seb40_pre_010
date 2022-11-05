@@ -249,6 +249,7 @@ function SideNav2() {
   };
 
   const fetchTags = () => {
+    console.log(lists);
     const Tagslist = [...lists].map((x) =>
       x.questionTags.includes(',')
         ? x.questionTags.split(',')
@@ -266,6 +267,7 @@ function SideNav2() {
         uniqueArr.push(element);
       }
     });
+    console.log(Tagslist, Tagslist2);
   };
   useEffect(() => {
     fetchdata();
