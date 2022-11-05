@@ -255,19 +255,21 @@ function SideNav2() {
               : [x.questionTags]
           )
         );
-        const Tagslist2 = Tagslist.flat();
-        const result2 = {};
-        Tagslist2.forEach((x) => {
-          result2[x] = (result2[x] || 0) + 1;
-        });
-        setResult({ ...result2 });
-        const uniqueArr2 = [];
-        Tagslist2.forEach((element) => {
-          if (!uniqueArr2.includes(element)) {
-            uniqueArr2.push(element);
-          }
-        });
-        setUniqueArr([...uniqueArr2]);
+        if (Tagslist.length > 0) {
+          const Tagslist2 = Tagslist.flat();
+          const result2 = {};
+          Tagslist2.forEach((x) => {
+            result2[x] = (result2[x] || 0) + 1;
+          });
+          setResult({ ...result2 });
+          const uniqueArr2 = [];
+          Tagslist2.forEach((element) => {
+            if (!uniqueArr2.includes(element)) {
+              uniqueArr2.push(element);
+            }
+          });
+          setUniqueArr([...uniqueArr2]);
+        }
       });
   };
   useEffect(() => {
