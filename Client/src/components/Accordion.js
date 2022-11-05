@@ -30,7 +30,7 @@ const StyledDiv = styled.div`
 
 function BasicExample() {
   return (
-    <StyledDiv>
+    <StyledDiv className="sm:d-none">
       <div className="accordion">
         <Accordion defaultActiveKey="0">
           <Accordion.Item eventKey="0">
