@@ -353,9 +353,10 @@ function SideNav2() {
       <Sidebar>
         <div className="title mb fs-body3">Related Tags</div>
         <div className="body">
-          {[...uniqueArr].map((x, i) => {
-            return Tags(x, result[uniqueArr[i]], i);
-          })}
+          {uniqueArr.length > 0 &&
+            uniqueArr.map((x, i) => {
+              return Tags(x, result[uniqueArr[i]], i);
+            })}
         </div>
       </Sidebar>
       <Sidebar>
