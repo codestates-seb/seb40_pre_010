@@ -12,7 +12,7 @@ const UserCard = (props) => {
         </a>
         <ul className="s-user-card--awards">
           <li className="s-user-card--rep">
-            {Number.isInteger(props.variation) ? props.variation * 500 : null}
+            {Math.floor(Math.random() * 5000)}
           </li>
           <li className="s-award-bling s-award-bling__gold">
             {Math.floor(Math.random() * 10)}

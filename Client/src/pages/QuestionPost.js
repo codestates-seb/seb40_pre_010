@@ -224,7 +224,7 @@ const QuestionPost = () => {
                           <UserCard
                             pic={`https://randomuser.me/api/portraits/men/1.jpg`}
                             author={x.userId}
-                            variation={x.answerId}
+                            variation={x.createdAt}
                           />
                         </div>
                       </div>
