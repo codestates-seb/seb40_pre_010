@@ -245,35 +245,29 @@ function SideNav2() {
     axios.get('/api/question/questions').then((res) => setlists(res.data));
   };
 
-  const fetchTags = () => {
-    console.log(lists);
-    const Tagslist = [...lists].map((x) =>
-      x.questionTags.includes(',')
-        ? x.questionTags.split(',')
-        : [x.questionTags]
-    );
+  console.log(lists);
+  const Tagslist = [...lists].map((x) =>
+    x.questionTags.includes(',') ? x.questionTags.split(',') : [x.questionTags]
+  );
 
-    console.log(Tagslist);
-    const Tagslist2 = Tagslist.flat(); //['지연님', '지연님', 'javascript', 'javascript']
-    const result = {};
-    const uniqueArr = [];
-    Tagslist2.forEach((x) => {
-      result[x] = (result[x] || 0) + 1;
-    });
+  console.log(Tagslist);
+  const Tagslist2 = Tagslist.flat(); //['지연님', '지연님', 'javascript', 'javascript']
+  const result = {};
+  const uniqueArr = [];
+  Tagslist2.forEach((x) => {
+    result[x] = (result[x] || 0) + 1;
+  });
 
-    Tagslist2.forEach((x) => {
-      if (!uniqueArr.includes(x)) {
-        uniqueArr.push(x);
-      }
-    });
-    console.log(Tagslist, Tagslist2);
-  };
+  Tagslist2.forEach((x) => {
+    if (!uniqueArr.includes(x)) {
+      uniqueArr.push(x);
+    }
+  });
+  console.log(Tagslist, Tagslist2);
+
   useEffect(() => {
     fetchdata();
   }, []);
-  useEffect(() => {
-    fetchTags();
-  }, [lists]);
 
   return (
     <Wrapper>
