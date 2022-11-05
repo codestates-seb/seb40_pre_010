@@ -241,9 +241,11 @@ function SideNav2() {
   const [lists, setlists] = useState([]);
   const [gettag, setGetTag] = useState([]);
   const [Tagslist, setTagsList] = useState('');
+  const [result, setResult] = useState({});
+  const [uniqueArr, setUniqueArr] = useState([]);
   const fetchdata = () => {
     axios
-      .get('/question/questions')
+      .get('/api/question/questions')
       .then((res) => setlists(res.data))
       .then((data) => {
         setTagsList(
@@ -253,6 +255,19 @@ function SideNav2() {
               : [x.questionTags]
           )
         );
+        const Tagslist2 = Tagslist.flat();
+        const result2 = {};
+        Tagslist2.forEach((x) => {
+          result2[x] = (result2[x] || 0) + 1;
+        });
+        setResult({ ...result2 });
+        const uniqueArr2 = [];
+        Tagslist2.forEach((element) => {
+          if (!uniqueArr2.includes(element)) {
+            uniqueArr2.push(element);
+          }
+        });
+        setUniqueArr([...uniqueArr2]);
       });
   };
   useEffect(() => {
@@ -263,17 +278,17 @@ function SideNav2() {
   //   x.questionTags.includes(',') ? x.questionTags.split(',') : [x.questionTags]
   // );
 
-  const Tagslist2 = Tagslist.flat();
-  const result = {};
-  Tagslist2.forEach((x) => {
-    result[x] = (result[x] || 0) + 1;
-  });
-  const uniqueArr = [];
-  Tagslist2.forEach((element) => {
-    if (!uniqueArr.includes(element)) {
-      uniqueArr.push(element);
-    }
-  });
+  // const Tagslist2 = Tagslist.flat();
+  // const result = {};
+  // Tagslist2.forEach((x) => {
+  //   result[x] = (result[x] || 0) + 1;
+  // });
+  // const uniqueArr = [];
+  // Tagslist2.forEach((element) => {
+  //   if (!uniqueArr.includes(element)) {
+  //     uniqueArr.push(element);
+  //   }
+  // });
 
   return (
     <Wrapper>
