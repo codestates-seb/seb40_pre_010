@@ -104,7 +104,7 @@ const QuestionList = () => {
     setSearch(e.target.value);
   };
   const getfetch = () => {
-    axios.get('/question/questions').then((res) => setLists(res.data));
+    axios.get('/api/question/questions').then((res) => setLists(res.data));
   };
 
   useEffect(() => {
