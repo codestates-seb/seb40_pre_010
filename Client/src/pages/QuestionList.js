@@ -143,7 +143,7 @@ const QuestionList = () => {
                 onChange={onChangeSearchHandler}
               ></input>
               <Link
-                to={'/' + search_id + '/' + search}
+                to={search_id && search ? `/${search_id}/${search}` : '/'}
                 className="s-btn s-btn__primary"
                 type="button"
               >
