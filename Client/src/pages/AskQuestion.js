@@ -141,7 +141,7 @@ const AskQuestion = () => {
   return (
     <Wrapper>
       <Header>Ask a public question</Header>
-      <QuestionDiv>
+      <QuestionDiv className="sm:fd-column">
         <StyledDiv>
           Title
           <br />
@@ -169,7 +169,7 @@ const AskQuestion = () => {
           <InputTag setgetTag={setgetTag} />
         </StyledDiv>
 
-        <Accordion />
+        <Accordion className="sm:d-none" />
       </QuestionDiv>
       <div className="main-button">
         <StyledButton onClick={onClickButton}>
