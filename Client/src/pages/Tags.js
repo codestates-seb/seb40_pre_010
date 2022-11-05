@@ -67,7 +67,7 @@ const Tags = () => {
               <Tag
                 key={i}
                 name={x.name}
-                amount={result[uniqueArr[i]]}
+                amount={result[x.name]}
                 description={x.description}
               />
             );
