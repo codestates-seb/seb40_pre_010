@@ -263,6 +263,7 @@ function SideNav2() {
   }, []);
 
   useEffect(() => {
+    console.log(Tagslist);
     if (Tagslist.length > 0) {
       const Tagslist2 = Tagslist.flat();
       const result2 = {};
