@@ -335,81 +335,83 @@ function TopMainNav({ isLogin, setIsLogin }) {
   const [isOpen, setIsOpen] = useRecoilState(toggleState);
 
   return (
-    <MainNavBox>
-      <div className="main-box">
-        <Menu>
-          <ul>
-            <div className="hiden-menu-icon">
-              <button
-                className="hiden-menu-btn"
-                onClick={() => {
-                  setIsOpen(!isOpen);
-                }}
-              ></button>
-            </div>
-            <a className="logo-box" href="/">
-              <li>
-                <div className="logo"></div>
-              </li>
-            </a>
+    <div className="position-relative">
+      <MainNavBox>
+        <div className="main-box">
+          <Menu>
+            <ul>
+              <div className="hiden-menu-icon">
+                <button
+                  className="hiden-menu-btn"
+                  onClick={() => {
+                    setIsOpen(!isOpen);
+                  }}
+                ></button>
+              </div>
+              <a className="logo-box" href="/">
+                <li>
+                  <div className="logo"></div>
+                </li>
+              </a>
 
-            <li className="menu-btn">About</li>
+              <li className="menu-btn">About</li>
 
-            <li className="menu-btn btn2">Products</li>
+              <li className="menu-btn btn2">Products</li>
 
-            <li className="menu-btn btn3">For Teams</li>
-          </ul>
-        </Menu>
-        <div className="search-bar">
-          <i className="fas fa-search"></i>
-          <input className="search-bar__input" placeholder="Search"></input>
+              <li className="menu-btn btn3">For Teams</li>
+            </ul>
+          </Menu>
+          <div className="search-bar">
+            <i className="fas fa-search"></i>
+            <input className="search-bar__input" placeholder="Search"></input>
+          </div>
+          <Buttons>
+            {isLogin ? (
+              <div className="login-state">
+                <ul className="login-icons">
+                  <li className="login-icon">
+                    <div className="login-icon_ profile"></div>
+                  </li>
+                  <li className="login-icon">
+                    <div className="login-icon_ login-icon1 "></div>
+                  </li>
+                  <li className="login-icon">
+                    <div className="login-icon_ login-icon2"></div>
+                  </li>
+                  <li className="login-icon">
+                    <div className="login-icon_  login-icon3"></div>
+                  </li>
+                  <li className="login-icon ">
+                    <div className="login-icon_ login-icon4"></div>
+                  </li>
+                  <li className="logout-btn">
+                    <button
+                      className="logout-btn"
+                      onClick={() => {
+                        localStorage.removeItem('token');
+                        localStorage.removeItem('userId');
+                        setIsLogin(false);
+                      }}
+                    >
+                      logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <div className="logout-state">
+                <Link to="/login">
+                  <button className="btn-login">Log In</button>
+                </Link>
+                <Link to="/signup">
+                  <button className="btn-logout">Sign Up</button>
+                </Link>
+              </div>
+            )}
+          </Buttons>
         </div>
-        <Buttons>
-          {isLogin ? (
-            <div className="login-state">
-              <ul className="login-icons">
-                <li className="login-icon">
-                  <div className="login-icon_ profile"></div>
-                </li>
-                <li className="login-icon">
-                  <div className="login-icon_ login-icon1 "></div>
-                </li>
-                <li className="login-icon">
-                  <div className="login-icon_ login-icon2"></div>
-                </li>
-                <li className="login-icon">
-                  <div className="login-icon_  login-icon3"></div>
-                </li>
-                <li className="login-icon ">
-                  <div className="login-icon_ login-icon4"></div>
-                </li>
-                <li className="logout-btn">
-                  <button
-                    className="logout-btn"
-                    onClick={() => {
-                      localStorage.removeItem('token');
-                      localStorage.removeItem('userId');
-                      setIsLogin(false);
-                    }}
-                  >
-                    logout
-                  </button>
-                </li>
-              </ul>
-            </div>
-          ) : (
-            <div className="logout-state">
-              <Link to="/login">
-                <button className="btn-login">Log In</button>
-              </Link>
-              <Link to="/signup">
-                <button className="btn-logout">Sign Up</button>
-              </Link>
-            </div>
-          )}
-        </Buttons>
-      </div>
-    </MainNavBox>
+      </MainNavBox>
+    </div>
   );
 }
 
