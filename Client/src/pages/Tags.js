@@ -31,20 +31,20 @@ const Tags = () => {
   }, []);
 
   //Related Tags 숫자 random->직접연결
-  // const Tagslist = lists.map((x) =>
-  //   x.questionTags.includes(',') ? x.questionTags.split(',') : [x.questionTags]
-  // );
-  // const Tagslist2 = Tagslist.flat();
-  // const result = {};
-  // Tagslist2.forEach((x) => {
-  //   result[x] = (result[x] || 0) + 1;
-  // });
-  // let uniqueArr = [];
-  // Tagslist2.forEach((element) => {
-  //   if (!uniqueArr.includes(element)) {
-  //     uniqueArr.push(element);
-  //   }
-  // });
+  const Tagslist = [...lists].map((x) =>
+    x.questionTags.includes(',') ? x.questionTags.split(',') : [x.questionTags]
+  );
+  const Tagslist2 = Tagslist.flat();
+  const result = {};
+  Tagslist2.forEach((x) => {
+    result[x] = (result[x] || 0) + 1;
+  });
+  const uniqueArr = [];
+  Tagslist2.forEach((element) => {
+    if (!uniqueArr.includes(element)) {
+      uniqueArr.push(element);
+    }
+  });
 
   return (
     <Wrapper className="d-flex">
@@ -66,7 +66,7 @@ const Tags = () => {
               <Tag
                 key={i}
                 name={x.name}
-                //amount={result[uniqueArr[i]]}
+                amount={result[uniqueArr[i]]}
                 description={x.description}
               />
             );
