@@ -194,7 +194,7 @@ const QuestionPost = () => {
                 <UserCard
                   pic={pic}
                   author={posts.userId}
-                  variation={posts.questionId}
+                  variation={posts.createdAt}
                 />
               </div>
             </div>
