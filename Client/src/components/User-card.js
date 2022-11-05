@@ -1,5 +1,7 @@
 import React from 'react';
 const UserCard = (props) => {
+  const minivariation = props.variation[-1];
+  console.log(minivariation);
   return (
     <div className="as-end s-user-card s-user-card__highlighted">
       <time className="s-user-card--time">{props.variation}</time>
@@ -12,16 +14,14 @@ const UserCard = (props) => {
         </a>
         <ul className="s-user-card--awards">
           <li className="s-user-card--rep">
-            {Number.isInteger(props.variation) ? props.variation * 500 : null}
+            {Number.isInteger(props.variation) ? minivariation * 500 : null}
           </li>
-          <li className="s-award-bling s-award-bling__gold">
-            {props.variation}
-          </li>
+          <li className="s-award-bling s-award-bling__gold">{minivariation}</li>
           <li className="s-award-bling s-award-bling__silver">
-            {props.variation}
+            {minivariation}
           </li>
           <li className="s-award-bling s-award-bling__bronze">
-            {props.variation}
+            {minivariation}
           </li>
         </ul>
       </div>
